@@ -1,0 +1,121 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<section class="transaction-successful">
+
+    <div class="w-75 m-auto">
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i>
+            <h1>Transaction completed</h1>
+            <h2>{{ description }}</h2>
+            <!--      <a class="btn m-auto btn-lg btn-primary btn" [routerLink]="['/transactions/invoice', transactionId, 'pdf']">-->
+            <!--        <i class="fas fa-file-invoice mr-2"></i>-->
+            <!--        Download Invoice-->
+            <!--      </a>-->
+        </div>
+
+
+    </div>
+
+    <!-- //popover_1 -->
+
+    <div [style.display]="schemeTransactionModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1"
+        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog margin-centered">
+            <div class="modal-content p-4 bg-clr-modal">
+                <div class="transaction">
+                    <div class="d-flex mb-4 justify-content-between">
+                        <div>
+                            <h5 class="modal-title clr-w" id="myModalLabel">Feedback</h5>
+
+                        </div>
+                        <div>
+                            <button class="btn btn-danger" data-dismiss="modal" (click)="hideSchemeTransactionModal()">
+                                X
+                            </button>
+                        </div>
+                    </div>
+
+                    <form [formGroup]="form1" (ngSubmit)="onsubmit_form()">
+
+                        <div>
+                            <div class="form-group">
+                                <div class="input-group" style="padding: 0; margin: 0">
+                                    <textarea type="Message" placeholder="Help us to improve*"
+                                        class="form-control form-control form-control-lg"
+                                        id="exampleFormControlTextarea1" rows="3" formControlName="message"
+                                        maxlength="250">
+                    </textarea>
+
+                                </div>
+
+                            </div>
+                            <p class="max">* Max 250 character</p>
+                            <div class="modal-footer border-top">
+                                <!--  -->
+
+                                <div class="form-group ratingDiv">
+                                    <div class="ml-3">
+                                        <div class="ml-4 pl-4">
+                                            <b style="display: block" style="color: gold;font-size: 18px;">Rate us <span
+                                                    class="text-danger " style="font-size: 20px;">*</span></b>
+                                        </div>
+                                    </div>
+                                    <ul class="rate-area">
+                                        <input type="radio" id="5-star" name="rating" value="5"
+                                            formControlName="rating" /><label for="5-star" title="Amazing">5
+                                            stars</label>
+                                        <input type="radio" id="4-star" name="rating" value="4"
+                                            formControlName="rating" /><label for="4-star" title="Good">4 stars</label>
+                                        <input type="radio" id="3-star" name="rating" value="3"
+                                            formControlName="rating" /><label for="3-star" title="Average">3
+                                            stars</label>
+                                        <input type="radio" id="2-star" name="rating" value="2"
+                                            formControlName="rating" /><label for="2-star" title="Not Good">2
+                                            stars</label>
+                                        <input type="radio" id="1-star" name="rating" value="1"
+                                            formControlName="rating" /><label for="1-star" title="Bad">1 star</label>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="su">
+                                <button style="font-variant: all-small-caps" type="submit" [disabled]="form1.invalid"
+                                    class="btn btn-save btn-outline-dark post_btn">
+                                    submit
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- popover_2 -->
+    <div [style.display]="schemeTransactionModal_after ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1"
+        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog margin-centered">
+            <div class="modal-content p-4 bg-clr-modal">
+                <div class="transaction">
+                    <div class="d-flex mb-4 justify-content-between">
+                        <div>
+
+                            <i class="fa fa-check"></i>
+                            <h3 class="modal-title clr-w" id="myModalLabel"> Thank for your Feedback</h3>
+
+                        </div>
+
+                        <div>
+                            <button class="btn btn-danger" data-dismiss="modal" (click)="hideSchemeTransactionModal()">
+                                X
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</section>

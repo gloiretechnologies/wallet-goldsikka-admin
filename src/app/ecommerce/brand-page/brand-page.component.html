@@ -1,0 +1,33 @@
+<section>
+  <div class="container-fluid">
+    <div class="sticky">
+      <div class="demo demo4">
+        <div class="heading"> {{response[0].brand}}</div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+
+      <div class="col-12">
+        <img class="brand-img" src="{{response[0].image_uri}}" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-6 mt-4 " *ngFor="let data of response1">
+        <div class="brand-card card">
+
+          <img class="br-c1" src="{{data.image_uri}}" alt="">
+          <h3 class="br-h3">{{data.pname}}</h3>
+          <p class="br-pa">Price: <span class="br-pb">₹{{data.price| currency:'JPY':''}}</span></p>
+          <!-- <p class="br-pa">Grams: <span class="br-pb">{{data.weight}}gms</span></p> -->
+          <button routerLink="/ecommerce/details/{{data.id}}" class="br-km">KNOW MORE</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

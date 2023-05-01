@@ -1,0 +1,121 @@
+.transaction-successful {
+    .alert {
+        padding: 50px;
+        text-align: center;
+        min-height: 50vh;
+
+        i.fa-check-circle {
+            font-size: 4rem;
+            margin-bottom: 30px;
+        }
+
+
+        h1 {
+            font-size: 1.5rem;
+            margin: 15px 0;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+    }
+}
+
+.margin-centered {
+    margin-top: 90px !important;
+}
+
+.bg-clr-modal {
+    background-color: #1a2e22;
+    border: none !important;
+    color: rgb(0, 0, 0);
+}
+
+.clr-w {
+    color: white;
+}
+
+.btn-save {
+    background: white;
+    color: black;
+    font-weight: 400;
+}
+
+.border-top {
+    border-top: 1px solid #ffffff !important;
+}
+
+//testing star
+// star testing
+.rate-area {
+    float: left;
+    border-style: none;
+}
+
+.max {
+    color: white;
+    display: flex;
+    justify-content: end;
+}
+
+.rate-area:not(:checked)>input {
+    position: absolute;
+    top: -9999px;
+    clip: rect(0, 0, 0, 0);
+}
+
+.rate-area:not(:checked)>label {
+    float: right;
+    width: 0.8em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 180%;
+    color: lightgrey;
+}
+
+.rate-area:not(:checked)>label:before {
+    content: "★";
+}
+
+.rate-area>input:checked~label {
+    color: gold;
+}
+
+.rate-area:not(:checked)>label:hover,
+.rate-area:not(:checked)>label:hover~label {
+    color: gold;
+}
+
+.rate-area>input:checked+label:hover,
+.rate-area>input:checked+label:hover~label,
+.rate-area>input:checked~label:hover,
+.rate-area>input:checked~label:hover~label,
+.rate-area>label:hover~input:checked~label {
+    color: gold;
+}
+
+.ratingDiv {
+    padding: 0;
+    margin-right: 39%;
+    color: white;
+    margin-top: 5px;
+}
+
+.su {
+    padding: 0;
+    margin: 0;
+    margin-left: 188px
+}
+
+@media only screen and (max-width: 767px) {
+    .ratingDiv {
+        margin-right: 35%;
+    }
+
+    .su {
+        margin-left: 143px;
+    }
+
+}

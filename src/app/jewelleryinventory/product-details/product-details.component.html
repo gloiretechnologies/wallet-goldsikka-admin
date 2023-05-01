@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="im col-md-12 col-12 mt-4 ">
+
+      <div class="card col-md-8 col-12 m-auto" *ngFor="let data of response">
+
+        <div class="row grid-divider">
+          <div class="parent col-md-6 col-11  hover-zoomin">
+            <img src="{{data.pimg}}" class="child">
+          </div>
+          <div class="col-md-6 col-12 mt-3">
+            <h2 class="st pt-4">{{data.pname}}</h2>
+
+            <table>
+              <tr class="pb-4">
+                <th>
+                  ID
+                </th>
+                : &nbsp; {{data.id}}
+                <td></td>
+              </tr>
+              <tr class="pb-4">
+                <th>
+                  weight
+                </th>
+
+
+                <td>
+                  : &nbsp; {{data.pweight}} grams
+
+                </td>
+              </tr>
+              <tr class="pb-4">
+                <th>
+                  VA
+                </th>
+
+                <td> : &nbsp;{{data.pva}}%</td>
+              </tr>
+            </table>
+            <div>
+              <!-- <div class="addwishlist mt-1 mb-2">
+                <button (click)="addtowishlist(data.id)" id="addedlist{{data.id}}" type="button" class="btn">
+                  <span class="addwishlist_btn" style="color:white ;"><i style="color:white ;"
+                      class="fas fa-cart-plus"></i> Add to Wishlist</span>
+                </button>
+              </div> -->
+              <div *ngIf="checkwish(data.id) else other">
+                <div class="addwishlist mt-1 mb-2">
+                  <button type="button" class="buttond-addc" routerLink="/jewelleryinventory/wishlist">
+                    <span class="addwishlist_btn box-sh" style="color: white;"><i class="fas fa-cart-plus"
+                        style="color: white;"></i>
+                      Go to Wishlist
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <ng-template #other>
+                <div class="addwishlist mt-1 mb-2">
+                  <button (click)="addtowishlist(data.id)" id="addedlist{{data.id}}" type="button" class="main-b">
+
+                    <span class="addwishlist_btn buttond-addc2"><i class="fas fa-cart-plus"></i> Add to Wishlist</span>
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

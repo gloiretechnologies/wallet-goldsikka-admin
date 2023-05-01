@@ -1,0 +1,90 @@
+<section class="user-scheme-info">
+
+  <h1>Event Details</h1>
+  <div class="card d-block scheme-subscribe-details">
+    <div class="card-body p-0">
+      <div class="row">
+        <div class="col-md-6">
+          <table class="payment-details">
+            <tr>
+              <td class="form-text text-muted ">Event Type</td>
+              <td class=""> :</td>
+              <td *ngIf="events.event_type==='MRG'">Marriage</td>
+              <td *ngIf="events.event_type==='OTH'">Others</td>
+            </tr>
+            <tr>
+              <td class="form-text text-muted">Event Name</td>
+              <td> :</td>
+              <td>{{events.event_name}}</td>
+            </tr>
+            <tr>
+              <td class="form-text text-muted">Event Date/Time</td>
+              <td> :</td>
+              <td>{{events.event_date}} {{events.event_time}}</td>
+            </tr>
+            <tr *ngIf="isMarriageType">
+              <td class="form-text text-muted">Selected User</td>
+              <td> :</td>
+              <td *ngIf="events.gender==='M'">Bride</td>
+              <td *ngIf="events.gender==='F'">Groom</td>
+            </tr>
+            <tr>
+              <td class="form-text text-muted">Invited Numbers</td>
+              <td> :</td>
+              <td>{{events.invitedMembers}}</td>
+            </tr>
+            <br><br>
+            <tr>
+              <td class="form-text text-muted">Photo</td>
+              <td> </td>
+              <td><img src="{{events.photoImageLink}}" class="image"></td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <table class="payment-details">
+            <tr *ngIf="isMarriageType">
+              <td class="form-text text-muted">Bride Name</td>
+              <td> :</td>
+              <td>{{events.bride_name}}</td>
+            </tr>
+            <tr *ngIf="isMarriageType">
+              <td class="form-text text-muted">Groom Name</td>
+              <td> :</td>
+              <td>{{events.groom_name}}</td>
+            </tr>
+            <tr>
+              <td class="form-text text-muted">Event Venue</td>
+              <td> :</td>
+              <td>{{events.venue}}</td>
+            </tr>
+            <tr>
+              <td class="form-text text-muted">Event Description</td>
+              <td> :</td>
+              <td>{{events.description}}</td>
+            </tr>
+            <tr *ngIf="isOthersType">
+              <td class="form-text text-muted">Holder Name</td>
+              <td> :</td>
+              <td>{{events.holder_name}}</td>
+            </tr>
+            <tr></tr>
+            <br><br>
+            <tr *ngIf="isMarriageType">
+              <td class="form-text text-muted">Weediing Card Photo</td>
+              <td></td>
+              <td><img src="{{events.weddingCardPhotoLink}}" class="image"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <h5></h5>
+
+      <br/>
+      <br/>
+
+    </div>
+  </div>
+</section>

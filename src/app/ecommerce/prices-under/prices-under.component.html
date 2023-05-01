@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="sticky">
+    <div class="demo demo4">
+      <div class="heading">Prices-Under : {{price}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-6 mt-2 mb-4" *ngFor="let data of response">
+      <div class="card">
+        <img src="{{data.image_uri}}" alt="">
+        <h3 class="br-h3">{{data.pname}}</h3>
+        <p class="br-pa">Price: <span class="br-pb"> ₹{{data.price}}</span></p>
+        <p class="br-pa">Grams: <span class="br-pb">{{data.weight}}Grams</span></p>
+        <button routerLink="/ecommerce/details/{{data.id}}" class="br-km">KNOW MORE</button>
+      </div>
+    </div>
+  </div>
+</div>

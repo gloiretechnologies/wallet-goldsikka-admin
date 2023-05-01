@@ -1,0 +1,42 @@
+.schemes {
+
+  .scheme {
+    padding: 25px;
+    background: white;
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+
+    h3 {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    p {
+      min-height: 50px;
+      overflow: hidden;
+    }
+  }
+  .loading {
+    position: absolute;
+    z-index: 10;
+    display: block;
+    height: 100%;
+    background-color: white;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.75;
+    width: 100%;
+
+    i {
+      font-size: 3rem;
+      vertical-align: middle;
+      margin: 100px;
+    }
+  }
+}
+.mandatory {
+  color: red;
+  font-size: 20px;
+}

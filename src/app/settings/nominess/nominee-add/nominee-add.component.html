@@ -1,0 +1,141 @@
+<div class="nominee-add-settings">
+  <h1>Add Nominee</h1>
+
+  <section class="mt-4">
+    <div class="row">
+      <div class="w-100">
+        <div *ngIf="!!errorMessage" class="form-group">
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle mr-2"></i> {{errorMessage}}
+          </div>
+        </div>
+        <div *ngIf="!!successMessage" class="form-group">
+          <div class="alert alert-success">
+            <i class="fas fa-check mr-2"></i> {{successMessage}}
+          </div>
+        </div>
+      </div>
+
+      <form class="from d-block w-100" role="form" [formGroup]="form" (ngSubmit)="onSubmit()"
+            [ngClass]="{'was-validated': (submitted && form.valid), 'needs-validation': (submitted)}">
+        <div class="container profile-update">
+          <div class="form-group ">
+            <label>Name <span class="mandatory">*</span></label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter Name"
+                   autocomplete="off"
+                   [ngClass]="{'is-invalid': (submitted && (f.name.errors || errors['name']))}">
+
+            <div class="invalid-feedback" *ngIf="form.get('name').hasError('required')">This field is required</div>
+
+          </div>
+          <div class="form-group">
+            <label>Phone No (+91)<span class="mandatory">*</span></label>
+            <input type="number" class="form-control" formControlName="phone"
+                   placeholder="Enter Phone No" autocomplete="off"
+                   [ngClass]="{'is-invalid': (submitted && (f.phone.errors || errors['phone']))}">
+
+            <div class="invalid-feedback" *ngIf="form.get('phone').hasError('required')">This field is required
+            </div>
+            <div class="invalid-feedback" *ngFor="let e of errors['phone']">{{e.toString()}}</div>
+          </div>
+          <div class="form-group ">
+            <label>Address <span class="mandatory">*</span></label>
+            <textarea class="form-control" formControlName="address" autocomplete="off" placeholder="Enter Address"
+                      [ngClass]="{'is-invalid': (submitted && (f.address.errors || errors['address']))}"></textarea>
+
+            <div class="invalid-feedback" *ngIf="form.get('address').hasError('required')">This field is required
+            </div>
+          </div>
+          <div class="form-group ">
+            <label>City <span class="mandatory">*</span></label>
+            <input type="text" class="form-control" formControlName="city" autocomplete="off" placeholder="Enter city"
+                   [ngClass]="{'is-invalid': (submitted && (f.city.errors || errors['city']))}">
+
+            <div class="invalid-feedback" *ngIf="form.get('city').hasError('required')">This field is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-lg-6">
+                <label>State <span class="mandatory">*</span></label>
+                <select class="form-control" formControlName="state_id" autocomplete="off"
+                        [ngClass]="{'is-invalid': (submitted && (f.state_id.errors || errors['state_id']))}">
+                  <option *ngFor="let state of states" value="{{state['id']}}">{{state['name']}}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="form.get('state_id').hasError('required')">This field is required
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label>Country <span class="mandatory">*</span></label>
+                <select class="form-control" formControlName="country_id" autocomplete="off"
+                        [ngClass]="{'is-invalid': (submitted && (f.country_id.errors || errors['country_id']))}">
+                  <option *ngFor="let country of countries" value="{{country['id']}}">{{country['nicename']}}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="form.get('country_id').hasError('required')">This field is required
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+
+              <div class="col-lg-6">
+                <label>Pincode <span class="mandatory">*</span></label>
+                <input type="text" class="form-control" formControlName="zip" pattern="^[1-9][0-9]{5}$"
+                       placeholder="Enter Pincode" autocomplete="off"
+                       [ngClass]="{'is-invalid': (submitted && (f.zip.errors || errors['zip']))}">
+
+                <div class="invalid-feedback" *ngIf="form.get('zip').hasError('required')">This field is required
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('zip').hasError('min')">Atleast minimum 6 digits
+                  <code></code>
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('zip').hasError('pattern')">Enter Correct pincode
+                </div>
+                <div class="invalid-feedback" *ngFor="let e of errors['zip']">{{e.toString()}}</div>
+              </div>
+              <div class="col-lg-6">
+                <label>Relation <span class="mandatory">*</span></label>
+                <select class="form-control" formControlName="relation" autocomplete="off"
+                        [ngClass]="{'is-invalid': (submitted && (f.relation.errors || errors['relation']))}">
+                  <option value="">Please select relation</option>
+                  <option value="FT">Father</option>
+                  <option value="MT">Mother</option>
+                  <option value="ST">Sister</option>
+                  <option value="BR">Brother</option>
+                  <option value="DT">Daughter</option>
+                  <option value="SP">Spouse</option>
+                  <option value="SO">Son</option>
+                  <option value="CU">Cousin</option>
+                  <option value="GP">GrandParents</option>
+                  <option value="NE">Nephews</option>
+                  <option value="NI">Nieces</option>
+                  <option vlue="SIL">Sibling-in-law</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="form.get('relation').hasError('required')">This field is required
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('relation').hasError('min')">Atleast minimum 6 digits
+                  <code></code>
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('relation').hasError('pattern')">Enter Correct pincode
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary btn-block">
+              Submit
+            </button>
+          </div>
+        </div>
+
+        <!-- /.card-footer -->
+      </form>
+    </div>
+  </section>
+
+</div>

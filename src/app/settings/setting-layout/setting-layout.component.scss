@@ -1,0 +1,43 @@
+@import "src/assets/scss/variables";
+
+.settings {
+  position: relative;
+
+  .main-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .sub-heading {
+    font-size: 14px;
+    color: $text-light-color;
+  }
+
+  .nav {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 1;
+    top: 85px;
+    transition: all .5s;
+
+    .list-group-item {
+      font-weight: 500;
+
+      &.active {
+        color: $text-color;
+      }
+    }
+  }
+
+  .page {
+    background-color: white;
+    min-height: calc(100vh - 100px);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 4px;
+    padding: 25px;
+    transition: all .5s;
+  }
+
+
+}

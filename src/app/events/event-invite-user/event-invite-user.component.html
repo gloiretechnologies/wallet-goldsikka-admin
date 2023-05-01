@@ -1,0 +1,202 @@
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="login-div">
+        <div class="login-box">
+          <h2>Invite Users Event</h2>
+
+          <form [formGroup]="eventInviteForm" (ngSubmit)="onSubmit()">
+
+            <div class="w-100">
+              <div *ngIf="!!errorMessage" class="form-group">
+                <div class="alert alert-danger">
+                  <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+                </div>
+              </div>
+            </div>
+            <table class="table table-borderless" formArrayName="events">
+              <tr>
+                <th class="remove"><button type="button" (click)="addEventUser()" class="btn btn-info">Add Invite User</button>&nbsp;&nbsp;
+                  <button (click)="removeEventUser(i)" class="btn btn-danger">Remove</button>
+                </th>
+                <th>
+
+                </th>
+              </tr>
+              <tr *ngFor="let event of events().controls; let i=index" [formGroupName]="i">
+                <td>
+                  Name:
+                  <input type="text" formControlName="guest_name" class="form-control" placeholder="Enter Name"
+                    [ngClass]="{ 'is-invalid':submitted && (event.get('guest_name').errors) }">
+                  <div class="invalid-feedback" *ngIf="event.get('guest_name').errors?.required &&
+                  event.get('guest_name').touched">
+                    Name is required
+                  </div>
+                </td>
+                <td>
+
+                </td>
+              </tr>
+              <tr *ngFor="let event of events().controls; let i=index" [formGroupName]="i">
+
+                <td>
+                  Mobile Number :
+                  <input type="text" formControlName="guest_mobile" class="form-control" placeholder="Enter Mobile No"
+                    [ngClass]="{ 'is-invalid':submitted && (event.get('guest_mobile').errors) }">
+                  <div class="invalid-feedback" *ngIf="event.get('guest_mobile').errors?.required &&
+                  event.get('guest_mobile').touched">
+                    Mobile Number is required
+                  </div>
+                </td>
+                <td>
+
+                </td>
+              </tr>
+            </table>
+
+            <button type="submit" class="btn btn-primary submit">Submit</button>
+
+          </form>
+
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="login-div">
+        <div class="login-box">
+          <h2>Invite Users Event</h2>
+
+          <form [formGroup]="eventInviteForm" (ngSubmit)="onSubmit()">
+
+            <div class="w-100">
+              <div *ngIf="!!errorMessage" class="form-group">
+                <div class="alert alert-danger">
+                  <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+                </div>
+              </div>
+            </div>
+            <table class="table table-borderless" formArrayName="events">
+              <tr>
+                <th class="remove"><button type="button" (click)="addEventUser()" class="btn btn-info">Add Invite User</button>&nbsp;&nbsp;
+                  <button (click)="removeEventUser(i)" class="btn btn-danger">Remove</button>
+                </th>
+                <th>
+
+                </th>
+              </tr>
+              <tr *ngFor="let event of events().controls; let i=index" [formGroupName]="i">
+                <td>
+                  Name:
+                  <input type="text" formControlName="guest_name" class="form-control" placeholder="Enter Name"
+                    [ngClass]="{ 'is-invalid':submitted && (event.get('guest_name').errors) }">
+                  <div class="invalid-feedback" *ngIf="event.get('guest_name').errors?.required &&
+                  event.get('guest_name').touched">
+                    Name is required
+                  </div>
+                </td>
+                <td>
+
+                </td>
+              </tr>
+              <tr *ngFor="let event of events().controls; let i=index" [formGroupName]="i">
+
+                <td>
+                  Mobile Number :
+                  <input type="text" formControlName="guest_mobile" class="form-control" placeholder="Enter Mobile No"
+                    [ngClass]="{ 'is-invalid':submitted && (event.get('guest_mobile').errors) }">
+                  <div class="invalid-feedback" *ngIf="event.get('guest_mobile').errors?.required &&
+                  event.get('guest_mobile').touched">
+                    Mobile Number is required
+                  </div>
+                </td>
+                <td>
+
+                </td>
+              </tr>
+            </table>
+
+            <button type="submit" class="btn btn-primary submit">Submit</button>
+
+          </form>
+
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="login-div">
+        <div class="login-box">
+          <h2>Invite Users</h2>
+
+          <form [formGroup]="eventInviteForm" (ngSubmit)="onSubmit()">
+
+            <div class="w-100">
+              <div *ngIf="!!errorMessage" class="form-group">
+                <div class="alert alert-danger">
+                  <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+                </div>
+              </div>
+            </div>
+            <table class="table table-borderless" formArrayName="events">
+
+              <tr *ngFor="let event of events().controls; let i=index" [formGroupName]="i">
+                <td>
+                  <label>Name  <span class="mandatory">*</span></label>
+                  <input type="text" formControlName="guest_name" class="form-control" placeholder="Enter Name"
+                         [ngClass]="{ 'is-invalid':submitted && (event.get('guest_name').errors) }">
+                  <div class="invalid-feedback" *ngIf="event.get('guest_name').errors?.required &&
+                  event.get('guest_name').touched">
+                    Name is required
+                  </div>
+                </td>&nbsp;
+
+                <td>
+                  <label>Mobile No  <span class="mandatory">*</span></label>
+                  <input type="text" formControlName="guest_mobile" class="form-control" placeholder="Enter Mobile No"
+                         [ngClass]="{ 'is-invalid':submitted && (event.get('guest_mobile').errors) }">
+                  <div class="invalid-feedback" *ngIf="event.get('guest_mobile').errors?.required &&
+                  event.get('guest_mobile').touched">
+                    Mobile Number is required
+                  </div>
+                </td>&nbsp;
+
+                <td class="remove">
+                  <i (click)="removeEventUser(i)" class="fas fa-trash "></i>
+                  <!-- <button  class="btn btn-danger remove">Remove</button> -->
+                </td>
+                <td  class="invite">
+                  <p>
+                    <a (click)="addEventUser()"><i  class="fas fa-plus"></i> Add</a></p>
+
+                  <!-- <button type="button"  class="btn btn-info add-invite"><i class="fas fa-plus"></i>Add </button> -->
+                </td>
+              </tr>
+
+
+
+
+            </table>
+
+            <div class="text-right submit">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+          </form>
+
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

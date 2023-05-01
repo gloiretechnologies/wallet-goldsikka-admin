@@ -1,0 +1,23 @@
+.event-list {
+
+  .event {
+    padding: 25px;
+    background: white;
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+
+    h3 {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    p {
+      min-height: 50px;
+      overflow: hidden;
+    }
+  }
+  .button{
+    float:right;
+  }
+}

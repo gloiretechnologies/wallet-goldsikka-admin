@@ -1,0 +1,49 @@
+@import "src/assets/scss/variables";
+
+.Organizations {
+
+  h1 {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    line-height: 32px;
+    color: $text-dark-color;
+  }
+
+  table {
+    td {
+      span, small {
+        display: block;
+      }
+
+      span.plus {
+        color: $theme-credit-color;
+      }
+
+      span.minus {
+        color: $theme-debit-color;
+      }
+    }
+  }
+
+  table {
+    tr.ld {
+      td {
+        i {
+          display: inline-block;
+          width: 100%;
+          height: 22px;
+          background: linear-gradient(to right, #e7e7e7 20%, #d7d7d7 50%, #e7e7e7 80%);
+          background-size: 500px 100px;
+          animation-name: moving-gradient;
+          animation-duration: 1s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+          animation-fill-mode: forwards;
+        }
+      }
+    }
+  }
+
+}

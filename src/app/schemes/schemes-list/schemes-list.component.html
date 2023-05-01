@@ -1,0 +1,119 @@
+<section class="schemes w-100 m-auto">
+  <div class="container bg-white p-3 rounded">
+
+  <h1 class="mt-3">Schemes</h1>
+  <div class="alert alert-warning">
+    Subscribe to GoldSikka Schemes and accumulate gold for your family and future.
+  </div>
+
+
+  <div *ngIf="!!schemeList">
+    <div class="row">
+      <div class="col-lg-6" *ngFor="let a of schemeList">
+        <div class="scheme">
+          <h3>{{a.title}}</h3>
+          <p class="mt-3 mb-3">{{a.description}}</p>
+          <div *ngIf="a.id!=1">
+          <a class="btn btn-primary btn-block btn-lg" routerLink="/schemes/{{a.id}}/subscribe">Subscribe</a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="my-schemes mt-5 mb-5">
+    <h2>My Schemes</h2>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+        <th>Nick name</th>
+        <th>Scheme</th>
+        <th>Subscribe Date</th>
+        <th>Status</th>
+        <th>Action</th>
+        </thead>
+        <tbody *ngIf="activeSchemesList">
+        <tr
+          *ngFor="let sc of activeSchemesList.data| paginate: { itemsPerPage: 10, currentPage: page, totalItems: activeSchemesList.total }">
+
+          <td>{{sc.nick_name}}</td>
+          <td>{{sc.scheme_title.title}} </td>
+          <td>{{sc.created_date}}</td>
+          <td>{{sc.schemeStatus}}</td>
+          <td><a routerLink="./{{sc.id}}/info" class="btn btn-dark btn-sm mr-2 pr-2"> View Details</a>
+            <a (click)="nickNameScreen(sc.id)" class="btn btn-primary btn-sm mr-2">Update Nick Name</a>
+          </td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="!activeSchemesList">
+        <tr>
+          <td colspan="6">
+            <div class="alert alert-warning">No subscriptions found</div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="card-footer">
+        <div class="pagination">
+          <pagination-controls
+            (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)"
+            maxSize="{{activeSchemesList['last_page']}}"
+            directionLinks="true"
+            responsive="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog"
+       aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel">Withdraw Amount</h4>
+        </div>
+        <form class="from" role="form" [formGroup]="form" (ngSubmit)="onSubmit()"
+              [ngClass]="{'was-validated': (submitted && form.valid), 'needs-validation': (submitted)}">
+          <div class="modal-body">
+
+            <div class="row">
+              <div class="w-100">
+                <div *ngIf="!!errorMessage" class="form-group">
+                  <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Nick Name <span class="mandatory">*</span></label>
+              <input type="text" formControlName="nick_name" class="form-control" placeholder="Enter Nick Name"
+                     [ngClass]="{'is-invalid': (submitted && (f.nick_name.errors || errors['nick_name']))}"/>
+              <div class="invalid-feedback" *ngIf="form.get('nick_name').hasError('required')">This field is required
+              </div>
+              <div class="invalid-feedback" *ngFor="let e of errors['nick_name']">{{e.toString()}}</div>
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <div class="loading" *ngIf="isSubmitting">
+              <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="hide()">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

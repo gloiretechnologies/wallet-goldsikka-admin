@@ -1,0 +1,119 @@
+<section class="scheme-user-list">
+  <div class="row mb-2">
+    <h1 class="col-lg-6">Scheme</h1>
+    <div class="col-lg-6">
+      <a (click)="addSchemeSubscribe()" class="btn btn-primary float-right btn-lg"><i class="fa fa-plus mr-2"></i>
+        Add New Subscription</a>
+    </div>
+    <div class="card d-block mt-4 mb-4" *ngIf="!schemeDataList">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th>DATE</th>
+              <th>TOTAL GRAMS</th>
+              <th>TOTAL TENURE</th>
+              <th>TOTAL AMOUNT</th>
+              <th>PAID TENURE</th>
+              <th>PAID AMOUNT</th>
+              <th>PAID GRAMS</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody *ngIf="!!schemes">
+            <tr
+              *ngFor="let sc of schemes.data| paginate: { itemsPerPage: 10, currentPage: page, totalItems: schemes.total }">
+              <td>{{sc.created_at | date:'short'}}</td>
+              <td>{{sc.emi_grams|  number}} g</td>
+              <td>{{sc.total_installments}} Months</td>
+              <td>{{sc.amount}} </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><a (click)="schemeInfo(sc.id)" class="btn btn-dark btn-sm"> View Details</a></td>
+            </tr>
+            </tbody>
+            <tbody *ngIf="!schemes.data.length">
+              <tr>
+                <td colspan="6">
+                  <div class="alert alert-warning">No subscriptions found</div>
+                </td>
+              </tr>
+              </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <div class="pagination">
+            <pagination-controls
+              (pageChange)="pageChanged($event)"
+              (pageBoundsCorrection)="pageChanged($event)"
+              maxSize="{{schemes['last_page']}}"
+              directionLinks="true"
+              responsive="true"
+              previousLabel="Previous"
+              nextLabel="Next"
+              screenReaderPaginationLabel="Pagination"
+              screenReaderPageLabel="page"
+              screenReaderCurrentLabel="You're on page">
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--  <div class="card d-block scheme-subscribe-details" *ngIf="schemeDataList">-->
+<!--    <div class="card-body p-0">-->
+<!--      <table>-->
+<!--        <tr>-->
+<!--          <td class="form-text text-muted">Grams</td>-->
+<!--          <td> :</td>-->
+<!--          <td>{{subscribeSchemeInfo.emi_grams}}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="form-text text-muted">Tenure</td>-->
+<!--          <td> :</td>-->
+<!--          <td>{{subscribeSchemeInfo.total_installments}}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="form-text text-muted">Purchased Date</td>-->
+<!--          <td> :</td>-->
+<!--          <td> {{subscribeSchemeInfo.created_at|date:'short'}}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="form-text text-muted">Paid tenures</td>-->
+<!--          <td> :</td>-->
+<!--          <td> &#45;&#45;</td>-->
+<!--        </tr>-->
+<!--      </table>-->
+<!--      <br/>-->
+<!--      <br/>-->
+<!--      <h5>Transactions </h5>-->
+<!--      <table class="table table-striped table-hover">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th>DATE</th>-->
+<!--          <th>TRANSACTION ID</th>-->
+<!--          <th>PAYMENT MODE</th>-->
+<!--          <th>GOLD <small>(grams)</small></th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody *ngIf="!!subscribeSchemeInfo.transactions">-->
+<!--        <tr-->
+<!--          *ngFor="let txn of subscribeSchemeInfo.transactions">-->
+<!--          <td>{{txn.created_at | date:'short'}}</td>-->
+<!--          <td>{{txn.reference_id}}</td>-->
+
+<!--          <td>{{txn['source']}}</td>-->
+<!--          <td>-->
+<!--            <span *ngIf="txn.type === 'CR'" class="plus">+{{txn.grams.toFixed(6)}}</span>-->
+<!--            <span *ngIf="txn.type === 'DE'" class="minus">-{{txn.grams.toFixed(6)}}</span>-->
+<!--            <small>{{txn.total_amount | currency}}</small>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+
+<!--    </div>-->
+<!--  </div>-->
+</section>

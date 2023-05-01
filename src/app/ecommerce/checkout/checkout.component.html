@@ -1,0 +1,305 @@
+<div>
+  <section class="co-sec mt-2" *ngFor="let datam of arr ">
+    <div>
+      <div class="container">
+        <div class="row co-row">
+          <div class="col-md-2 col-3">
+            <img class="co-image" src="{{datam.image_uri}}" alt="">
+          </div>
+          <div class="col-md-8 col-4">
+            <h3 class="co-head">{{datam.pname}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="table-responsive-xl">
+        <table class="table co-tab">
+          <thead>
+            <tr class="th-color">
+              <th scope="col" class="text-center">S.NO</th>
+              <th scope="col" class="text-center">DETAILS</th>
+              <th scope="col" class="text-center">VALUE</th>
+              <th scope="col" class="text-center">AMOUNT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="rr">
+              <th scope="row" class="text-center t-font">1</th>
+              <td scope="row" class="text-center t-font">Weight</td>
+              <td class="text-center t-font">{{datam.weight}}gms</td>
+              <td class="text-center t-font">₹{{datam.price | currency:'JPY':''}}</td>
+            </tr>
+
+            <tr class="rr">
+              <th scope="row" class="text-center t-font">2</th>
+              <td scope="row" class="text-center t-font">VA Price</td>
+              <td class="text-center t-font">{{datam.va}}%</td>
+              <td class="text-center t-font">₹{{datam.vaprice | currency:'JPY':''}}</td>
+            </tr>
+            <tr class="rr" *ngIf="datam.stoneprice!=0">
+              <th scope="row" class="text-center t-font">3</th>
+              <td scope="row" class="text-center t-font">Stone price</td>
+              <td class="text-center t-font">-</td>
+              <td class="text-center t-font">₹{{datam.stoneprice | currency:'JPY':''}}</td>
+            </tr>
+            <tr class="th-color">
+              <th>Excluding GST</th>
+              <th></th>
+              <th class="text-center ta-head t-font"></th>
+              <td class="text-center cost t-font"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="container mt-2 " *ngIf="response!=null">
+    <div class="row">
+      <div class="col-md-8">
+      </div>
+      <div class="col-md-4">
+        <table>
+          <tr>
+            <th>
+              No of Products
+            </th>
+            <th>
+              :&nbsp; {{response.productscount}}
+            </th>
+          </tr>
+          <tr>
+            <th>
+              Sub Total
+            </th>
+            <th class="d-flex justify-content-between">
+              <p class="mb-0">:&nbsp;</p>
+              <p class="mb-0">₹{{response.cartprice | currency:'JPY':''}}</p>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              GST({{response.Gst}}%)
+            </th>
+            <th class="d-flex justify-content-between">
+              <p class="mb-0"> :&nbsp;</p>
+              <p class="mb-0">₹{{response.totalgstprice | currency:'JPY':''}}</p>
+            </th>
+          </tr>
+
+          <tr>
+            <th>
+              Grand Total
+            </th>
+            <th class="d-flex justify-content-between">
+              <p class="mb-0">:&nbsp;</p>
+              <p class="btb mb-0">₹{{math.round(response.payable_amount) | currency:'JPY':''}}</p>
+            </th>
+          </tr>
+        </table>
+        <section class="event-buy-gold  m-auto">
+          <div class="form-info">
+            <form class="from" role="form" [formGroup]="form" (ngSubmit)="onSubmit()"
+              [ngClass]="{'was-validated': (submitted && form.valid), 'needs-validation': (submitted)}">
+              <div class="row">
+                <div class="w-100">
+                  <div *ngIf="!!errorMessage" class="form-group">
+                    <div class="alert alert-danger">
+                      <i class="fas fa-exclamation-triangle mr-2"></i> {{errorMessage}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="box">
+                    <div class="form-group">
+                      <div class="input-group" [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+
+                        <input type="hidden" ngModel="{{response.productscount}}" placeholder="Enter amount"
+                          class="form-control form-control-lg" autofocus formControlName="productscount"
+                          [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group" [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+
+                        <input type="hidden" ngModel="{{arr[0].liveprice}}" placeholder="Enter amount"
+                          class="form-control form-control-lg" autofocus formControlName="liveprice"
+                          [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group" [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+
+                        <input type="hidden" ngModel="{{arr[0].pid}}" placeholder="Enter amount"
+                          class="form-control form-control-lg" autofocus formControlName="pid"
+                          [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group" [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+
+                        <input type="hidden" value="50000" ngModel="{{response.payable_amount}}"
+                          placeholder="Enter amount" class="form-control form-control-lg" autofocus
+                          (change)="onAmountChange()" (keyup)="onAmountChange()" formControlName="amount"
+                          [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+                        <div class="invalid-feedback" *ngIf="form.get('amount').hasError('required')">This field is
+                          required
+                        </div>
+                        <div class="invalid-feedback" *ngIf="form.get('amount').hasError('min')">You
+                          have min limit 1/-
+                          amount per transaction
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input form-control" type="checkbox" (change)="moneyWallet($event)">
+                      <label class="form-check-label">
+                        Use Booking Account
+                      </label>
+                    </div>
+                    <div>Booking Account Balance : ₹{{walletAmount| currency:'JPY':''}}/-</div>
+                    <br>
+                    <div class="form-group" *ngIf="walletAmountInput">
+                      <label>Booking Account Amount : <span class="mandatory">*</span></label>
+                      <div class="input-group"
+                        [ngClass]="{'is-invalid': (submitted && (f.enteredWalletAmount.errors || errors['enteredWalletAmount']))}">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+                        </div>
+                        <input formControlName="enteredWalletAmount"
+                          oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';"
+                          (keypress)="onlyNumberKey($event)" type="text" placeholder="Enter Amount"
+                          class="form-control form-control-lg" (change)="enteredWalletAmountChange()"
+                          (keyup)="enteredWalletAmountChange()"
+                          [ngClass]="{'is-invalid': (submitted && (f.enteredWalletAmount.errors || errors['enteredWalletAmount']))}">
+                      </div>
+
+                      <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('required')">Enter
+                        amount
+                      </div>
+                      <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('min')">Enter Wallet
+                        amount
+                        <!-- above 0 -->
+                      </div>
+                      <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('pattern')">Enter
+                        only
+                        numbers
+                      </div>
+                      <!--            <div class="invalid-feedback">{{walletErrorMsg}}</div>-->
+                    </div>
+                    <div style="height: 45px" class="mb-2">
+                      <!-- <span class="form-text">Taxes & Levies : {{amountWithGstAmount| currency}}</span> -->
+                      <span class="form-text">Amount payable is :
+                        ₹{{amountPayableIncludingCharges| currency:'JPY':''}}/-</span>
+                    </div>
+                    <div class="form-group pt-2">
+                      <button type="submit" class="btn btn-primary btn-lg btn-block hei-b">
+                        Proceed to Pay
+                        <span style="font-size: 1.25rem;" *ngIf="amountPayableIncludingCharges == 0 && f.enteredWalletAmount.value !== 0
+                        && f.enteredWalletAmount.value ">with Booking Account
+                        </span>
+                        <span style="font-size: 1.25rem;" *ngIf="amountPayableIncludingCharges !==
+                          0">₹{{amountPayableIncludingCharges| currency:'JPY':''}}/-</span>
+                      </button>
+                      <p (click)="openVerticallyCentered()" class=" mt-2 btn pay hei-b ">
+                        GOLD PLUS PLAN
+                        <!-- <span *ngIf="amountPayableIncludingCharges == 0 && f.enteredWalletAmount.value !== 0
+                                              && f.enteredWalletAmount.value ">with Booking Account
+                        </span> -->
+                        <!-- {{amountPayableIncludingCharges
+                          | currency}} -->
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div [style.display]="schemeTransactionModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1"
+  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog margin-centered">
+    <div class="modal-content p-4 bg-clr-modal">
+      <div class="transaction">
+        <div class="d-flex mb-4 justify-content-between">
+          <div>
+            <h4 class="modal-title clr-w" id="myModalLabel">Recommended monthly plan</h4>
+          </div>
+          <div>
+
+            <button class="btn btn-danger" datam-dismiss="modal" (click)="hideSchemeTransactionModal()"> X
+            </button>
+          </div>
+
+        </div>
+        <p class="clr-w">
+          Goldsikka offers unique 11+1 scheme earn benefits of getting one month free installment from Goldsikka on
+          completion of the eleven months plan.
+        </p>
+        <!-- <table>
+          <tr>
+            <td class="clr-w">
+              Item total amount
+            </td>
+            <td class="clr-w">
+              :&nbsp;₹{{math.round(response.payable_amount) | currency:'JPY':''}}
+
+            </td>
+          </tr>
+          <tr>
+            <td class="clr-w">
+              Monthly Amount
+            </td>
+            <td class="clr-w">
+              :&nbsp;₹{{math.round(response.payable_amount/12) | currency:'JPY':''}}
+
+            </td>
+          </tr>
+          <tr>
+            <td class="clr-w">
+              Your total payble amount(11 Months)
+            </td>
+            <td class="clr-w">
+              :&nbsp;₹{{(math.round(response.payable_amount/12))*11 | currency:'JPY':''}}
+
+            </td>
+          </tr>
+          <tr>
+            <td class="clr-w">
+              100% Discount on 12th installment
+            </td>
+            <td class="clr-w">
+              :&nbsp;₹{{math.round(response.payable_amount/12) | currency:'JPY':''}}
+
+            </td>
+          </tr>
+          <tr>
+
+          </tr>
+        </table> -->
+        <div class="mainb-center">
+          <button routerLink="/schemes/2/subscribe" class="btn-primary btnm">
+            Start with GOLD PLUS PLAN
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="bank-account-settings">
+  <h1>Bank Accounts</h1>
+
+  <section class="mt-3">
+    <div class="w-100">
+      <div *ngIf="!!errorMessage" class="form-group">
+        <div class="alert alert-danger">
+          <i class="fas fa-exclamation-triangle mr-2"></i> {{errorMessage}}
+        </div>
+      </div>
+      <div *ngIf="!!successMessage" class="form-group">
+        <div class="alert alert-success">
+          <i class="fas fa-check mr-2"></i> {{successMessage}}
+        </div>
+      </div>
+    </div>
+
+    <div class="bank">
+      <a routerLink="./add" class="btn btn-primary btn-lg btn-block"> <i class="fa fa-plus mr-2"></i> Add New Bank</a>
+
+      <div *ngFor="let b of bankAccountList">
+        <div class="bank-list">
+          <div class="row">
+            <div class="col-lg-6">
+              <h5 class="title mb-4"><i class="fas fa-file-invoice mr-2"></i> {{b.name_on_account}}</h5>
+
+              <p class="bank-data">{{b.account_number}}</p>
+              <p class="bank-data">{{b.bank_name}},{{b.bank_branch}}</p>
+              <p class="bank-data">{{b.ifsc_code}}</p>
+            </div>
+            <div class="col-lg-6">
+              <div class="float-right text-right">
+                <a class="btn btn-sm mr-2 btn-outline-secondary" (click)="onMakePrimary(b.id)"
+                   *ngIf="b.is_primary == false">Set Default</a>
+                <a class="btn btn-sm mr-2 btn-success" *ngIf="b.is_primary == true"><i class="fa fa-check mr-2"></i>
+                  Primary</a>
+                <a class="btn btn-outline-secondary btn-sm" *ngIf="b.actions==true" routerLink="{{b.id}}/edit"><i class="far fa-edit"></i></a>
+                <a (click)="deleteBank(b.id)" *ngIf="b.actions==true" class="btn btn-outline-danger btn-sm ml-2"><i
+                  class="fas fa-trash-alt"></i> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

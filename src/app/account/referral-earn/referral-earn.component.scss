@@ -1,0 +1,107 @@
+@import "src/assets/scss/variables";
+
+.passbook {
+  .card-header{
+    font-weight: bold;
+  }
+  h1 {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    line-height: 32px;
+    color: $text-dark-color;
+  }
+.refer{
+  p{
+    border: 1px solid black;
+    padding: 10px;
+    margin: 0px 10px;
+    width: fit-content;
+    display: inline;
+  }
+  span{
+    background-color: #1a2e22;
+    color: #fff;
+    margin-left: 10px;
+    line-height: 2!important;
+  }
+  button{
+  margin: 5px;
+  }
+}
+  .referrals {
+    font-size: 19px;
+    text-align: right;
+    color: #757ca6;
+  }
+  .modal{
+    position:absolute;
+  }
+
+  .btn .badge {
+    position: relative;
+    top: -1px;
+    font-size: 12px;
+  }
+  .loading {
+    position: absolute;
+    z-index: 10;
+    display: block;
+    height: 100%;
+    background-color: white;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.75;
+    width: 100%;
+
+    i {
+      font-size: 3rem;
+      vertical-align: middle;
+      margin: 100px;
+    }
+  }
+  table {
+    td {
+      span, small {
+        display: block;
+      }
+
+      span.plus {
+        color: $theme-credit-color;
+      }
+
+      span.minus {
+        color: $theme-debit-color;
+      }
+
+      // small {
+      // }
+    }
+  }
+  .btn-disconnect{
+    outline: none;
+    cursor:auto;
+    box-shadow: none;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .refer{
+    p{
+      display: block!important;
+      margin: 0px!important;
+      margin-top: 5px!important;
+      padding: 5px!important;
+    }
+  }
+}
+
+.mandatory {
+  color: red;
+  font-size: 20px;
+}
+.message{
+  font-size: 13px;
+color:red;
+}

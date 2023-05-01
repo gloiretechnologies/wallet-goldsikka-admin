@@ -1,0 +1,51 @@
+<section class="schemes m-auto">
+  <h2 class="mt-3">Tickets</h2>
+  <section class="my-schemes mt-3 mb-5">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+        <th> name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Message</th>
+        <th>Scheme name</th>
+        <th>Status</th>
+        </thead>
+        <tbody *ngIf="ticketList">
+        <tr
+          *ngFor="let sc of ticketList.data| paginate: { itemsPerPage: 10, currentPage: page, totalItems: ticketList.total }">
+
+          <td>{{sc.name}}</td>
+          <td>{{sc.email}} </td>
+          <td>{{sc.mobile}}</td>
+          <td>{{sc.message}}</td>
+          <td>{{sc.scheme.nick_name}}</td>
+          <td>{{sc.status}}</td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="!ticketList">
+        <tr>
+          <td colspan="6">
+            <div class="alert alert-warning">No subscriptions found</div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="card-footer">
+        <div class="pagination">
+          <pagination-controls
+            (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)"
+            maxSize="{{ticketList['last_page']}}"
+            directionLinks="true"
+            responsive="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </section>

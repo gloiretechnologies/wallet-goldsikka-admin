@@ -1,0 +1,32 @@
+@import "src/assets/scss/variables";
+
+.coupon {
+
+  h1 {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    line-height: 32px;
+    color: $text-dark-color;
+  }
+
+  table {
+    td {
+      span, small {
+        display: block;
+      }
+
+      span.plus {
+        color: $theme-credit-color;
+      }
+
+      span.minus {
+        color: $theme-debit-color;
+      }
+
+      small {
+      }
+    }
+  }
+}

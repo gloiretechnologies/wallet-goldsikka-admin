@@ -1,0 +1,47 @@
+<div class="address-settings">
+    <h1>Addresses</h1>
+
+    <section class="mt-3">
+      <div class="w-100">
+        <div *ngIf="!!errorMessage" class="form-group">
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+          </div>
+        </div>
+        <div *ngIf="!!successMessage" class="form-group">
+          <div class="alert alert-success">
+            <i class="fas fa-check"></i> &nbsp; {{successMessage}}
+          </div>
+        </div>
+      </div>
+
+      <div class="address">
+
+        <a routerLink="./add" class="btn btn-primary btn-block btn-lg mb-3"><i class="fa fa-plus mr-2"></i> Add New
+          Address</a>
+
+        <div *ngIf="!!addressResponse.data">
+          <div class="address-list" *ngFor="let a of addressResponse.data">
+            <div class="row">
+              <div class="col-lg-6">
+                <h5><i class="fas fa-map-marked-alt mr-2"></i> {{a.title}} </h5>
+                <br>
+                <span class="address-data">{{a.address}},</span><br/>
+                <span class="address-data">{{a.city}},{{a.state.name}},{{a.zip}}.</span>
+              </div>
+              <div class="col-lg-6">
+                <div class="float-right text-right">
+                  <a class="btn btn-sm btn-outline-secondary mr-2" (click)="onMakePrimary(a.id)" *ngIf="a.is_primary == false">Set As
+                    Primary</a>
+                  <a class="btn btn-sm btn-success mr-2" *ngIf="a.is_primary == true"><i class="fa fa-check mr-1"></i> Primary</a>
+                  <a class="btn btn-sm btn-outline-secondary" *ngIf="a.actions == true" routerLink="./{{a.id}}/edit"><i class="far fa-edit"></i></a>
+                  <button type="button" (click)="deleteAddress(a.id)" *ngIf="a.actions == true" class="btn btn-outline-danger btn-sm ml-2"><i
+                    class="far fa-trash-alt"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+</div>

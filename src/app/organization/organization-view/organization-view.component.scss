@@ -1,0 +1,26 @@
+.custom-box-form {
+  width: 900px;
+  margin: 0 auto;
+  padding: 25px;
+  background: #fff;
+  /* border: 1px solid #ddd; */
+  border-radius: 4px;
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.sub-head-side {
+  padding: 10px;
+  background: hsla(0, 0%, 86.7%, .24);
+  width: calc(100% + 25px);
+  display: block;
+  height: 55px
+}
+
+[dir=ltr] .sub-head-side .d-flex {
+  float: right;
+}

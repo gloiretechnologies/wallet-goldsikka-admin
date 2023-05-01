@@ -1,0 +1,124 @@
+.main-form{
+  width: 50%;
+  background: #ffffff;
+  padding: 20px;
+  border-radius:6px;
+}
+.buy-gold {
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .i-box {
+    padding: 15px;
+    display: block;
+
+    ul {
+      list-style: disc;
+      padding: 0;
+      margin-left: 25px;
+
+      li {
+        font-size: 14px;
+        margin: 3px 0;
+      }
+    }
+  }
+
+  // .coupon-buy{
+  //   margin: 4% 0 0 0;
+  // }
+
+  form {
+    margin: 20px 0 0 0;
+
+    label {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .input-group-text {
+      width: 60px;
+      text-align: center;
+      display: block;
+
+      i {
+        text-align: center;
+        vertical-align: middle;
+        color: #666666;
+        margin-top: 5px;
+        font-size: 21px;
+      }
+    }
+
+    .form-control-lg {
+      font-size: 1.5rem;
+    }
+
+   .form-check-input{
+     width: 22px;
+     height: 22px;
+   }
+
+    .form-check-label{
+      margin-left: 8px;
+      margin-top: 3px;
+      color: black!important;
+    }
+  }
+  .loading {
+    position: absolute;
+    z-index: 10;
+    display: block;
+    height: 100%;
+    background-color: white;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.75;
+    width: 100%;
+
+    i {
+      font-size: 3rem;
+      vertical-align: middle;
+      margin: 100px;
+    }
+  }
+
+
+  nz-alert {
+    margin-bottom: 16px;
+  }
+
+}
+
+// mobile responsive
+@media only screen and (max-width: 767px) {
+  .buy-gold{
+    h1{
+      font-size: 1.5rem;
+    }
+  }
+ .main-form{
+   width: 100%;
+
+ }
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.mandatory {
+  color: red;
+  font-size: 20px;
+}

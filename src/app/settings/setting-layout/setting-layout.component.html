@@ -1,0 +1,47 @@
+<div class="container m-auto">
+  <div class="settings">
+
+    <div class="row">
+      <section class="col-lg-3 col-md-4">
+        <div class="nav m-1">
+
+          <!--          <h1 class="main-title">Account Settings</h1>-->
+          <!--          <small class="sub-heading">Change your profile and account settings</small>-->
+
+          <div class="list-group w-100 m-2">
+            <a routerLink="/settings" class="list-group-item list-group-item-action" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact:true}"><i class="far fa-user mr-2"></i> Account</a>
+            <a routerLink="/settings/kyc" class="list-group-item list-group-item-action" routerLinkActive="active"><i
+                class="fas fa-search mr-2"></i> KYC
+            </a>
+            <a routerLink="/settings/nominees" class="list-group-item list-group-item-action"
+              routerLinkActive="active"><i class="fas fa-users mr-2"></i> Nominee Details
+            </a>
+            <!-- <a routerLink="/settings/password" class="list-group-item list-group-item-action" routerLinkActive="active"><i
+              class="fas fa-unlock-alt mr-2"></i> Password</a> -->
+            <a routerLink="/settings/addresses" class="list-group-item list-group-item-action"
+              routerLinkActive="active"><i class="fas fa-map-marked mr-2"></i>
+              Addresses</a>
+            <a routerLink="/settings/bankAccounts" class="list-group-item list-group-item-action"
+              routerLinkActive="active"><i class="fas fa-money-check mr-2"></i> Bank
+              Accounts</a>
+            <!--            <a routerLink="/settings/notifications" class="list-group-item list-group-item-action"-->
+            <!--               routerLinkActive="active"><i-->
+            <!--              class="far fa-bell mr-2"></i> Notifications</a>-->
+          </div>
+        </div>
+      </section>
+
+      <div class="col-lg-9 col-md-8">
+        <div class="row">
+
+          <section class="page d-block w-100">
+            <div class="w-75 m-auto">
+              <router-outlet></router-outlet>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

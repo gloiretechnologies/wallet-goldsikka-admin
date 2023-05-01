@@ -1,0 +1,165 @@
+.co-head {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 35px;
+  font-style: italic;
+  font-family: fangsong;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.co-row {
+  border-radius: 5px;
+  box-shadow: 1px 1px 13px 6px lightgrey;
+  margin: 15px;
+}
+
+.co-tab {
+  margin: 15px;
+  width: 97%;
+}
+
+.co-image {
+  height: 70px;
+  display: flex;
+  margin: 6px 0px;
+  border-radius: 80px;
+}
+
+.rr {
+  background-color: white;
+}
+
+.ta-head {
+  text-align: end;
+  font-weight: 600;
+  font-style: italic;
+  font-family: auto;
+  font-size: 20px;
+}
+
+.th-color {
+  background: #f2f2f2;
+}
+
+.cost {
+  font-size: 20px;
+  font-weight: 600;
+}
+.pay{
+  background-color: #1a2e22;
+  color: #f2f2f2;
+  padding: 8px 43px;
+    font-size: 20px;
+}
+
+.co-sec {
+  border: 1px solid black;
+}
+
+@media only screen and (max-width: 767px) {
+  .co-image {
+    height: 50px;
+    border-radius: 80px;
+    width: 50px;
+    margin: 0px 0px;
+  }
+
+  .co-head {
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .co-row {
+    padding: 10px 0px;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+  }
+
+  .t-font {
+    font-size: 12px;
+  }
+}
+
+.btb {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.form-check-input {
+  width: 16px;
+  height: 16px;
+}
+
+.form-check-label {
+  margin-left: 2px;
+  color: black !important;
+}
+
+.form-check {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.form-group {
+  margin-bottom: 0px !important;
+}
+ .bg-clr-modal
+ {
+   background-color: #1a2e22;
+    border: none !important;
+    color: rgb(0, 0, 0);
+ }
+ .modal.show {
+  display: block;
+  margin-top: 100px;
+  margin-left: 150px;
+}
+.modal-body {
+  display: flex;
+  justify-content: space-between;
+
+  .buy_gms {
+    background-color: rgb(170, 221, 170);
+  }
+}
+.margin-centered
+{
+  margin-top: 90px !important;
+ }
+ .bg-clr-modal
+ {
+   background-color: #1a2e22;
+    border: none !important;
+    color: rgb(0, 0, 0);
+ }
+ 
+ .clr-w 
+ {
+   color: white;
+ }
+ .btnm
+ {
+ padding: 11px 13px;
+    border-radius: 4px;
+    border: navajowhite;
+ }
+ .mainb-center
+ {
+      width: 225px;
+    margin: 1px auto;
+    margin-top: 23px;
+ }
+ .pay{
+  background-color: #1a2e22;
+  color: #f2f2f2;
+  font-size: 18px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0px !important;
+
+ }
+ .hei-b{
+  width: 311px;
+ }

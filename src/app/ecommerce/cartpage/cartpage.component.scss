@@ -1,0 +1,195 @@
+.one .wb-head:before {
+    width: 28px;
+    height: 5px;
+    display: block;
+    content: "";
+    position: absolute;
+    top: 43px;
+    left: 50%;
+    margin-left: -14px;
+    background-color: #1a2e22;
+}
+
+.one .wb-head:after {
+    width: 100px;
+    height: 1px;
+    display: block;
+    content: "";
+    position: relative;
+    margin-top: 1px;
+    left: 50%;
+    margin-left: -50px;
+    background-color: #1a2e22;
+}
+
+.wb-head {
+    text-align: center;
+    font-size: 25px;
+    padding: 5px 0;
+    border: 1px solid black;
+    margin-bottom: 18px;
+}
+
+.one {
+    position: sticky;
+    top: 70px;
+    z-index: 999;
+    background: #F4F5FA;
+}
+
+img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.cards {
+    padding: 15px;
+    margin: 20px 0px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.re {
+    background-color: gray;
+    color: #e3cb65;
+    font-size: 20px;
+}
+
+.move {
+    background-color: #e3cb65;
+    font-size: 20px;
+}
+
+.amount {
+    text-align: end;
+    margin-top: 15px;
+    font-size: 20px;
+}
+.card-space {
+    margin-bottom: 70px;
+}
+.cart {
+    border: 1px solid black;
+    bottom: 1px;
+    position: fixed;
+    z-index: 999;
+    background: #F4F5FA;
+    width: 78.5%;
+    padding: 5px 3px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 20px;
+}
+
+.continue {
+    background-color: #39654b;
+    font-size: 20px;
+    color: white;
+    margin-top: 8px;
+}
+
+.su {
+       font-size: 20px;
+    font-weight: 200;
+    padding: 5px 0px;
+}
+
+.sd {
+    font-size: 25px;
+    padding: 0px 20px;
+}
+
+.sub {
+    // margin: 45px 0px;
+    line-height: 40px;
+}
+
+.card-sec {
+    margin-bottom: 30px;
+}
+
+hr {
+    margin: 5px 15px;
+    color: grey;
+}
+.margin-b {
+    margin-bottom: -8px;
+}
+
+.am {
+    margin-top: 15px;
+    font-size: 20px;
+}
+.cart-sec {
+    margin-bottom: 70px;
+}
+
+@media only screen and (max-width: 767px) {
+    .sub {
+        margin: 0px 0px !important;
+    }
+
+    .su {
+        font-size: 14px;
+    }
+
+    .sd {
+        font-size: 18px;
+    }
+
+    .am {
+        font-size: 20px;
+        margin-top: 0px !important;
+    }
+
+    .bottom-row {
+        padding: 10px 8px;
+    }
+    .cart {
+     border: 1px solid black;
+    bottom: 1px;
+    /* position: fixed; */
+    position: initial;
+    z-index: 999;
+    background: #F4F5FA;
+    width: 100%;
+    padding: 5px 3px;
+    }
+    .amount {
+        margin-top: 0px;
+    }
+    h2 {
+        font-size: 15px;
+    }
+    .wb {
+        font-size: 20px;
+    }
+    hr {
+        margin: 5px 0px;
+    }
+    .continue {
+        font-size: 14px;
+        margin-top: 0;
+    }
+    .card-space {
+        margin-bottom: 100px;
+    }
+    .cart-sec {
+        margin-bottom: 70px;
+    }
+    .one {
+        position: sticky;
+        top: 65px;
+    }
+    .mobile-f{
+        font-size: 13px;
+    }
+    .b-mobile{
+        font-size: 19px;
+    }
+}
+.ju{
+display: flex;
+justify-content: end;
+}

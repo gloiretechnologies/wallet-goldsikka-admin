@@ -1,0 +1,128 @@
+<div class="">
+  <div class="wallet">
+    <div class="card-body p-0">
+      <div class="row">
+
+        <div class="col-lg-6 wallet-box">
+          <div class=" wallet-amount">
+            <div class="card-body p-0">
+              <h5>Account Amount </h5>
+<br/>
+              <p>{{  walletAmount |   currency:'₹' + ' '}} /-</p><br>
+              <div class="transfor-btn">
+                <a href="/money-wallet/withdraw">Withdraw</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="col-lg-6 mt-3">
+          <div class="">
+            <div class="card-body p-0">
+
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="login-div">
+                      <div class="login-box">
+                        <h2>Add Amount to Booking Account</h2>
+                        <form role="form" class="form w-100" [formGroup]="form" (ngSubmit)="onSubmit()">
+                          <div class="w-100">
+                            <div *ngIf="!!errorMessage" class="form-group">
+                              <div class="alert alert-danger">
+                                <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+                              </div>
+                            </div>
+
+                            <div *ngIf="!!successMessage" class="form-group">
+                              <div class="alert alert-success">
+                                <i class="fas fa-check"></i> &nbsp; {{successMessage}}
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label>Enter Amount <span class="mandatory">*</span></label>
+                              <div class="input-group"
+                                [ngClass]="{'is-invalid': (submitted && (f.amount.errors || errors['amount']))}">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+                                </div>
+                                <input formControlName="amount" type="text" placeholder="Enter amount"
+                                  class="form-control"
+                                  [ngClass]="{'is-invalid': (submitted && (f.amount.errors || errors['amount']))}">
+                              </div>
+                              <div class="invalid-feedback" *ngIf="form.get('amount').hasError('required')">Enter
+                                amount
+                              </div>
+                              <div class="invalid-feedback" *ngIf="form.get('amount').hasError('pattern')">Enter only
+                                numbers
+                              </div>
+                              <div class="invalid-feedback" *ngIf="form.get('amount').hasError('min')">Please Enter Minimum 50 on your account
+                              </div>
+                              <div class="invalid-feedback" *ngIf="form.get('amount').hasError('max')">Please Enter Maximum 100000 on your account
+                              </div>
+                              <div class="invalid-feedback" *ngFor="let e of errors['amount']">{{e.toString()}}</div>
+                            </div>
+
+                            <div class="form-group">
+                              <button type="submit" class="btn btn-primary btn-block btn-md">
+                                Submit <i *ngIf="isSubmitting" class="fas fa-spinner fa-spin"></i>
+                              </button>
+                            </div>
+
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-12 card transactions">
+  <h4>Transactions : </h4>
+  <div class="table-responsive">
+    <table class="table table-striped ">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Transaction ID</th>
+          <th>Amount</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!!transactions">
+        <tr *ngFor="let txn of transactions.data |
+              paginate: { itemsPerPage: 10, currentPage: page, totalItems: transactions.total }">
+          <td>{{txn.created_date}}</td>
+          <td>{{txn.transaction_id}}</td>
+          <td>
+            <span *ngIf="txn.type === 'CR'" class="plus">
+              +&nbsp;{{txn.amount |currency}}
+            </span>
+            <span *ngIf="txn.type === 'DE'" class="minus">
+              -&nbsp;{{txn.amount |currency}}
+            </span>
+          </td>
+          <td>{{txn.description}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-footer card-body" *ngIf="!!transactions">
+    <div class="pagination">
+      <pagination-controls (pageChange)="pageChanged($event)" (pageBoundsCorrection)="pageChanged($event)" maxSize="5"
+        directionLinks="true" responsive="true" previousLabel="Prev" nextLabel="Next"
+        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+      </pagination-controls>
+    </div>
+  </div>
+</div>

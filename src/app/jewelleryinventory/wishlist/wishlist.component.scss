@@ -1,0 +1,276 @@
+h2 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 35px;
+  border-bottom: 1px solid #9e9e9e;
+  padding: 5px 0px;
+  border-top: 1px solid #9e9e9e;
+  text-shadow: 2px 2px 20px #00000082;
+}
+
+// wishlist image css
+.img {
+  border-right: 1px solid #000;
+  margin: 10px 0px;
+}
+
+// CSS TO SIDE BY SIDE IMAGE AND PRODUCT DETAILS
+.img-details {
+  display: flex;
+}
+
+// css for product detail beside image
+.prod_details {
+  margin-top: 45px;
+  margin-left: 5px;
+}
+
+// css for product detail heading
+h4 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: system-ui;
+}
+
+// css for product detail paragraphs
+
+.bar {
+  p {
+    position: absolute;
+    left: 40%;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 0;
+    font-family: "Times New Roman", Times, serif;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 30px;
+    border-radius: 20px;
+  }
+}
+
+// accmulate button product details
+.btn-acc {
+  background-color: #f5d65a;
+  color: #000;
+  border-radius: 5px;
+  padding: 8px 7px;
+  font: -webkit-control;
+  font-family: monospace;
+  border: 1px solid #000;
+  font-weight: bold;
+}
+
+.btn-acc {
+
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: white !important;
+}
+
+// FOR POP-UP
+.modal.show {
+  display: block;
+  margin-top: 100px;
+  margin-left: 150px;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: space-between;
+
+  .buy_gms {
+    background-color: rgb(170, 221, 170);
+  }
+}
+
+// css for pending requirment_2
+
+.status_section_pending {
+  font-variant: all-small-caps;
+  padding: 4px 6px;
+  font-weight: bold;
+  color: red;
+}
+
+// css for accmulated requirment_3
+
+.status_section_accmulated {
+  font-variant: all-small-caps;
+  padding: 4px 6px;
+  font-weight: bold;
+  color: green;
+
+  span {
+    color: green;
+    font-variant: all-small-caps;
+  }
+}
+
+
+
+// catagory scss
+.cat_name {
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+// css for product detail beside image
+.prod_details {
+  text-transform: uppercase;
+  margin-top: 3rem+2rem;
+  margin-left: 3px +2px;
+}
+
+ul {
+  text-transform: uppercase;
+  list-style: none;
+}
+
+
+// transaction history btn css
+
+.transactionbtn {
+  border: 0;
+  color: #fff;
+  background-color: #1a2e22;
+  font-size: large;
+  padding: 3px 0px;
+
+  &:hover {
+    color: #edd368;
+  }
+}
+
+.accumlatebtn {
+  border: 0;
+  color: #000;
+  background-color: #edd368;
+  font-size: large;
+  padding: 3px 0px;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.transaction-btn{
+  text-decoration: underline;
+}
+
+// scss for collapse / jumbotron.
+.text-success {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.jmb {
+  margin-top: -3rem;
+}
+
+ul {
+  padding-left: 0px !important;
+}
+
+.inputgms {
+  height: calc(2.5em + 0.75rem + 2px) !important;
+}
+
+.pay-btn {
+  height: calc(2.5em + 0.75rem + 2px) !important;
+  width: 72px;
+}
+
+.show {
+  display: block;
+}
+
+.unshow {
+  display: none;
+}
+
+.jumbotron {
+  margin-bottom: 10px;
+}
+.button-redeem
+{
+      border:none !important;
+    background:#1a2e22;
+    color: white;
+    border-radius: 3px;
+}
+.margin-centered
+{
+  margin-top: 90px !important;
+ }
+ .bg-clr-modal
+ {
+   background-color: #1a2e22;
+    border: none !important;
+    color: rgb(0, 0, 0);
+ }
+ 
+ .clr-w 
+ {
+   color: white;
+ }
+ .button-delivered 
+ {
+   border: none!important;
+    background: #008000;
+    color: #fff;
+    border-radius: 3px;
+ }
+ /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .img-fluid {
+    height: 250px;
+    display: flex;
+    margin: 0px auto;
+    box-shadow: 1px 1px 7px 2px lightgrey;
+  }
+  .cat_name {
+    font-weight: 600;
+    font-size: 32px;
+  }
+  .img {
+    border: none;
+  }
+  .status_section_pending {
+    position: absolute;
+    top: 38px;
+    right: 10px;
+  }
+  .text-success {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .text-secondary {
+    margin-top: 30px;
+  }
+  
+  .offset-3 {
+    margin-left: 0;
+  }
+  .input-group-text {
+    margin-left: 0px;
+  }
+  .ha {
+    display: grid !important;
+  }
+}

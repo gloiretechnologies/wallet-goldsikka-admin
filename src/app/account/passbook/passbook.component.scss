@@ -1,0 +1,46 @@
+@import "src/assets/scss/variables";
+
+.passbook {
+
+  h1 {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    line-height: 32px;
+    color: $text-dark-color;
+  }
+  
+  .button{
+    padding-top: 2%;
+  }
+
+  table {
+    td {
+      span, small {
+        display: block;
+      }
+
+      span.plus {
+        color: $theme-credit-color;
+      }
+
+      span.minus {
+        color: $theme-debit-color;
+      }
+
+      // small {
+      // }
+    }
+  }
+.btn-passbook {
+  margin: 6px;
+}
+}
+@media only screen and (max-width: 767px) {
+  .passbook{
+    .button{
+padding-top: 0px;
+    }
+  }
+}

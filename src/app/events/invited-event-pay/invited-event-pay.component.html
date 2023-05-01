@@ -1,0 +1,251 @@
+<section class="event-buy-gold  m-auto">
+
+
+  <div class="form-info">
+
+    <form class="from" role="form" [formGroup]="form" (ngSubmit)="onSubmit()"
+      [ngClass]="{'was-validated': (submitted && form.valid), 'needs-validation': (submitted)}">
+
+      <div class="row">
+        <div class="w-100">
+          <div *ngIf="!!errorMessage" class="form-group">
+            <div class="alert alert-danger">
+              <i class="fas fa-exclamation-triangle mr-2"></i> {{errorMessage}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+          <h1 class="">Event Information</h1>
+          <div class=" d-block scheme-subscribe-details">
+            <div class="card-body p-0">
+
+              <table class="payment-details table table-striped">
+                <tr>
+                  <td class=" td1">Event Type</td>
+                  <td class=" td2"> :</td>
+                  <td *ngIf="events.event_type==='MRG'">Marriage</td>
+                  <td *ngIf="events.event_type==='OTH'">Others</td>
+                </tr>
+                <tr>
+                  <td class=" td1">Event Name</td>
+                  <td> :</td>
+                  <td>{{events.event_name}}</td>
+                </tr>
+                <tr>
+                  <td class="">Event Date/Time</td>
+                  <td> :</td>
+                  <td>{{events.event_date}} {{events.event_time}}</td>
+                </tr>
+                <tr *ngIf="isMarriageType">
+                  <td class="">Selected User</td>
+                  <td> :</td>
+                  <td *ngIf="events.gender==='M'">Bride</td>
+                  <td *ngIf="events.gender==='F'">Groom</td>
+                </tr>
+                <tr *ngIf="isMarriageType">
+                  <td class="">Bride Name</td>
+                  <td> :</td>
+                  <td>{{events.bride_name}}</td>
+                </tr>
+                <tr *ngIf="isMarriageType">
+                  <td class="">Groom Name</td>
+                  <td> :</td>
+                  <td>{{events.groom_name}}</td>
+                </tr>
+                <tr>
+                  <td class="">Event Venue</td>
+                  <td> :</td>
+                  <td>{{events.venue}}</td>
+                </tr>
+                <tr>
+                  <td class="">Event Description</td>
+                  <td> :</td>
+                  <td>{{events.description}}</td>
+                </tr>
+                <tr *ngIf="isOthersType">
+                  <td class="">Holder Name</td>
+                  <td> :</td>
+                  <td>{{events.holder_name}}</td>
+                </tr>
+                <tr>
+                  <td class="">Status</td>
+                  <td> :</td>
+                  <td><span *ngIf="events.status==0">Event Not Approved</span>
+                    <span *ngIf="events.status==1">Event Started</span>
+                    <span *ngIf="events.status==2">Event Rejected</span>
+                  </td>
+                </tr>
+                <!-- <tr *ngIf="isMarriageType">
+                  <td class="">Weediing Card Photo</td>
+                  <td> :</td>
+                  <td><img src="{{events.weddingCardPhotoLink}}" class="image"></td>
+                </tr> -->
+              </table>
+              <p (click)="onImage()" class="view-photo"><a>View Photo <i class="far fa-images"></i></a> </p>
+              <p (click)="onImage1()" *ngIf="isMarriageType" class="view-photo"><a>View Weediing Card Photo <i
+                    class="far fa-images"></i></a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" *ngIf="events.status==1">
+          <h1 class="text-center">Gift Gold</h1>
+          <div class="box">
+            <div class="form-group">
+              <label>Amount: <span class="mandatory">*</span></label>
+
+              <div class="input-group" [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+                </div>
+                <input type="text" placeholder="Enter amount" class="form-control form-control-lg" autofocus
+                  (change)="onAmountChange()" (keyup)="onAmountChange()" formControlName="amount"
+                  [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+                <div class="invalid-feedback" *ngIf="form.get('amount').hasError('required')">This field is required
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('amount').hasError('min')">You have min limit 100/-
+                  amount per transaction
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Quantity: <small>(in grams)</small> <span class="mandatory">*</span></label>
+              <div class="input-group" [ngClass]="{'is-invalid': (submitted && f.quantity.errors)}">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <img
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKQSURBVFiFzddLqM1bHAfwz+bksMs9SHFwRrhhICMyECFlYiBRHhlwuyYeZcKETJgIGXqWTkSimwh5lDPABFGu+/CIUAY4yCV5DNZybeusvfef4+Bbq3bf32+t33evtdf3tzY/CS5j0nesNwmXoCESK7AfB3Gvi4u3YBbmQCkJzERzFwt4iEPiFy1lEkZjeoZ/i4toq1NgAsaheyZ2DNcqiW5VFumbGQOwE0trFF8ecwZUWaPTGI77NeIPMPRbFKqFv2vE/unq4j8E47ALt/AK7+uMVzF3J8Z2pnAZu3FH+HENR2OBeY34VfCWO1F8+UuLN+IUWr9mcgXK2IuT6JFLyPkArMcowZjeZeJ9MBnD8Aa3o+AXmdzuOIwrWFNEdX88Fu5yikZsxFMcxYU4juEJNqBnZl5zXLNfEQFLsCfDN+Es9mFg5Jb6ZEzNQj+5EHNTtOK3IgJ24PeEK+EENteZW8JWHMnElmB7EQFnMCXhZghnmPr76jgq0YCrOvaTqThdRMBfGJFwf2BBJrcN5zL8QhxIuJG4UUTAc/ROuEcYnHDlmPtcx6vaouO74peYWxNNeJbhnwouN7+CmyrsQJvPj2xBzH2dWedZFFIVo/Bnhr+LIQm32Cf7XZTEWoSHR4obwlH8j/Q9MFi+3Z4TjKcSO4RffUnw/UpMwfnMOvclR1lUQCtWyr9yUjTE3FRUpwScEB4bm1S3bzG2Bf8KTvnNBLzHXIwX3G5Q5JfFIXIHMAbzqgj8agEEr58o9PrLOB5FzY2fr+OmcDteFhXQkCT0kr+GH/EfVmEtpgl9vyRs+ew6c6Fdnfa+TtjGXDPpLJqEPz5rayWVhevVrv7T60tHO7YJu/zz4qONduWotPMfjw9sIbzEke2S9gAAAABJRU5ErkJggg=="
+                      alt="Weight Machine">
+                  </span>
+                </div>
+                <input type="text" placeholder="Enter grams" class="form-control form-control-lg"
+                  (change)="onQuantityChange()" (keyup)="onQuantityChange()" formControlName="quantity"
+                  [ngClass]="{'is-invalid': (submitted && f.quantity.errors)}">
+                <div class="invalid-feedback" *ngIf="form.get('quantity').hasError('required')">This field is required
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('quantity').hasError('max')">You have exceed the max limit
+                  of
+                  1000
+                  grams per transaction
+                </div>
+              </div>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input form-control" type="checkbox" (change)="moneyWallet($event)">
+              <label class="form-check-label">
+                Use Booking Account
+              </label>
+            </div>
+            <div>Booking Account Balance : {{walletAmount | currency}} /-</div>
+            <br>
+            <div class="form-group" *ngIf="walletAmountInput">
+              <label>Booking Account Amount <span class="mandatory">*</span></label>
+              <div class="input-group"
+                [ngClass]="{'is-invalid': (submitted && (f.enteredWalletAmount.errors || errors['enteredWalletAmount']))}">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+                </div>
+                <input formControlName="enteredWalletAmount" type="text" placeholder="Enter Amount"
+                  class="form-control form-control-lg" (change)="enteredWalletAmountChange()"
+                  (keyup)="enteredWalletAmountChange()"
+                  [ngClass]="{'is-invalid': (submitted && (f.enteredWalletAmount.errors || errors['enteredWalletAmount']))}">
+              </div>
+              <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('required')">Enter amount
+              </div>
+              <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('min')">Enter Account amount
+                above 0
+              </div>
+              <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('pattern')">Enter only
+                numbers
+              </div>
+              <!-- <div class="invalid-feedback" >Enter amount
+          </div>
+          <div class="invalid-feedback">Enter only numbers
+          </div> -->
+              <!--            <div class="invalid-feedback">{{walletErrorMsg}}</div>-->
+            </div>
+            <div style="height: 45px" class="mb-2">
+              <!-- <span class="form-text">Taxes & Levies : {{amountWithGstAmount | currency  }}</span> -->
+              <span class="form-text">Amount payable is : {{amountPayableIncludingCharges | currency}}</span>
+            </div>
+
+            <div class="form-group pt-2">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">
+                Proceed to Pay
+                <span *ngIf="amountPayableIncludingCharges == 0 && f.enteredWalletAmount.value !== 0
+                   && f.enteredWalletAmount.value ">with Booking Account
+                </span>
+                <span *ngIf="amountPayableIncludingCharges !== 0">{{amountPayableIncludingCharges | currency}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+      <div class="loading" *ngIf="isSubmitting">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </form>
+  </div>
+
+  <div class="alert alert-warning i-box">
+    <ul class="pb-0 mb-0">
+      <li>Buy / sell 24K Gold anytime, anywhere</li>
+      <li>Exchange for jewellery at our partner jewellers or ask for home delivery of coins and bars</li>
+      <li>Send a gift of gold</li>
+      <li>Donate gold to Temple, Mosque, Gurdwara, Church and other religious places</li>
+      <!--      <li>Setup an online SIP for building long term wealth</li>-->
+    </ul>
+  </div>
+  <!-- user image on hover -->
+  <div [style.display]="showUserImageModal ? 'block' : 'none'" class="modal user-hover-img" id="imagesModal"
+    tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <div class="text-right">
+            <button type="button" class="btn btn-danger " data-dismiss="modal" (click)="hideTerminateModal()">X</button>
+          </div> -->
+          <h4 class="w-100">User Image<button type="button" class="btn btn-danger float-right" data-dismiss="modal"
+              (click)="hideUserImageModal()">X
+            </button></h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <img src="{{events.photoImageLink}}">
+          </div>
+        </div>
+        <!-- <div class="modal-footer">
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- user image on hover -->
+
+  <div [style.display]="showUserImageModal1 ? 'block' : 'none'" class="modal user-hover-img" id="imagesModal"
+    tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <div class="text-right">
+            <button type="button" class="btn btn-danger " data-dismiss="modal" (click)="hideTerminateModal()">X</button>
+          </div> -->
+          <h4 class="w-100">User Image<button type="button" class="btn btn-danger float-right" data-dismiss="modal"
+              (click)="hideUserImageModal1()">X
+            </button></h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <img src="{{events.weddingCardPhotoLink}}">
+          </div>
+        </div>
+        <!-- <div class="modal-footer">
+          </div> -->
+      </div>
+    </div>
+  </div>
+
+</section>

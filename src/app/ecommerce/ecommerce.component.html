@@ -1,0 +1,194 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 search">
+        <div> <input onkeydown="return /[a-z]/i.test(event.key)" type="search" class="form-control search icon"
+            placeholder="Search..." [(ngModel)]="filterTerm">
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <div class="demo demo4 ">
+          <div class="heading">Categories</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="icons">
+          <div>
+            <a routerLink="/ecommerce/cartpage" class="btn btn-wishlist float-right">
+              <i class="fa fa-shopping-cart cart-size" aria-hidden="true"></i>
+              <span class="badge"> <span *ngIf="respons5==='No products'" class="zero">0</span> <span
+                  *ngIf="respons5!='No products'" class="zero">{{lenghts}}</span></span>
+            </a>
+          </div>
+          <div>
+            <a routerLink="/ecommerce/favourites" class="btn btn-wishlist float-right">
+              <i class="fa fa-heart cart-size"></i>
+              <span class="badge"> <span *ngIf="len==null" class="zero">0</span> {{len}}</span>
+            </a>
+          </div>
+          <!-- <div>
+            <a routerLink="/ecommerce/cart" class="btn btn-wishlist float-right">
+              <i class="fa fa-shopping-cart cart-size" aria-hidden="true"></i>
+              <span class="badge">{{len}}</span>
+            </a>
+          </div> -->
+          <i class="fa fa-circle-check"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row bul-row">
+      <!-- <button routerLink="/ecommerce/bullion" class="bul-btn">Bullion</button> -->
+    </div>
+    <div class="row cat-row">
+      <div class="col-12 cat-col">
+        <div class="d-flex flex-wrap">
+          <ng-container *ngIf="( filteredsubProducts | filter : filterTerm) as result">
+            <div class="cat-img text-center" *ngFor="let products of result" id="{{products .catname}}">
+              <div>
+                <a routerLink="/ecommerce/category/{{products .id}}">
+                  <img class="img-c" src="{{products .image_uri}}" alt="ecommerce" width="80%" />
+                  <h3 class="h-cat">{{products .catname}}</h3>
+                </a>
+              </div>
+            </div>
+
+            <b class="nofound" *ngIf="result.length === 0">No Search Found</b>
+          </ng-container>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+  <!-- </div> -->
+</section>
+
+<section class="banner-sec">
+  <carousel>
+    <slide *ngFor="let banner of ban">
+      <img class="secondDiv" src="{{banner.image_uri}}" alt="My image">
+      <div class="carousel-caption d-none d-md-block"></div>
+    </slide>
+  </carousel>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mobile-res">
+        <div class="card bg-clrm">
+
+          <div class="card-body p-0 text-center">
+            <h6 class="gold-clr"><img class="wid-liv" src="assets/images/live-price.gif" alt=""> Live Price </h6>
+
+            <p class="mb-0"><span class="k-text"> 22K Gold :&nbsp;&nbsp;</span>
+              <span class="clr-price">{{currentGoldPricePerGram}} /gram</span><br>
+
+            </p>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 bg-img-bullion " *ngFor="let bullioons of bul">
+        <div class="card bg-none mar " *ngIf="bullioons.catname=='Bullion'">
+          <a routerLink="/ecommerce/bullion/{{bullioons.id}}">
+            <div class="bullion-text">
+              <span style="color: white;">{{bullioons.catname}}</span>
+            </div>
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</section>
+<section class="na-sec">
+  <div class="container">
+    <div class="demo demo4">
+      <div class="heading">New Arrivals</div>
+    </div>
+    <div class="row na-row">
+      <ng-container *ngIf="( new | filter : filterTerm) as result">
+        <div class="col-md-3 col-6" *ngFor="let arr of result">
+          <a href="/ecommerce/details/{{arr.id}}">
+            <div class="na-card">
+              <img class="na-img" src="{{arr.image_uri}}" alt="" />
+              <!-- <hr class="card-hr"> -->
+              <h4 class="text-center text-h">{{arr.pname}}</h4>
+            </div>
+          </a>
+        </div>
+        <b class="nofound" *ngIf="result.length === 0">No Search Found</b>
+      </ng-container>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="demo demo4">
+      <div class="heading">Top Selling Products</div>
+    </div>
+    <div class="testimonials mb-8">
+      <div class="row mt">
+        <ng-container *ngIf="( top | filter : filterTerm) as result">
+          <div class="col-md-3 mb-4 col-6" *ngFor="let item of result">
+            <div class="item b-card clr-w">
+              <a href="/ecommerce/details/{{item.id}}">
+                <div class="mycard">
+                  <div>
+                    <img src="{{item.image_uri}}" alt="nivel5" class="cardimg
+                  ornament" />
+                  </div>
+                  <div>
+                    <p class="carddescription card-p pa">{{item.pname}}</p>
+                    <p class="card-p pb"><b class="price">Price : </b>{{item.price| currency}}</p>
+
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brands-sec">
+  <div class="container">
+    <div class="demo demo4">
+      <div class="heading">Brands</div>
+    </div>
+    <div class="row br-r1">
+      <div class="col-md-4 br-col col-6" *ngFor="let brands of brand">
+        <div class="containerr space">
+          <img routerLink="/ecommerce/brand-page/{{brands.id}}" class="l-img mb-2" src="{{brands.image_uri}}" alt="" />
+          <!-- <p routerLink="/ecommerce/brand-page/{{brands.id}}" class="pub-b">{{brands.brand}}</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pub-sec">
+  <div class="container">
+    <div class="demo demo4">
+      <div class="heading">Prices Under List</div>
+    </div>
+    <div class="row r1-images">
+      <div class="col-md-3 col-6" *ngFor="let under of price">
+        <a routerLink="/ecommerce/prices-under/{{under.price}}">
+          <div class="pub">
+            <img class="pub1" src="{{under.image_uri}}" alt="" />
+            <p class="pub-p">Under {{under.price}}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

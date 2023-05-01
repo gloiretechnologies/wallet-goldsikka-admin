@@ -1,0 +1,32 @@
+<h2>Transaction Details</h2>
+<div class="card mb-4">
+
+  <table class="table table-responsive-md table-striped">
+    <thead class="text-center">
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Transaction ID</th>
+        <th scope="col">Date & Time</th>
+        <th scope="col">Description</th>
+        <th scope="col">Gold in grams</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <tr *ngFor="let data of response">
+        <th scope="row">
+          <div class="circle ">
+            <p class="">.</p>
+            <p class="line"></p>
+          </div>
+        </th>
+        <td>
+          {{data.id}}
+        </td>
+        <td>{{data.created_at}}</td>
+        <td>{{data.description}}</td>
+        <td>{{data.goldtransfer| number}} grms</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

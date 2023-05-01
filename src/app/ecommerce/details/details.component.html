@@ -1,0 +1,252 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 rounded vertical_line ">
+          <div ng-controller="PopoverDemoCtrl" class="img zoomWrapper img-magnifier-container data-ng-magnify">
+            <figure>
+              <div class="form-group row">
+                <div class="d-flex justify-content-between">
+                  <div class="col-md-6">
+                    <div class="img-magnifier-container ma">
+                      <img class="planing zoom-img" id="myimage" src="{{producedetails[0].image_uri}}" width="460"
+                        height="500">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </figure>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 vertical_line_2 top-55 text-left">
+          <h2 class="text-center display-6 name-head mt-4">{{producedetails[0].pname}}</h2>
+          <!-- <h6 class="box-title mt-1 pd-head">Product Description: </h6> -->
+          <p class="para">
+            {{producedetails[0].description}}
+          </p>
+          <hr />
+          <p>
+            <!-- <b class="pl-2  fs"> Product ID: {{producedetails[0].id}} </b> -->
+          </p>
+          <p>
+            <!-- <b class="pl-2 fs"> Rating: {{producedetails[0].ratings}} </b> -->
+          </p>
+          <table class="tab-cls">
+            <tr>
+              <th>
+                Brand Name
+              </th>
+              <td>
+                : &nbsp;{{producedetails[0].brandname}}
+              </td>
+            </tr>
+            <tr *ngIf="producedetails[0].stoneprice!=0">
+              <th>
+                Stone Colour
+              </th>
+              <td>
+                : &nbsp;{{producedetails[0].stonecolor}}
+              </td>
+            </tr>
+            <tr *ngIf="producedetails[0].stoneprice!=0">
+              <th>
+                Stone Name
+              </th>
+              <td>
+                : &nbsp;{{producedetails[0].stonename}}
+              </td>
+            </tr>
+            <tr *ngIf="producedetails[0].stoneprice!=0">
+              <th>
+                Stone Price
+              </th>
+              <td>
+                : &nbsp;{{producedetails[0].stoneprice}}
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Weight
+              </th>
+              <td>
+                : <span *ngIf="weightfilter!=null">{{weightfilter}}grams</span>
+                <span *ngIf="weightfilter==null">{{producedetails[0].weight}}grams</span>
+
+              </td>
+            </tr>
+            <tr>
+              <th>
+                VA( {{producedetails[0].va}}%)
+              </th>
+              <td>
+                : &nbsp;{{producedetails[0].vaprice}}
+              </td>
+            </tr>
+          </table>
+          <hr>
+
+          <!-- filter start  -->
+          <section>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4 pl-0">
+                  <h6 class="mt-2">Size/Length</h6>
+                  <div class="mb-2">
+                    <form [formGroup]="myForm1">
+                      <select class="sel-opt" name="Price" class="form-control" #teams
+                        (change)="onSelected(teams.value)">
+                        <option selected="selected" disabled value="0">select</option>
+                        <option *ngFor="let size of producedetails[0].sizes " [value]="size.sizes">
+                          {{size.sizes}}</option>
+                      </select>
+                    </form>
+                  </div>
+
+                </div>
+                <div class="col-md-4">
+
+                </div>
+
+                <div class="col-md-4">
+
+
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div [style.display]="schemeTransactionModal_after ? 'block' : 'none'" class="modal" id="imagemodal"
+            tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog margin-centered">
+              <div class="modal-content p-4 bg-clr-modal">
+                <div class="transaction">
+                  <div class="d-flex mb-4 justify-content-between">
+                    <!-- *ngIf="reviews.length > 0; else AlreadySubmitted"  -->
+                    <div>
+                      <i class="fa fa-check"></i>
+                      <h3 class="modal-title clr-w" id="myModalLabel"> Thank for your Feedback</h3>
+                    </div>
+                    <!-- <ng-template #AlreadySubmitted  >
+              <h3 class="modal-title clr-w" id="myModalLabel" > Already the rating has given</h3>
+            </ng-template> -->
+                    <div>
+                      <button class="btn btn-danger" data-dismiss="modal" (click)="hideSchemeTransactionModal()">
+                        X
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <div [style.display]="schemeTransactionModal_after1 ? 'block' : 'none'" class="modal" id="imagemodal"
+            tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog margin-centered">
+              <div class="modal-content p-4 bg-clr-modal">
+                <div class="transaction">
+                  <div class="d-flex mb-4 justify-content-between">
+                    <!-- *ngIf="reviews.length > 0; else AlreadySubmitted"  -->
+                    <div>
+                      <i class="fa fa-check"></i>
+                      <h3 class="modal-title clr-w" id="myModalLabel"> your feedback already recorded</h3>
+                    </div>
+                    <!-- <ng-template #AlreadySubmitted  >
+              <h3 class="modal-title clr-w" id="myModalLabel" > Already the rating has given</h3>
+            </ng-template> -->
+                    <div>
+                      <button class="btn btn-danger" data-dismiss="modal" (click)="hideSchemeTransactionModal()">
+                        X
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <h2 *ngIf="finalprice2!=null&& producedetails[0].carat!=999">₹{{finalprice2| currency:'JPY':''}}</h2>
+          <h2 *ngIf="finalprice2!=null&& producedetails[0].carat==999">₹{{finalprice3| currency:'JPY':''}}</h2>
+
+          <h2 *ngIf="finalprice2==null ">₹
+            {{producedetails[0].totalprice| currency:'JPY':''}}
+          </h2>
+
+          <div class="d-flex">
+            <div data-toggle="tooltip" (click)="movecart(producedetails[0].id)">
+              <p class="ac-button" style="color: white;" id="cart{{producedetails[0].id}}"> <i style="color: aliceblue"
+                  class="fa fa-shopping-cart"></i> &nbsp; &nbsp; Add to Cart </p>
+            </div>
+            <div class="ml-2 pl-1" (click)="favo(producedetails[0].id)">
+              <p class="af-button" id="favo{{producedetails[0].id}}">Add to Favourites </p>
+            </div>
+          </div>
+          <hr />
+          <div class="img-zoom-container postion-main">
+
+            <div id="myresult" class="img-zoom-result"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="demo demo4">
+    <h4 class="">Similar Products</h4>
+  </div>
+  <div class="row">
+    <div class="col-12" *ngIf="len==0">
+      <h6 class="mt-4 mb-4 text-center font-g">No similar Products</h6>
+    </div>
+    <div class="col-md-3 col-6" *ngFor="let productssub of products">
+      <div class="card cards-s">
+        <a routerLink="/ecommerce/detailss/{{productssub.id}}">
+          <a class="card-font">
+            <img src="{{productssub.image_uri}}" class="bn-img" width="100%" alt="">
+          </a>
+          <hr class="img-hr">
+          <div class="pad-10">
+            <div class="text-center mt-2">
+              <h6 class="pa">{{productssub.pname}}</h6>
+              <h6 class="pb"> <b class="price"> Price: </b> {{productssub.price| currency}}</h6>
+              <h6 class="pb"> <b class="price"> Grams: </b> {{productssub.weight}}</h6>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<div class="container">
+  <div class="demo demo4">
+    <h4 class="">Reviews</h4>
+  </div>
+  <div class="row">
+    <div class="col-md-6" *ngFor="let data of reviews">
+      <div class="comment-box">
+        <div class="comment-box-inner">
+          <div class="media mt-0">
+            <div class="media-body">
+              <div class="d-flex justify-content-between">
+                <h5 class="media-heading">{{data.user_id}}&nbsp; <span>({{data.rating}}<i [value]="3"
+                      class='fa fa-star star-img'></i>)</span> </h5>
+                <p>{{data.created_at}}</p>
+              </div>
+              <p>{{data.review}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="triangle-comment"></div>
+      </div>
+    </div>
+  </div>
+</div> -->

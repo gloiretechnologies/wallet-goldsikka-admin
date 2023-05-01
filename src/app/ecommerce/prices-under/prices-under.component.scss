@@ -1,0 +1,121 @@
+img {
+    width: 100%;
+    border-radius: 5px 5px 0px 0px;
+}
+.card {
+    background: #fff;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    border: 1px solid #8080805c;
+    padding-bottom: 12px;
+     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+ 
+.demo {
+    width: 350px;
+    margin: 0 auto;
+    padding: 10px 0;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+.heading {
+    margin: 10px 0
+}
+.demo4 .heading {
+    border: solid 3px black;
+    position: relative;
+    text-align: center;
+    border-radius: 3px;
+    background: #f4f5fa;
+    font-weight: 600;
+    font-size: 28px;
+    color: #2c4f3a;
+}
+.demo4 .heading:after,
+.demo4 .heading:before {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    background: #EDD368;
+    border: solid 2px black;
+    width: 25px;
+    height: 20px;
+    z-index: -1;
+}
+.demo4 .heading:after {
+    left: 2px;
+    transform: rotate(120deg);
+}
+.demo4 .heading:before {
+    right: 2px;
+    transform: rotate(60deg);
+}
+.br-h3 {
+    text-align: center;
+    padding: 8px 0;
+    font-weight: 600;
+    font-style: italic;
+    color: #edd368;
+    margin: 0px 40px;
+    font-size: 17px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+.br-km {
+    padding: 6px 6px;
+    display: margin;
+    display: flex;
+    margin: 0px auto;
+    border: none;
+    border-radius: 4px;
+    background: #1A2E22;
+    color: #EDD368;
+    font-size: 12px;
+}
+.br-pb {
+    font-size: 14px;
+    color: #39654b;
+}
+.br-pa {
+    font-size: 15px;
+    color: #a5a790;
+    font-weight: 600;
+    padding: 0 6px;
+    margin: 2px 0;
+    text-align: center;
+}
+.sticky {
+    position: sticky;
+    top: 60px;
+    z-index: +999;
+    background: #F4F5FA;
+}
+.cards-s {
+    padding: 15px;
+}
+
+@media only screen and (max-width: 767px) {
+    .demo4 {
+        width: 100%;
+    }
+    .br-h3 {
+        margin: 10px 15px;
+        font-size: 12px;
+    }
+    .br-km {
+        padding: 6px 10px;
+        font-size: 11px;
+        margin: 6px auto;
+    }
+    .br-pb {
+        font-size: 12px;
+    }
+    .br-pa {
+        font-size: 12px;
+    }
+}

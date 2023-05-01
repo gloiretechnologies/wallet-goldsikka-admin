@@ -1,0 +1,176 @@
+<div class="container">
+  <div class="heading">
+    <h2>My Wishlist</h2>
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class=" col-md-8 col-12 pt-1 py-1 card shadow mt-2" *ngFor="let data of response">
+      <div [style.display]="schemeTransactionModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1"
+        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog margin-centered">
+          <div class="modal-content p-4 bg-clr-modal">
+            <div class="transaction">
+              <div class="d-flex mb-4">
+                <div>
+                  <h4 class="modal-title clr-w" id="myModalLabel">Please visit our office to collect your product</h4>
+                </div>
+                <div>
+
+                  <button class="btn btn-danger" data-dismiss="modal" (click)="hideSchemeTransactionModal(data.pids)"> X
+                  </button>
+                </div>
+
+              </div>
+              <div>
+                <h6 class="clr-w">Office address : -</h6>
+                <p class="clr-w">
+                  Goldsikka Limited 2nd Floor, Ashoka Raghupathi Chambers , H.No. 1-10-60 , Adj to Prakash Nagar Metro
+                  Station, Begumpet, Hyderabad, Telangana, 500016 India.
+                </p>
+              </div>
+              <table>
+                <tr>
+                  <th class="clr-w">
+                    Whatsapp No
+                  </th>
+                  <td class="clr-w">
+                    &nbsp; : &nbsp; 99898 74992
+                  </td>
+                </tr>
+                <tr>
+                  <th class="clr-w">
+                    Email
+                  </th>
+                  <td class="clr-w">
+                    &nbsp;: &nbsp; info@goldsikka.com
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="row">
+          <div class="img pl-2 pt-1 px-0 col-md-3">
+            <img src="{{data.pimg}}" class="img-fluid" alt="cart img" />
+          </div>
+          <div class=" col-md-9 col-sm-12 col-xs-12">
+            <div class="d-flex justify-content-end pt-3 pr-3">
+              <p class="status_section_pending" id="{{data.pids}}statustext">
+                <button type='button' style="background-color: red
+              ;" id='' *ngIf="data.sum==0" (click)='deletewishlist(data.pids)'
+                  class='btn btn-outline-danger btn-sm ml-2'><i class='far fa-trash-alt'
+                    style="color:white;"></i></button>
+              </p>
+              <div>
+                <ng-container *ngIf="data.sum=='0';else second">
+                  <p class="status_section_pending" id="{{data.pids}}statustext">
+                    <button type='button' id='' *ngIf="" (click)='deletewishlist(data.pids)'
+                      class='btn btn-outline-danger btn-sm ml-2 unshow'><i class='far fa-trash-alt'></i></button>
+                  </p>
+                </ng-container>
+                <ng-template #second>
+                  <ng-container *ngIf="(data.sum|number)==(data.pweight);else third">
+                    <div *ngIf="(data.sum|number)==data.pweight && data.wishlist_status=='3';else other_content">
+                      <span><button class="button-delivered ">Delivered</button></span>
+                    </div>
+                    <ng-template #other_content>
+                      <span><button (click)="openVerticallyCentered(data.pids)" aria-label="Close"
+                          class=" button-redeem">Redeem
+                          Now </button></span>
+                    </ng-template>
+                  </ng-container>
+                </ng-template>
+                <ng-template #third>
+                  <span><b style=" color:red;">Pending</b> </span>
+                </ng-template>
+              </div>
+            </div>
+            <div>
+            </div>
+            <div class="pr-2 pl-2 pt-4 pb-2">
+              <h3 class="cat_name">{{data.pname}}</h3>
+              <div class="details">
+                <table class="table-responsive">
+                  <tr>
+                    <th class="pb-2 pr-4">ID </th>
+                    <td>: {{data.pva}}</td>
+                  </tr>
+                  <tr>
+                    <th class="pb-2 pr-4">Weight </th>
+                    <td>: {{data.pweight}} Grams</td>
+                  </tr>
+                  <tr>
+                    <th class="pb-2 pr-4">VA </th>
+                    <td>: {{data.pva}}%</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="bar">
+                <p>{{data.sum| number }} / {{data.pweight}} grams</p>
+                <progress id="file" class="progress-bar" value="{{(data.sum/data.pweight)*100}}" max="100"
+                  aria-placeholder=""> </progress>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mt-2 mb-2">
+            <div *ngIf="(data.sum|number)==data.pweight;else other_content">
+              <button class="col-md-12 transactionbtn" id="{{data.pweight}}" (click)='setlocal( data.pids)'>
+                Transaction Details
+              </button>
+            </div>
+            <ng-template #other_content>
+              <button class="col-md-12 accumlatebtn" id="{{data.pweight}}"
+                (click)="Toggle(data.pids); cls(data.pweight); name(data.pname)">
+                Click Here to " Accumulate Gold"
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="jumbotron" style="display: none;" id="{{data.pids}}">
+        <div class="d-flex justify-content-between jmb ha">
+          <h5 class="text-secondary">
+            Available Balance:
+            <span class="text-success"> {{currentBalance}} <span style="color:black;">gms</span> </span>
+          </h5>
+          <a (click)='setlocal( data.pids)' class="btn transaction-btn">
+            Transaction Details >>
+          </a>
+        </div>
+        <span name="validerror" id="{{data.pname}}asdf" style=" color: red;" #validerror>
+        </span>
+        <div class="col-12 mt-4 d-flex offset-3">
+          <form [formGroup]="form" class="d-flex"
+            (ngSubmit)="submit(data.pids, addgold.value, data.sum, data.pweight , validerror.id)">
+            <div class="d-flex"> 
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <img
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKQSURBVFiFzddLqM1bHAfwz+bksMs9SHFwRrhhICMyECFlYiBRHhlwuyYeZcKETJgIGXqWTkSimwh5lDPABFGu+/CIUAY4yCV5DNZybeusvfef4+Bbq3bf32+t33evtdf3tzY/CS5j0nesNwmXoCESK7AfB3Gvi4u3YBbmQCkJzERzFwt4iEPiFy1lEkZjeoZ/i4toq1NgAsaheyZ2DNcqiW5VFumbGQOwE0trFF8ecwZUWaPTGI77NeIPMPRbFKqFv2vE/unq4j8E47ALt/AK7+uMVzF3J8Z2pnAZu3FH+HENR2OBeY34VfCWO1F8+UuLN+IUWr9mcgXK2IuT6JFLyPkArMcowZjeZeJ9MBnD8Aa3o+AXmdzuOIwrWFNEdX88Fu5yikZsxFMcxYU4juEJNqBnZl5zXLNfEQFLsCfDN+Es9mFg5Jb6ZEzNQj+5EHNTtOK3IgJ24PeEK+EENteZW8JWHMnElmB7EQFnMCXhZghnmPr76jgq0YCrOvaTqThdRMBfGJFwf2BBJrcN5zL8QhxIuJG4UUTAc/ROuEcYnHDlmPtcx6vaouO74peYWxNNeJbhnwouN7+CmyrsQJvPj2xBzH2dWedZFFIVo/Bnhr+LIQm32Cf7XZTEWoSHR4obwlH8j/Q9MFi+3Z4TjKcSO4RffUnw/UpMwfnMOvclR1lUQCtWyr9yUjTE3FRUpwScEB4bm1S3bzG2Bf8KTvnNBLzHXIwX3G5Q5JfFIXIHMAbzqgj8agEEr58o9PrLOB5FzY2fr+OmcDteFhXQkCT0kr+GH/EfVmEtpgl9vyRs+ew6c6Fdnfa+TtjGXDPpLJqEPz5rayWVhevVrv7T60tHO7YJu/zz4qONduWotPMfjw9sIbzEke2S9gAAAABJRU5ErkJggg=="
+                      alt="Weight Machine">
+                  </span>
+                </div>
+                <input type="number" #addgold class="form-control inputgms" name="addgold" id="addgold" min="0"
+                  pattern="[0-9]" onkeypress="return !(event.charCode == 46)" step="1" title="Must be an integer
+                number" type="number" placeholder="* Enter Grams" formControlName="addgold"/>
+              </div>
+              <div class="ml-1">
+                <button class="btn btn-primary pay-btn" data-placement="top" type="submit">
+                  Pay
+                </button>
+              </div>
+            </div>
+            <div class="loading" *ngIf="isSubmitting">
+              <i class="fas fa-spinner fa-spin"></i>
+            </div>
+          </form>
+        </div>
+        <p class="text-center"> Note : <span class="text-danger">You can’t enter decimal values .</span> </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,147 @@
+.main-form {
+  width: 50%;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 6px;
+}
+.ratingDiv{
+  padding: 0;
+  margin-right: 38%;
+  color: white;
+  margin-top: 5px;
+          
+}
+
+.withdraw-gold {
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .form-check-input{
+    width: 22px;
+    height: 22px;
+  }
+
+   .form-check-label{
+     margin-left: 8px;
+     margin-top: 3px;
+     color: black!important;
+   }
+
+  .loading {
+    position: absolute;
+    z-index: 10;
+    display: block;
+    height: 100%;
+    background-color: white;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.75;
+    width: 100%;
+
+    i {
+      font-size: 3rem;
+      vertical-align: middle;
+      margin: 100px;
+    }
+  }
+
+  a .add-address {
+    text-decoration: underline;
+  }
+}
+
+// mobile responsive
+@media only screen and (max-width: 767px) {
+  .withdraw-gold {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+  .main-form {
+    width: 100%;
+  }
+  .ratingDiv{
+    margin-right: 31%;
+  }
+}
+
+
+.mandatory {
+  color: red;
+  font-size: 20px;
+}
+
+//testing star
+// star testing
+.margin-centered {
+  margin-top: 90px !important;
+}
+.bg-clr-modal {
+  background-color: #1a2e22;
+  border: none !important;
+  color: rgb(0, 0, 0);
+}
+.clr-w {
+  color: white;
+}
+.btn-save {
+  background: white;
+  color: black;
+  font-weight: 400;
+}
+.border-top {
+  border-top: 1px solid #ffffff !important;
+}
+
+
+
+
+.rate-area {
+  margin: auto;
+  border-style: none;
+}
+.max{
+  color: white;
+  display: flex;
+  justify-content: end;
+}
+
+.rate-area:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0, 0, 0, 0);
+}
+
+.rate-area:not(:checked) > label {
+  float: right;
+  width: 0.8em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 180%;
+  color: lightgrey;
+}
+
+.rate-area:not(:checked) > label:before {
+  content: "★";
+}
+
+.rate-area > input:checked ~ label {
+  color: gold;
+}
+
+.rate-area:not(:checked) > label:hover,
+.rate-area:not(:checked) > label:hover ~ label {
+  color: gold;
+}
+
+.rate-area > input:checked + label:hover,
+.rate-area > input:checked + label:hover ~ label,
+.rate-area > input:checked ~ label:hover,
+.rate-area > input:checked ~ label:hover ~ label,
+.rate-area > label:hover ~ input:checked ~ label {
+  color: gold;
+}

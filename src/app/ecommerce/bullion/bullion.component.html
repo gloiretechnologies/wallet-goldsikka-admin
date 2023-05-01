@@ -1,0 +1,153 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card bg-clrm">
+          <div class="card-body p-0 text-center">
+            <h6 class="gold-clr"><img class="wid-liv" src="assets/images/live-price.gif" alt=""> Live Price </h6>
+            <p class="mb-0"><span class="k-text"> 24K Gold :&nbsp;&nbsp;</span>
+              <span class="clr-price">{{currentGoldPricePerGram}} /gram</span><br>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-clrm">
+          <div class="card-body p-0 text-center">
+            <h6 class="gold-clr"><img class="wid-liv" src="assets/images/live-price.gif" alt=""> Live Price </h6>
+            <p class="mb-0"><span class="k-text"> 24K Silver :&nbsp;&nbsp;</span>
+              <span class="clr-price">{{price}} /Kg</span><br>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="row align-items-center set-sticky">
+  <div class="col-md-3">
+    <div class="can-toggle demo-rebrand-1 mt-4">
+      <input id="d" class="form-check-input form-control" type="checkbox" (change)="checking($event)">
+      <label for="d">
+        <div class="can-toggle__switch" data-checked="Silver" data-unchecked="Gold"></div>
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <input onkeydown="return /[a-z]/i.test(event.key)" type="search" class="form-control search icon search  mt-4 mb-1"
+      placeholder="Search..." [(ngModel)]="filterTerm">
+  </div>
+  <div class="col-md-3">
+    <div class="form-group ml100">
+      <label> Filter Weight</label>
+      <form [formGroup]="myForm">
+        <select name="Price" class="form-control" formControlName="filterProduct" (change)="onChange('status')"
+          [(ngModel)]="selectedStatus">
+          <option disabled selected="selected" value="">Select</option>
+
+          <option [ngValue]="k" *ngFor="let k of PriceFilter; let i = index">
+            {{ getValue(i).displayText }}
+          </option>
+        </select>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group ml100">
+      <form [formGroup]="myForm1">
+        <label>Filter Price</label>
+        <select name="Price" class="form-control" formControlName="filterProduct1" (change)="onChange('user')"
+          [(ngModel)]="selectedUser">
+          <option selected="selected" disabled value="">Select</option>
+          <option *ngFor="let k of PriceFilter1; let i = index" [ngValue]="k">
+            {{ getValue1(i).displayText }}
+          </option>
+        </select>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container-fluid p-0">
+  <div class="row">
+    <div class="col-2" *ngIf="screen">
+      <ng-container *ngIf="( filteredsubProducts2 | filter : filterTerm) as result">
+        <ul class="p-0">
+          <li class="l-none" (click)="nonelist(id)" *ngFor="let subc of result">
+            <label class="lab" for="tab{{ subc.id }}" (click)="getproducts(subc.id)">
+              <img src="{{ subc.image_uri }}" alt="" class="tab1 sidei" />
+              <p>{{ subc.subcatname }}</p>
+            </label>
+          </li>
+        </ul>
+        <!-- <b class="nofound" *ngIf="result.length == 0">No Search Found</b> -->
+      </ng-container>
+    </div>
+    <div class="col-2" *ngIf="screen2">
+      <ng-container *ngIf="( filteredsubProducts | filter : filterTerm) as result">
+        <ul class="p-0">
+          <li class="l-none" (click)="nonelist(id)" *ngFor="let subc of result">
+            <label class="lab" for="tab{{ subc.id }}" (click)="getproducts(subc.id)">
+              <img src="{{ subc.image_uri }}" alt="" class="tab1 sidei" />
+              <p>{{ subc.subcatname }}</p>
+            </label>
+          </li>
+        </ul>
+        <!-- <b class="nofound" *ngIf="result.length == 0">No Search Found</b> -->
+      </ng-container>
+    </div>
+    <div class="col-10 mainds" *ngIf="showOtpScreen">
+      <ng-container *ngIf="( filteredPro | filter : filterTerm) as results1">
+
+        <div class="cls mb-2" *ngFor="let productssub of results1">
+          <div class="card w-100">
+            <a class="card-font">
+              <img src="{{productssub.image_uri}}" class="bn-img" alt="">
+              <h6 class="pa">{{productssub.pname}}</h6>
+              <h6 class="pb"> <b class="price"> Price: </b> ₹{{productssub.totalprice}}</h6>
+              <!-- <h6 class="pb"> <b class="price"> Grams: </b> {{productssub.weight}}</h6> -->
+            </a>
+            <div class="add">
+              <a class="km-a" routerLink="/ecommerce/details/{{productssub.id}}">KNOW MORE</a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-10 mainds" *ngIf="showOtpScreen2">
+      <ng-container *ngIf="( filteredProsilver | filter : filterTerm) as result">
+
+        <div class="cls mb-2" *ngFor="let productssub of result">
+          <div class="card w-100">
+            <a class="card-font">
+              <img src="{{productssub.image_uri}}" class="bn-img" alt="">
+              <h6 class="pa">{{productssub.pname}}</h6>
+              <h6 class="pb"> <b class="price"> Price: </b> ₹{{productssub.totalprice}}</h6>
+              <!-- <h6 class="pb"> <b class="price"> Grams: </b> {{productssub.weight}}</h6> -->
+            </a>
+            <div class="add">
+              <a class="km-a" routerLink="/ecommerce/details/{{productssub.id}}">KNOW MORE</a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-10 mainds" *ngIf="showOtpScreen3">
+      <ng-container *ngIf="( filteredProducts | filter : filterTerm) as resul">
+
+        <div class="cls mb-2" *ngFor="let roductssub of resul">
+          <div class="card w-100 h-100">
+            <a class="card-font">
+              <img src="{{roductssub.image_uri}}" class="bn-img" alt="">
+              <h6 class="pa">{{roductssub.pname}}</h6>
+              <h6 class="pb"> <b class="price"> Price: </b> ₹{{roductssub.totalprice| currency:'JPY':''}}</h6>
+              <!-- <h6 class="pb"> <b class="price"> Grams: </b> {{roductssub.weight}}</h6> -->
+            </a>
+            <div class="add">
+              <a class="km-a" routerLink="/ecommerce/details/{{roductssub.id}}">KNOW MORE</a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

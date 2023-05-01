@@ -1,0 +1,60 @@
+<section class="feed-backform-list">
+  <div class="row">
+    <h1 class="col-lg-6">Feed Back List</h1>
+    <div class="col-lg-6 pt-1">
+      <a routerLink="./add" class="btn btn-primary float-right btn-lg">
+        Create Feed Back
+      </a>
+    </div>
+  </div>
+  <div class="card d-block mt-4 mb-4">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+          <tr>
+            <th>DATE</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile Number</th>
+            <th>Message</th>
+<!--            <th>Actions</th>-->
+          </tr>
+          </thead>
+          <tbody *ngIf="!!testimonials">
+          <tr
+            *ngFor="let sc of testimonials.data| paginate: { itemsPerPage: 10, currentPage: page, totalItems: testimonials.total }">
+            <td>{{sc.created_at | date:'short'}}</td>
+            <td>{{sc.name}}</td>
+            <td>{{sc.email}} </td>
+            <td>{{sc.mobile_no}}</td>
+            <td>{{sc.message}} </td>
+           <!-- <td>
+              <a  *ngIf="sc.admin_approval==0" class="btn btn-dark btn-sm mr-2" routerLink="./{{sc.id}}/update"> Edit</a>
+              <a  *ngIf="sc.admin_approval==0" class="btn btn-danger btn-sm mr-2" (click)="delete(sc.id)"> Delete</a>
+            </td>-->
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+      <div class="card-footer">
+        <div class="pagination">
+          <pagination-controls
+            (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)"
+            maxSize="{{testimonials['last_page']}}"
+            directionLinks="true"
+            responsive="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

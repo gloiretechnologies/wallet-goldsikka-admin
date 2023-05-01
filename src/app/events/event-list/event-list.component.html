@@ -1,0 +1,71 @@
+<section class="event-list w-100 m-auto">
+
+  <!--  <div class="alert alert-warning">-->
+  <!--    Subscribe to GoldSikka Event and Gift to gold for your family & friends-->
+  <!--  </div>-->
+
+
+  <!-- <div class="row button">
+    <a class="btn btn-primary  btn-lg mr-2" routerLink="./create"> Create Event</a>
+  </div> -->
+
+  <section class="my-schemes mb-5">
+    <div class="text">
+      <h2>Event List</h2>
+    </div>
+    <div class="button">
+      <a class="btn btn-primary  btn-lg mr-2" routerLink="./create"> Create Event</a>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+        <th>Event Date</th>
+        <th>Event Name</th>
+        <th>Event Status</th>
+        <th>Admin Status</th>
+        <th>Action</th>
+        </thead>
+        <tbody *ngIf="activeEventsList">
+        <tr
+          *ngFor="let sc of activeEventsList.data| paginate: { itemsPerPage: 10, currentPage: page, totalItems: activeEventsList.total }">
+
+          <td>{{sc.event_date }} </td>
+          <td>{{sc.event_name}} </td>
+          <td>{{sc.eventStatus}}</td>
+          <td>{{sc.adminStatus}} </td>
+          <td><a routerLink="./{{sc.id}}/info" class="btn btn-dark mr-2 btn-sm"> View Details</a>
+            <a routerLink="./{{sc.id}}/invited-list" class="btn btn-success mr-2 btn-sm"> Invited Users</a>
+            <a routerLink="./{{sc.id}}/invite" class="btn btn-primary mr-2 btn-sm"> Invite</a>
+            <a *ngIf="sc.isUpdate" routerLink="./{{sc.id}}/update" class="btn btn-info mr-2 btn-sm"> Update</a>
+            <a  *ngIf="sc.isUpdate" (click)="deleteEvent(sc.id)" class="btn btn-danger mr-2 btn-sm"> Delete</a>
+          </td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="!activeEventsList">
+        <tr>
+          <td colspan="6">
+            <div class="alert alert-warning">No subscriptions found</div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="card-footer">
+        <div class="pagination">
+          <pagination-controls
+            (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)"
+            maxSize="{{activeEventsList['last_page']}}"
+            directionLinks="true"
+            responsive="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>

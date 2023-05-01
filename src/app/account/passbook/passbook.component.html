@@ -1,0 +1,107 @@
+<section class="passbook">
+
+  <div class="row">
+
+    <div class="col-lg-9">
+      <h1>Passbook</h1>
+    </div>
+
+    <div class="col-lg-3 text-right" *ngIf="roleId === 1">
+      <form role="form" class="form w-100" [formGroup]="form">
+        <!-- <div class="row">
+          <div class="col-md-3"> -->
+            <div class="form-group">
+              <h4>Select Transaction Type</h4>
+                <select formControlName="type" class="form-control" (change)="getTypeBasedTransaction()"
+                  [ngClass]="{'is-invalid': (submitted && (type))}">
+                  <option value="">--- Select ---</option>
+                  <option value="">ALL</option>
+                  <option value="BU">BUY</option>
+                  <option value="SL">SELL</option>
+                  <option value="TR">TRANSFER</option>
+                  <option value="GT">EVENT</option>
+                  <option value="WT">REDEEM</option>
+                  <option value="PR">COUPONS</option>
+                </select>
+              <div class="invalid-feedback" *ngIf="type">
+                This field is required
+              </div>
+            </div>
+          <!-- </div> -->
+
+          <!-- <div class="col-md-4 button"> -->
+            <!-- <button type="button" class="btn btn-info btn-passbook" (click)="getTypeBasedTransaction();">Search</button> -->
+          <!-- </div> -->
+
+        <!-- </div> -->
+      </form>
+    </div>
+  </div>
+
+  <div class="card d-block mt-3 mb-4">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+          <tr>
+            <th>DATE</th>
+            <th>TRANSACTION ID</th>
+            <th>DESCRIPTION</th>
+            <th>PAYMENT MODE</th>
+            <th>GOLD <small>(grams)</small></th>
+            <th>ACTIONS</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="!!transactions">
+          <tr
+            *ngFor="let txn of transactions.data | paginate: { itemsPerPage: 10, currentPage: page, totalItems: transactions.total }">
+            <td>{{txn.created_at}}</td>
+            <td>{{txn._id}}</td>
+            <td>
+              <div class="d-flex">
+                <div class="mr-2">
+                  <i *ngIf="txn.txn_type === 'GT'" class="fas fa-gift"></i>
+                  <i *ngIf="txn.txn_type === 'TR'" class="fas fa-exchange-alt"></i>
+                  <i *ngIf="txn.txn_type === 'WT'" class="fas fa-shipping-fast"></i>
+                  <i *ngIf="txn.txn_type === 'SL'" class="fas fa-money-bill-wave-alt"></i>
+                  <i *ngIf="txn.txn_type === 'CV'" class="fas fa-ring"></i>
+                  <i *ngIf="txn.txn_type === 'PR'" class="fas fa-wallet"></i>
+                  <i *ngIf="txn.txn_type === 'BU'" class="fas fa-coins"></i>
+                </div>
+                <div>{{txn['desc']}}</div>
+              </div>
+            </td>
+            <td>{{txn['source']}}</td>
+            <td>
+              <span *ngIf="txn.type === 'CR'" class="plus">+{{txn.grams.toFixed(5)}} g</span>
+              <span *ngIf="txn.type === 'DE'" class="minus">-{{txn.grams.toFixed(5)}} g</span>
+              <small>{{txn.total_amount | currency}}</small>
+            </td>
+            <td>
+              <a (click)="downloadReceipt(txn._id)" download="w3logo"><i class="fas fa-download"></i> Download
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer" *ngIf="!!transactions">
+      <div class="pagination">
+        <pagination-controls
+          (pageChange)="pageChanged($event)"
+          (pageBoundsCorrection)="pageChanged($event)"
+          maxSize="{{transactions['last_page']}}"
+          directionLinks="true"
+          responsive="true"
+          previousLabel="Previous"
+          nextLabel="Next"
+          screenReaderPaginationLabel="Pagination"
+          screenReaderPageLabel="page"
+          screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+
+</section>

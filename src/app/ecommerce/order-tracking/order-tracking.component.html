@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="demo demo4 mb-4">
+    <div class="heading">Order Tracking</div>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-4">
+      <table class="table ">
+        <tbody>
+          <tr *ngFor="let data of ordertracking">
+            <td>
+              <div class="circle" *ngIf="data.status==true">
+                <p class="line"></p>
+              </div>
+              <div class="circle1" *ngIf="data.status==false">
+                <p class="line1"></p>
+              </div>
+            </td>
+            <td class="table-des">
+              <b *ngIf="data.status==true ">{{data.message}}</b>
+
+              <span *ngIf="data.status==false" style=" color: gray;">{{data.message}}</span>
+
+
+            <td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>

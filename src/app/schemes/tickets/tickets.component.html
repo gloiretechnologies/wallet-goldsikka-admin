@@ -1,0 +1,100 @@
+<section class="user-tickets">
+  <div class="row">
+    <div class="w-100">
+      <div *ngIf="!!accountErrorMessage" class="form-group">
+        <div class="alert alert-danger">
+          <i class="fas fa-exclamation-triangle"></i> &nbsp; {{accountErrorMessage}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <form role="form" class="form w-100" [formGroup]="form" enctype="multipart/form-data" (ngSubmit)="onSubmit()">
+    <div class="w-100">
+      <div *ngIf="!!errorMessage" class="form-group">
+        <div class="alert alert-danger">
+          <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+        </div>
+      </div>
+
+      <div *ngIf="!!successMessage" class="form-group">
+        <div class="alert alert-success">
+          <i class="fas fa-check"></i> &nbsp; {{successMessage}}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Name: <span class="mandatory">*</span></label>
+        <div class="input-group"
+             [ngClass]="{'is-invalid': (submitted && (f.name.errors || errors['name']))}">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+          </div>
+          <input formControlName="name" type="text" placeholder="Enter Name" class="form-control"
+                 [ngClass]="{'is-invalid': (submitted && (f.name.errors || errors['name']))}">
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('name').hasError('required')">This field is required
+        </div>
+        <div class="invalid-feedback" *ngFor="let e of errors['name']">{{e.toString()}}</div>
+      </div>
+
+      <div class="form-group">
+        <label>Email: <span class="mandatory">*</span></label>
+        <div class="input-group"
+             [ngClass]="{'is-invalid': (submitted && (f.email.errors || errors['email']))}">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+          </div>
+          <input formControlName="email" type="email" placeholder="Enter Email" class="form-control"
+                 [ngClass]="{'is-invalid': (submitted && (f.email.errors || errors['email']))}">
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('email').hasError('required')">This field is required
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('email').hasError('pattern')">Enter Correct email
+        </div>
+        <div class="invalid-feedback" *ngFor="let e of errors['email']">{{e.toString()}}</div>
+      </div>
+
+      <div class="form-group">
+        <label>Mobile: <span class="mandatory">*</span></label>
+        <div class="input-group"
+             [ngClass]="{'is-invalid': (submitted && (f.mobile.errors || errors['mobile']))}">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+          </div>
+          <input formControlName="mobile" type="text" placeholder="Enter Mobile" class="form-control"
+                 [ngClass]="{'is-invalid': (submitted && (f.mobile.errors || errors['mobile']))}">
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('mobile').hasError('required')">This field is required
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('mobile').hasError('minlength')">Enter 10 digits only
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('mobile').hasError('maxlength')">Enter 10 digits only
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('mobile').hasError('pattern')">Enter Numbers only
+        </div>
+        <div class="invalid-feedback" *ngFor="let e of errors['mobile']">{{e.toString()}}</div>
+      </div>
+
+      <div class="form-group">
+        <label>Message: <span class="mandatory">*</span></label>
+        <div class="input-group"
+             [ngClass]="{'is-invalid': (submitted && (f.message.errors || errors['message']))}">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+          </div>
+          <textarea formControlName="message" placeholder="Enter Message" class="form-control"
+                    [ngClass]="{'is-invalid': (submitted && (f.message.errors || errors['message']))}"></textarea>
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('message').hasError('required')">This field is required
+        </div>
+        <div class="invalid-feedback" *ngFor="let e of errors['message']">{{e.toString()}}</div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block btn-md">
+          Submit
+          <i *ngIf="isSubmitting" class="fas fa-spinner fa-spin"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

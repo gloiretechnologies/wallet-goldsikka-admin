@@ -1,0 +1,87 @@
+.scheme-form-list {
+  // width: 100%;
+  // background: #ffffff;
+  // // padding: 20px;
+  // border-radius:6px;
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  form {
+    margin: 20px 0 0 0;
+
+    label {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .input-group-text {
+      width: 60px;
+      text-align: center;
+      display: block;
+
+      i {
+        text-align: center;
+        vertical-align: middle;
+        color: #666666;
+        margin-top: 5px;
+        font-size: 21px;
+      }
+    }
+
+    .form-control-lg {
+      font-size: 1.5rem;
+    }
+  }
+  .payment-details {
+    width: 100% !important;
+  }
+}
+
+.form-check-input {
+  width: 16px;
+  height: 16px;
+}
+
+.form-check-label {
+  margin-left: 2px;
+
+  color: black !important;
+}
+
+.loading {
+  position: absolute;
+  z-index: 10;
+  display: block;
+  height: 100%;
+  background-color: white;
+  top: 0;
+  left: 0;
+  text-align: center;
+  opacity: 0.75;
+  width: 100%;
+
+  i {
+    font-size: 3rem;
+    vertical-align: middle;
+    margin: 100px;
+  }
+}
+
+.form-check {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+@media only screen and (max-width: 767px) {
+  .scheme-form-list {
+    h1 {
+      font-size: 25px;
+    }
+  }
+}
+.mandatory {
+  color: red;
+  font-size: 20px;
+}

@@ -1,0 +1,187 @@
+<section class="transfer-gold w-100 m-auto">
+
+  <!-- <div class="alert alert-warning i-box">
+    <ul class="pb-0 mb-0">
+      <li>Transfer gold to your and family</li>
+      <li>Transfer gold to your friends as a gift</li>
+      <li>Donate gold to Temple, Mosque, Gurdwara, Church and other religious places</li>
+    </ul>
+  </div> -->
+
+  <div class="w-100">
+    <div *ngIf="!!errorMessage" class="form-group">
+      <div class="alert alert-danger">
+        <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+      </div>
+    </div>
+  </div>
+
+  <section *ngIf="!showOtpBox && !transferCompleted">
+
+    <form class="from m-auto main-form" role="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h1 class="mb-3">Transfer Gold</h1>
+
+      <div class="form-group">
+        <label>Mobile Number: <span class="mandatory">*</span></label>
+        <div class="input-group" [ngClass]="{'is-invalid': (submitted && (f.to.errors || errors['to']))}">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-plus"> 91</i></span>
+          </div>
+
+
+          <input type="number" placeholder="Enter mobile number" class="form-control form-control-lg" autofocus
+            formControlName="to" [ngClass]="{'is-invalid': (submitted && (f.to.errors || errors['to']))}">
+          <!--          <nz-autocomplete [nzDataSource]="wallets" #auto></nz-autocomplete>-->
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('to').hasError('required')">This field is required</div>
+        <div class="invalid-feedback" *ngIf="form.get('to').hasError('min')">Please enter a correct Mobile Number</div>
+        <div class="invalid-feedback" *ngFor="let e of errors['to']">{{e.toString()}}</div>
+      </div>
+
+      <div class="form-group">
+        <label>Quantity: <small>(in grams)</small> <span class="mandatory">*</span></label>
+        <div class="input-group" [ngClass]="{'is-invalid': (submitted && (f.quantity.errors || errors['quantity']))}">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKQSURBVFiFzddLqM1bHAfwz+bksMs9SHFwRrhhICMyECFlYiBRHhlwuyYeZcKETJgIGXqWTkSimwh5lDPABFGu+/CIUAY4yCV5DNZybeusvfef4+Bbq3bf32+t33evtdf3tzY/CS5j0nesNwmXoCESK7AfB3Gvi4u3YBbmQCkJzERzFwt4iEPiFy1lEkZjeoZ/i4toq1NgAsaheyZ2DNcqiW5VFumbGQOwE0trFF8ecwZUWaPTGI77NeIPMPRbFKqFv2vE/unq4j8E47ALt/AK7+uMVzF3J8Z2pnAZu3FH+HENR2OBeY34VfCWO1F8+UuLN+IUWr9mcgXK2IuT6JFLyPkArMcowZjeZeJ9MBnD8Aa3o+AXmdzuOIwrWFNEdX88Fu5yikZsxFMcxYU4juEJNqBnZl5zXLNfEQFLsCfDN+Es9mFg5Jb6ZEzNQj+5EHNTtOK3IgJ24PeEK+EENteZW8JWHMnElmB7EQFnMCXhZghnmPr76jgq0YCrOvaTqThdRMBfGJFwf2BBJrcN5zL8QhxIuJG4UUTAc/ROuEcYnHDlmPtcx6vaouO74peYWxNNeJbhnwouN7+CmyrsQJvPj2xBzH2dWedZFFIVo/Bnhr+LIQm32Cf7XZTEWoSHR4obwlH8j/Q9MFi+3Z4TjKcSO4RffUnw/UpMwfnMOvclR1lUQCtWyr9yUjTE3FRUpwScEB4bm1S3bzG2Bf8KTvnNBLzHXIwX3G5Q5JfFIXIHMAbzqgj8agEEr58o9PrLOB5FzY2fr+OmcDteFhXQkCT0kr+GH/EfVmEtpgl9vyRs+ew6c6Fdnfa+TtjGXDPpLJqEPz5rayWVhevVrv7T60tHO7YJu/zz4qONduWotPMfjw9sIbzEke2S9gAAAABJRU5ErkJggg=="
+                alt="Weight Machine">
+            </span>
+          </div>
+          <input type="text" placeholder="Enter grams" class="form-control form-control-lg"
+            (change)="onQuantityChange()" (keyup)="onQuantityChange()" formControlName="quantity"
+            [ngClass]="{'is-invalid': (submitted && (f.quantity.errors || errors['quantity']))}">
+          <div class="invalid-feedback" *ngIf="form.get('quantity').hasError('required')">This field is required</div>
+          <div class="invalid-feedback" *ngIf="form.get('quantity').hasError('max')">You have exceed the max limit of
+            30 grams per transaction
+          </div>
+          <div class="invalid-feedback" *ngIf="form.get('quantity').hasError('min')">You need to transfer a minimum of 2
+            grams</div>
+          <div class="invalid-feedback" *ngFor="let e of errors['quantity']">{{e.toString()}}</div>
+        </div>
+      </div>
+
+      <div style="height: 20px" class="mb-2">
+        <span *ngIf="f.amount.value > 0" class="form-text text-muted">Amount: {{f.amount.value | currency}}</span>
+      </div>
+
+      <div class="form-group pt-2">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Continue</button>
+      </div>
+      <div class="loading" *ngIf="isSubmitting">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </form>
+  </section>
+
+  <section *ngIf="showOtpBox && !transferCompleted">
+    <app-transfer-verify-otp (onVerification)="processTransfer($event)" [triggerOtp]="showOtpBox">
+    </app-transfer-verify-otp>
+  </section>
+
+  <div class="mt-3" *ngIf="transferCompleted">
+
+
+
+
+    <div class="alert alert-success mb-4 pl-5 pt-5 pb-5">
+      <div class="pt-3 pb-3 d-flex">
+        <i class="fas fa-check-circle mr-1" style="font-size: 40px"></i>
+        <h6 style="font-size: 21px; line-height: 40px">
+          &nbsp; Transfer completed
+        </h6>
+      </div>
+      <p class="d-block pl-5 ml-3" style="font-size: 17px">You've sent {{form.get('quantity').value}} gram<ng-container
+          *ngIf="form.get('quantity').value > 1">s</ng-container>
+        gold to &quot;{{form.get('to').value}}&quot;
+      </p>
+    </div>
+  </div>
+  <!-- popover_1 -->
+  <div [style.display]="schemeTransactionModal ? 'block' : 'none'" class="modal p-4" id="imagemodal" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog margin-centered p-4">
+      <div class="modal-content p-4 bg-clr-modal">
+        <div class="transaction">
+          <div class="d-flex mb-4 justify-content-between">
+            <div>
+              <h5 class="modal-title clr-w" id="myModalLabel">Feedback</h5>
+            </div>
+            <div>
+              <button class="btn btn-danger" data-dismiss="modal" (click)="hideSchemeTransactionModal()">
+                X
+              </button>
+            </div>
+          </div>
+          <form [formGroup]="form1" (ngSubmit)="onsubmit_form()">
+            <div class="form-group">
+              <div class="input-group" style="padding: 0; margin: 0">
+                <textarea type="Message" placeholder="Help us to improve*"
+                  class="form-control form-control form-control-lg" id="exampleFormControlTextarea1" rows="8"
+                  formControlName="message" maxlength="250">
+                    </textarea>
+              </div>
+              <div></div>
+            </div>
+            <p class="max">* Max 250 character</p>
+            <div class="modal-footer border-top">
+              <!--  -->
+              <div class="form-group ratingDiv">
+                <div class="ml-3">
+                  <div class="rate">
+                    <b style="display: block" style="color: gold;font-size: 18px;">Rate us <span class="text-danger"
+                        style="font-size: 20px;">*</span></b>
+                  </div>
+                </div>
+                <ul class="rate-area">
+                  <input type="radio" id="5-star" name="rating" value="5" formControlName="rating" /><label for="5-star"
+                    title="Amazing">5 stars</label>
+                  <input type="radio" id="4-star" name="rating" value="4" formControlName="rating" /><label for="4-star"
+                    title="Good">4 stars</label>
+                  <input type="radio" id="3-star" name="rating" value="3" formControlName="rating" /><label for="3-star"
+                    title="Average">3 stars</label>
+                  <input type="radio" id="2-star" name="rating" value="2" formControlName="rating" /><label for="2-star"
+                    title="Not Good">2 stars</label>
+                  <input type="radio" id="1-star" name="rating" value="1" formControlName="rating" /><label for="1-star"
+                    title="Bad">1 star</label>
+                </ul>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: center;">
+              <button style="font-variant: all-small-caps" type="submit" [disabled]="form1.invalid"
+                class="btn btn-save btn-outline-dark post_btn">
+                submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- popover_2 -->
+  <div [style.display]="schemeTransactionModal_after ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog margin-centered">
+      <div class="modal-content p-4 bg-clr-modal">
+        <div class="transaction">
+          <div class="d-flex mb-4 justify-content-between">
+            <div>
+
+              <i class="fa fa-check"></i>
+              <h3 class="modal-title clr-w" id="myModalLabel"> Thank for your Feedback</h3>
+
+            </div>
+
+            <div>
+              <button class="btn btn-danger" data-dismiss="modal" (click)="hideSchemeTransactionModal()">
+                X
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>

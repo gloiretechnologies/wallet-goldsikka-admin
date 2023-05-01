@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="demo demo4">
+    <div class="heading">Favourite-Page</div>
+  </div>
+
+  <div class="row fp-row">
+
+    <div class="col-md-3 col-6" *ngFor="let data of favo">
+
+      <div class="card">
+        <img src="{{data.image_uri}}" alt="">
+        <h6>{{data.pname}}</h6>
+        <h6>₹ {{data.price| currency:'JPY':''}}</h6>
+        <div>
+          <button class="ad " (click)=" movetofav(data.id,data.size)">ADD TO CART</button>
+        </div>
+        <div>
+          <button class="add" (click)="del(data.id)">DELETE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section *ngIf="favo==null">
+    <h4 class="text-center mt-4 noItem"><b> No Items in Favourite </b></h4>
+  </section>
+</div>

@@ -1,0 +1,37 @@
+.event-list {
+  td{
+    a{
+      margin: 5px 0px;
+    }
+  }
+  .event {
+    padding: 25px;
+    background: white;
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+
+    h3 {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    p {
+      min-height: 50px;
+      overflow: hidden;
+    }
+    
+  }
+  .button{
+    float:right;
+    padding-bottom: 15px;
+  }
+  .text{
+    float: left;
+    
+    h2{
+      margin-bottom: 0px;
+      margin-top: 5px;
+    }
+  }
+}

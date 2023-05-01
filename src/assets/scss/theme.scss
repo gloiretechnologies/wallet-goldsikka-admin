@@ -1,0 +1,26 @@
+@import "variables";
+
+html, body {
+  background-color: white;
+  scroll-behavior: smooth;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
+}
+
+* {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  color: $primary-black;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
+}
+
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  background-image: none !important;
+}
+
+.form-control.is-valid, .was-validated .form-control:valid {
+  background-image: none !important;
+}

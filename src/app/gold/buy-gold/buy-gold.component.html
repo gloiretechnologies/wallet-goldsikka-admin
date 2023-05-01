@@ -1,0 +1,140 @@
+<section class="buy-gold m-auto">
+
+  <!-- <div class="alert alert-warning i-box">
+        <ul class="pb-0 mb-0">
+            <li>Buy / sell 24K Gold anytime, anywhere</li>
+            <li>Exchange for jewellery at our partner jewellers or ask for home delivery of coins and bars</li>
+            <li>Send a gift of gold</li>
+            <li>Donate gold to Temple, Mosque, Gurdwara, Church and other religious places</li>
+            <li>Setup an online SIP for building long term wealth</li>
+        </ul>
+    </div> -->
+
+  <form class="from main-form m-auto" role="form" [formGroup]="form" (ngSubmit)="onSubmit()"
+    [ngClass]="{'was-validated': (submitted && form.valid), 'needs-validation': (submitted)}">
+    <h1 class="mb-3">Buy Gold</h1>
+
+    <div class="form-group">
+      <label>Amount: <span class="mandatory">*</span></label>
+      <div class="input-group" [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+        </div>
+        <input type="number" placeholder="Enter amount" class="form-control form-control-lg" autofocus
+          (change)="onAmountChange()" (keyup)="onAmountChange()" formControlName="amount"
+          [ngClass]="{'is-invalid': (submitted && f.amount.errors)}">
+        <div class="invalid-feedback" *ngIf="form.get('amount').hasError('required')">This field is required
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('amount').hasError('min')">Enter Min Rs:100/-
+        </div>
+      </div>
+      <div class="invalid-feedback-coupon" [style.display]="isGreaterThanCouponAmount ? 'block' : 'none'">
+        <nz-alert nzType="error" nzMessage="please enter amount greater than the coupon transaction amount">
+        </nz-alert>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Quantity:
+        <small>(in grams)</small> <span class="mandatory">*</span>
+      </label>
+      <div class="input-group" [ngClass]="{'is-invalid': (submitted && f.quantity.errors)}">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKQSURBVFiFzddLqM1bHAfwz+bksMs9SHFwRrhhICMyECFlYiBRHhlwuyYeZcKETJgIGXqWTkSimwh5lDPABFGu+/CIUAY4yCV5DNZybeusvfef4+Bbq3bf32+t33evtdf3tzY/CS5j0nesNwmXoCESK7AfB3Gvi4u3YBbmQCkJzERzFwt4iEPiFy1lEkZjeoZ/i4toq1NgAsaheyZ2DNcqiW5VFumbGQOwE0trFF8ecwZUWaPTGI77NeIPMPRbFKqFv2vE/unq4j8E47ALt/AK7+uMVzF3J8Z2pnAZu3FH+HENR2OBeY34VfCWO1F8+UuLN+IUWr9mcgXK2IuT6JFLyPkArMcowZjeZeJ9MBnD8Aa3o+AXmdzuOIwrWFNEdX88Fu5yikZsxFMcxYU4juEJNqBnZl5zXLNfEQFLsCfDN+Es9mFg5Jb6ZEzNQj+5EHNTtOK3IgJ24PeEK+EENteZW8JWHMnElmB7EQFnMCXhZghnmPr76jgq0YCrOvaTqThdRMBfGJFwf2BBJrcN5zL8QhxIuJG4UUTAc/ROuEcYnHDlmPtcx6vaouO74peYWxNNeJbhnwouN7+CmyrsQJvPj2xBzH2dWedZFFIVo/Bnhr+LIQm32Cf7XZTEWoSHR4obwlH8j/Q9MFi+3Z4TjKcSO4RffUnw/UpMwfnMOvclR1lUQCtWyr9yUjTE3FRUpwScEB4bm1S3bzG2Bf8KTvnNBLzHXIwX3G5Q5JfFIXIHMAbzqgj8agEEr58o9PrLOB5FzY2fr+OmcDteFhXQkCT0kr+GH/EfVmEtpgl9vyRs+ew6c6Fdnfa+TtjGXDPpLJqEPz5rayWVhevVrv7T60tHO7YJu/zz4qONduWotPMfjw9sIbzEke2S9gAAAABJRU5ErkJggg=="
+              alt="Weight Machine">
+          </span>
+        </div>
+        <input type="text" placeholder="Enter grams" class="form-control form-control-lg" (change)="onQuantityChange()"
+          (keyup)="onQuantityChange()" formControlName="quantity"
+          [ngClass]="{'is-invalid': (submitted && f.quantity.errors)}">
+        <div class="invalid-feedback" *ngIf="form.get('quantity').hasError('required')">This field is required
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('quantity').hasError('max')">You have exceed the max limit
+          of 30
+          grams per transaction
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <!-- <span class="form-text text-muted">Taxes & Levies: {{amountWithGstAmount}}</span> -->
+      <span *ngIf="f.amount.value" class="form-text text-muted">Payable Amount is {{amountPayableIncludingCharges
+                | currency}}</span>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input form-control" type="checkbox" (change)="moneyWallet($event)">
+      <label class="form-check-label">
+        Use Booking Account
+      </label>
+    </div>
+    <div style="margin-left: 30px;"> Booking Account Balance : {{walletAmount | currency}}</div>
+    <br>
+    <div class="form-group" *ngIf="walletAmountInput">
+      <label>Booking Account Amount <span class="mandatory">*</span></label>
+      <div class="input-group"
+        [ngClass]="{'is-invalid': (submitted && (f.enteredWalletAmount.errors || errors['enteredWalletAmount']))}">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+        </div>
+        <input formControlName="enteredWalletAmount" type="text" placeholder="Enter  Account amount"
+          class="form-control form-control-lg" (change)="enteredWalletAmountChange()"
+          (keyup)="enteredWalletAmountChange()"
+          [ngClass]="{'is-invalid': (submitted && (f.enteredWalletAmount.errors || errors['enteredWalletAmount']) )}">
+      </div>
+      <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('required')">Enter amount
+      </div>
+      <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('min')">Enter Account amount
+        above 0
+      </div>
+      <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('pattern')">Enter only numbers
+      </div>
+      <!--            <div class="invalid-feedback">{{walletErrorMsg}}</div>-->
+    </div>
+    <!-- wallet -->
+    <br />
+    <div>
+      <app-coupon-buy>
+
+      </app-coupon-buy>
+    </div>
+
+
+    <div class="form-group">
+      <label>Referral Code</label>
+      <div class="input-group"
+        [ngClass]="{'is-invalid': (submitted && (f.referralCode.errors || errors['referralCode']))}">
+
+        <input formControlName="referralCode" type="text" placeholder="Enter Referral Code"
+          class="form-control form-control-lg"
+          [ngClass]="{'is-invalid': (submitted && (f.referralCode.errors || errors['referralCode']))}">
+      </div>
+      <div class="invalid-feedback" *ngIf="form.get('referralCode').hasError('required')">Enter Referral Code
+      </div>
+
+      <div class="invalid-feedback" *ngIf="form.get('referralCode').hasError('pattern')">Enter only numbers
+      </div>
+      <div class="invalid-feedback" *ngIf="form.get('referralCode').hasError('min')">Enter Referral Code
+      </div>
+      <div class="invalid-feedback" *ngFor="let e of errors['referralCode']">{{e.toString()}}</div>
+      <!--            <div class="invalid-feedback">{{walletErrorMsg}}</div>-->
+
+      <p class="">Note* : Referral code is used only for one time per transaction</p>
+    </div>
+
+    <div class="form-group pt-2">
+      <button type="submit" class="btn btn-primary btn-lg btn-block">
+        Proceed to Pay
+        <span *ngIf="amountPayableIncludingCharges == 0 && f.enteredWalletAmount.value !== 0
+                   && f.enteredWalletAmount.value ">with Booking Account
+        </span>
+        <!-- <span *ngIf="amountPayableIncludingCharges !== 0">{{amountPayableIncludingCharges | currency}}</span> -->
+      </button>
+    </div>
+    <div class="loading" *ngIf="isSubmitting">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
+  </form>
+</section>

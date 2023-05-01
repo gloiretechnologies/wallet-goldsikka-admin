@@ -1,0 +1,65 @@
+<section class="Organizations">
+
+    <h1>Business</h1>
+
+    <div class="card d-block mt-4 mb-4">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>For</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody *ngIf="!users">
+                    <tr *ngFor="let t of [].constructor(10)" class="ld">
+                        <td class="pt-3-half"><i></i></td>
+                        <td class="pt-3-half"><i></i></td>
+                        <td class="pt-3-half"><i></i></td>
+                    </tr>
+                    </tbody>
+                    <tbody *ngIf="!!users">
+                    <tr *ngFor="let user of users.data | paginate: { itemsPerPage: 10, currentPage: page, totalItems: users.total }">
+                        <td >{{user.name}}</td>
+                        <td >{{user.stateName}}</td>
+                        <td class="buttons" >
+                            <a [routerLink]="['/user-organizations', user.id,'donate']"
+                               class="btn btn-success btn-rounded btn-sm my-0">
+                                Donate
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tbody *ngIf="!!users && users.total === 0">
+                    <tr>
+                        <td colspan="8" style="text-align: center">
+                            <div>
+                                No Records Found
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="pagination" *ngIf="!!users && users.total > 0">
+                <pagination-controls
+                        (pageChange)="pageChanged($event)"
+                        (pageBoundsCorrection)="pageChanged($event)"
+                        directionLinks="true"
+                        responsive="true"
+                        previousLabel="Previous"
+                        nextLabel="Next"
+                        screenReaderPaginationLabel="Pagination"
+                        screenReaderPageLabel="page"
+                        screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+</section>
+
+

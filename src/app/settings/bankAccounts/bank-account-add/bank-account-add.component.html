@@ -1,0 +1,96 @@
+<div class="bank-add-settings">
+  <h1>Add Bank</h1>
+
+  <section class="mt-4">
+      <div class="w-100">
+        <div *ngIf="!!errorMessage" class="form-group">
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+          </div>
+        </div>
+        <div *ngIf="!!successMessage" class="form-group">
+          <div class="alert alert-success">
+            <i class="fas fa-check"></i> &nbsp; {{successMessage}}
+          </div>
+        </div>
+      </div>
+
+      <form class="from w-100" role="form" [formGroup]="form" (ngSubmit)="onSubmit()"
+            [ngClass]="{'was-validated': (submitted && form.valid), 'needs-validation': (submitted)}">
+
+        <div class="form-group ">
+          <label>Name on Account <small>(as per bank account)</small>  <span class="mandatory">*</span></label>
+
+          <input type="text" class="form-control" formControlName="name_on_account"
+                 placeholder="Enter Name on the Account" autocomplete="off"
+                 [ngClass]="{'is-invalid': (submitted && (f.name_on_account.errors || errors['name_on_account']))}">
+
+          <div class="invalid-feedback" *ngIf="form.get('name_on_account').hasError('required')">This field is
+            required
+          </div>
+          <div class="invalid-feedback" *ngFor="let e of errors['name_on_account']">{{e.toString()}}</div>
+        </div>
+
+        <div class="form-group ">
+          <label>Account Number <span class="mandatory">*</span></label>
+          <input type="number" class="form-control" formControlName="account_number" autocomplete="off"
+                 placeholder="Enter Account Number"
+                 [ngClass]="{'is-invalid': (submitted && (f.account_number.errors || errors['account_number']))}"/>
+
+          <div class="invalid-feedback" *ngIf="form.get('account_number').hasError('required')">This field is
+            required
+          </div>
+          <div class="invalid-feedback" *ngIf="form.get('account_number').hasError('minlength')">Ifsc code minimum length 10 characters
+          </div>
+          <div class="invalid-feedback" *ngIf="form.get('account_number').hasError('maxlength')">Ifsc code maximum length 20 characters
+          </div>
+          <div class="invalid-feedback" *ngFor="let e of errors['account_number']">{{e.toString()}}</div>
+        </div>
+
+        <div class="form-group ">
+          <label>Bank Name <span class="mandatory">*</span></label>
+          <input type="text" class="form-control" formControlName="bank_name" autocomplete="off"
+                 placeholder="Enter Bank Name"
+                 [ngClass]="{'is-invalid': (submitted && (f.bank_name.errors || errors['bank_name']))}">
+
+          <div class="invalid-feedback" *ngIf="form.get('bank_name').hasError('required')">This field is required
+          </div>
+          <div class="invalid-feedback" *ngFor="let e of errors['bank_name']">{{e.toString()}}</div>
+        </div>
+
+        <div class="form-group ">
+          <label>Branch <span class="mandatory">*</span></label>
+          <input type="text" class="form-control" formControlName="bank_branch" autocomplete="off"
+                 placeholder="Enter Branch Name"
+                 [ngClass]="{'is-invalid': (submitted && (f.bank_branch.errors || errors['bank_branch']))}">
+
+          <div class="invalid-feedback" *ngIf="form.get('bank_branch').hasError('required')">This field is required
+          </div>
+          <div class="invalid-feedback" *ngFor="let e of errors['bank_branch']">{{e.toString()}}</div>
+        </div>
+
+        <div class="form-group ">
+          <label>IFSC Code <span class="mandatory">*</span></label>
+          <input type="text" class="form-control" formControlName="ifsc_code" placeholder="Enter IFSC Code"
+                 autocomplete="off"
+                 [ngClass]="{'is-invalid': (submitted && (f.ifsc_code.errors || errors['ifsc_code']))}">
+
+          <div class="invalid-feedback" *ngIf="form.get('ifsc_code').hasError('required')">This field is required
+          </div>
+          <div class="invalid-feedback" *ngIf="form.get('ifsc_code').hasError('minlength')">Ifsc code minimum length 8 characters
+          </div>
+          <div class="invalid-feedback" *ngIf="form.get('ifsc_code').hasError('maxlength')">Ifsc code maximum length 20 characters
+          </div>
+          <div class="invalid-feedback" *ngFor="let e of errors['ifsc_code']">{{e.toString()}}</div>
+        </div>
+
+        <div class="form-group mt-4">
+          <button type="submit" class="btn btn-primary btn-block">
+            Submit
+          </button>
+        </div>
+
+        <!-- /.card-footer -->
+      </form>
+  </section>
+</div>

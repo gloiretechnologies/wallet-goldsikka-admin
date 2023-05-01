@@ -1,0 +1,130 @@
+<section class="coupons w-100 ">
+  <form role="form" class="form w-100" [formGroup]="form" (ngSubmit)="onOfflineApply()">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          <div *ngIf="!!onlineCouponAppliedMsg==false">
+            <div class="input-group margin">
+              <input type="text" formControlName="coupon" class="form-control form-control-md"
+                placeholder="Enter coupon code" [ngClass]="{'is-invalid': (submitted && f.coupon.errors)}">
+              &nbsp;<span class="input-group-btn">
+                <button type="submit" class="btn btn-danger btn-md">Apply</button>
+              </span>
+            </div>
+          </div>
+
+          <!--                    <input type="text" formControlName="coupon" class="form-control" placeholder="Enter coupon code"-->
+          <!--                           [ngClass]="{'is-invalid': (submitted && f.coupon.errors)}">-->
+          <!--                    <button type="submit" class="btn btn-danger btn-stle"-->
+          <!--                    >Apply</button>-->
+          <!--<div class="loading" *ngIf="isSubmitting">-->
+          <!--<i class="fas fa-spinner fa-spin"></i>-->
+          <!--</div>-->
+        </div>
+        <div *ngIf="!!errorMessage" class="form-group">
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i> {{errorMessage}}
+          </div>
+        </div>
+
+        <div *ngIf="!!couponAppliedMessage" class="form-group">
+          <div class="alert alert-success">
+            <i class="fas fa-tick"></i> &nbsp; {{ couponCode }}
+            <button type="button" class="btn btn-danger" (click)="onOfflineRemoveCoupon(couponId)"
+              style="float: right;margin-top: -5px">Remove
+            </button>
+          </div>
+        </div>
+        <div *ngIf=" !!onlineCouponAppliedMsg " class="coop">
+          <i class="fas fa-check"></i><span style="color: green">{{
+                                                onlineCouponAppliedMsg }}</span>
+          <span (click)="onOnlineRemoveCoupon(coupon)" style="float: right;cursor: pointer"
+            title="click here to remove">x</span>
+        </div>
+      </div>
+
+      <div class="col-md-4 ">
+        <button type="button" nz-button nzType="primary" (click)="onLists()" class="btn btn-success btn-md"
+          style="width: inherit;">
+          <span style="color: white;">
+            Coupon List
+          </span>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Online Coupons" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+    [nzStyle]="{ top: '20px' }" nzOkText="Ok" nzOkType="'primary'" nzCancelDisabled=true nzCancelText="cancel"
+    nzWidth="700px">
+    <ng-container *nzModalContent>
+      <div class="card d-block mt-4 mb-4">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Coupon Amount</th>
+                  <th>Coupon Code</th>
+                  <th>Minimum Transaction Amount</th>
+                  <th>Expires at</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="!!coupons">
+                <tr *ngFor="let coupon of coupons;let i=index">
+                  <td>{{coupon.amount}}</td>
+                  <td>{{coupon.coupon}}</td>
+                  <td>{{coupon.minimum_transaction_amount}}</td>
+                  <td>{{coupon.expiresAt}}</td>
+
+                  <td class="buttons">
+                    <p *ngIf="coupon.notApplicable && !coupon.is_expired">Coupon code already used</p>
+                    <p *ngIf="!coupon.notApplicable && coupon.is_expired">Coupon code is expired</p>
+                    <p *ngIf="coupon.notApplicable && coupon.is_expired">Coupon code is expired & already used</p>
+
+                    <button type="button" class="btn btn-success btn-rounded btn-sm my-0"
+                      (click)="onOnlineApply(coupon)" *ngIf="!coupon.is_expired && !coupon.notApplicable">
+                      Apply
+                    </button>
+                    <div *ngIf="coupon.isApplied && !!onlineCouponAppliedMsg ">
+                      <i class="fas fa-check"></i><span style="color: green">{{
+                                                onlineCouponAppliedMsg }}</span>
+                      <span (click)="onOnlineRemoveCoupon(coupon)" style="float: right;cursor: pointer"
+                        title="click here to remove">x</span>
+                    </div>
+
+
+                  </td>
+
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <!--<div class="pagination">-->
+          <!--<pagination-controls-->
+          <!--(pageChange)="pageChanged($event)"-->
+          <!--(pageBoundsCorrection)="pageChanged($event)"-->
+          <!--directionLinks="true"-->
+          <!--responsive="true"-->
+          <!--previousLabel="Previous"-->
+          <!--nextLabel="Next"-->
+          <!--screenReaderPaginationLabel="Pagination"-->
+          <!--screenReaderPageLabel="page"-->
+          <!--screenReaderCurrentLabel="You're on page">-->
+          <!--</pagination-controls>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </ng-container>
+
+    <div *nzModalFooter>
+      <button nz-button class="btn btn-primary" (click)="handleOk()">Ok</button>
+    </div>
+
+  </nz-modal>
+
+</section>

@@ -1,0 +1,140 @@
+body { overflow-x:hidden; }
+.child {
+    // border: 1px solid gold;
+    border-radius: 38px;
+    width: 100%;
+
+}
+
+.card{
+    border: 2px solid gold;
+border-radius: 15px;
+
+}
+
+.st
+{
+font-size: 30px;
+    font-weight: bolder;
+    color: #023020;
+}
+.btn{
+    background-color: #023020;
+      color: #fff;
+      border-radius: 3px;
+      border-width: -3px;
+      font-size: large;
+      margin-top: 20px;
+      //float: right;
+      padding: 5px 20px !important;
+      //box-shadow: 0 8px 15px #0000001a;
+      transition: all .3s ease 0s;
+      cursor: pointer;
+      outline: none;
+  
+  }
+  .text{
+    color: #023020;
+    font-weight: 200;
+    font-size: larger;
+    
+}
+.parent {
+    // width: 45%;
+    //margin: 20px;
+    // height: 300px;
+    
+    overflow: hidden;
+    position: relative;
+    
+    display: inline-block;
+  cursor: pointer;
+}
+
+.child {
+    height: 100%;
+    width: 100%;
+    
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+
+.child:before {
+    content: "";
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    //background-color: rgba(52,73,94,0.75);
+}
+.im{
+    background-image: url(/assets/images/gol.jpg);
+    background-repeat: no-repeat; 
+    background-size: cover;
+    
+ height: 40rem;
+ width: 100%;
+ 
+}
+
+.grid-divider {
+    overflow-x: hidden; 
+    position: relative;
+  }
+  
+  .grid-divider > [class*="col-"]:nth-child(n + 2):after {
+    content: "";
+    //background-color:#023020;
+    position: absolute;
+     top: 0;
+     bottom: 0;
+  
+    @media (max-width: 768px) {
+      width: 100%;
+      height: 1px;
+      left: 0;
+      top: -4px; 
+    }
+    @media (min-width: 768px) {
+      width: 1px;
+      height: auto;
+      left: -1px; 
+    }
+  }
+  .clr-w 
+  {
+    color: white;
+  }
+  .buttond-addc
+  {
+    border: none !important;
+    padding: 10px !important;
+    background: #1a2e22db;
+    border-radius: 3px
+
+    
+  }
+  
+.box-sh:hover
+{
+  box-shadow: 0 4px 6px #0000003d;
+}
+  .main-b
+  {
+    border: none !important;
+    background: none !important;
+    margin: 15px 0px;
+  }
+  .buttond-addc2
+  {
+       background-color: #faf87d;
+    border-radius: 4px;
+    padding: 10px 14px;
+    border: 1px solid #000;
+
+    
+  }

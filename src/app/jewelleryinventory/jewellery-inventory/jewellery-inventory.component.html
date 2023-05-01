@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="product_category">
+    <h2>
+      Categories
+      <a routerLink="/jewelleryinventory/wishlist" class="btn btn-wishlist float-right">
+        <i class="fa fa-shopping-cart cart-size" aria-hidden="true"></i>
+
+        <span class="badge">{{ wishlistCount }}</span>
+
+      </a>
+
+    </h2>
+
+    <div class="row ">
+
+      <!-- product_category_1 -->
+      <!-- this is for loop in angular  -->
+      <div class="col-md-3 col-6" *ngFor="let data of response">
+        <div class="product_img shadow">
+          <img src="{{data.image_uri}}" alt="jewellery" />
+          <div class="sub_heading mt-4">
+            <h4 id="{{data.id}}">{{data.catname}}</h4>
+            <div class="btn-hover">
+              <button (click)='setlocal(data.catname, data.id)' class="btn btn-primary button left-right">
+                View more
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

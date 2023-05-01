@@ -1,0 +1,272 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<section class="sell-gold w-100 m-auto">
+
+  <!-- <div class="alert alert-warning i-box">
+    <ul class="pb-0 mb-0">
+      <li>Exchange for jewellery at our partner jewellers or ask for home delivery of coins and bars</li>
+      <li>Convert your gold into coin and bars</li>
+      <li>Sell your gold</li>
+    </ul>
+  </div> -->
+
+  <div class="w-100">
+    <div *ngIf="!!errorMessage" class="form-group">
+      <div class="alert alert-danger">
+        <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+        <span *ngIf="!!isBank"><a class="add-bank" routerLink="/settings/bankAccounts/add"> Click here </a> to add your Bank Account</span>
+      </div>
+    </div>
+  </div>
+
+  <section *ngIf="!bankTransferCompleted && !moneyWalletTransferCompleted">
+
+    <form class="from m-auto main-form" role="form" [formGroup]="form" (ngSubmit)="onSubmit()"
+      [ngClass]="{'was-validated': (submitted && form.valid), 'needs-validation': (submitted)}">
+      <h1 class="mb-3">Sell Gold</h1>
+
+      <div class="form-group">
+        <label class="d-block">Quantity: <small>(in grams)</small>  <span class="mandatory">*</span></label>
+        <div class="input-group" [ngClass]="{'is-invalid': (submitted && (f.grams.errors || errors['grams']))}">
+          <div class="input-group-prepend">
+         
+          </div>
+          <input type="text" placeholder="Enter grams" class="form-control form-control-lg"
+            (change)="onQuantityChange()" (keyup)="onQuantityChange()" formControlName="grams"
+            [ngClass]="{'is-invalid': (submitted && (f.grams.errors || errors['grams']))}">
+        </div>
+
+        <small class="text-muted float-right mt-1">Available balance: {{currentBalance['inGrams']}}
+          <span class="text-muted" *ngIf="currentBalance['inGrams'] == 1">gram</span>
+          <span class="text-muted" *ngIf="currentBalance['inGrams'] !== 1">grams</span>
+        </small>
+
+        <div class="invalid-feedback" *ngIf="form.get('grams').hasError('required')">This field is required</div>
+        <div class="invalid-feedback" *ngIf="form.get('grams').hasError('min')">You have the minimum limit of 2
+          grams per sell
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('grams').hasError('max')">You have exceed the maximum limit of 30
+          grams per sell
+        </div>
+        <div class="invalid-feedback" *ngFor="let e of errors['grams']">{{e.toString()}}</div>
+      </div>
+
+      <div style="height: 25px" class="mb-2">
+      <span *ngIf="f.grams.value"
+        class="form-text text-muted">Get Amount: {{form.get('amount').value | currency}}</span>
+      </div>
+
+      <div class="form-group">
+        <label>Select one option for Transfer the Sell Amount  <span class="mandatory">*</span></label>
+        <div class="input-group"
+          [ngClass]="{'is-invalid': (submitted && (f.transferTo.errors || errors['transferTo']))}">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+          </div>
+          <select formControlName="transferTo" class="form-control form-control-lg" (change)="transferTo($event);"
+            [ngClass]="{'is-invalid': (submitted && (f.transferTo.errors || errors['transferTo']))}">
+            <option value="">-- Select --</option>
+            <option value="bankAccount">Bank Amount</option>
+            <option value="moneyWallet">Booking Account</option>
+          </select>
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('transferTo').hasError('required')">Select one option
+        </div>
+        <div class="invalid-feedback" *ngFor="let e of errors['transferTo']">{{e.toString()}}</div>
+      </div>
+
+      <br/>
+      <h2 *ngIf='isBankAccount  && banksList.length ==0' class="text-center" style="font-size: 20px;">You dont have any bank account.Please <a class="text-danger" routerLink="/settings/bankAccounts/add" style="font-size: 25px;">Click Here</a> add your bank account</h2>
+      <div class="form-group" *ngIf="isBankAccount && banksList.length >0">
+        <label class="w-100">Select one Bank to Transfer the Amount </label>
+        <div class="input-group"
+            >
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+          </div>
+          <select class="form-control form-control-lg" formControlName="bankId" autocomplete="off"
+                  >
+            <option *ngFor="let bank of banksList" value="{{bank.id}}">{{bank.name}}</option>
+          </select>
+        </div>
+
+        <div class="invalid-feedback" *ngFor="let e of errors['bankId']">{{e.toString()}}</div>
+      </div>
+      <div class="form-group pt-2">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Continue</button>
+      </div>
+      <div class="loading" *ngIf="isSubmitting">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </form>
+  </section>
+
+  <section *ngIf="bankTransferCompleted">
+      <div class="alert alert-success mb-4 pl-5 pt-5 pb-5">
+      <div class="pt-3 pb-3 d-flex">
+        <i class="fas fa-check-circle mr-1" style="font-size: 40px"></i>
+        <h6 style="font-size: 21px; line-height: 40px">
+          &nbsp; Transaction Successful
+        </h6>
+      </div>
+      <p class="d-block pl-5 ml-3" style="font-size: 17px">You've sold {{form.get('grams').value}}
+        <span style="font-size: 17px" *ngIf="form.get('grams').value > 1">grams  of gold.</span>
+        <span style="font-size: 17px" *ngIf="form.get('grams').value == 1">gram  of gold.</span>
+        <br>
+        The amount of {{form.get('amount').value | currency}} will be transferred to your bank account within 7 working days.
+      </p>
+    </div>
+   </section>
+
+  <section *ngIf="moneyWalletTransferCompleted">
+   
+    <div class="alert alert-success mb-4 pl-5 pt-5 pb-5">
+      <div class="pt-3 pb-3 d-flex">
+        <i class="fas fa-check-circle mr-1" style="font-size: 40px"></i>
+        <h6 style="font-size: 21px; line-height: 40px">
+          &nbsp; Transaction Successful
+        </h6>
+      </div>
+      <p class="d-block pl-5 ml-3" style="font-size: 17px">You've sold {{form.get('grams').value}}
+        <span style="font-size: 17px" *ngIf="form.get('grams').value > 1">grams  of gold.</span>
+        <span style="font-size: 17px" *ngIf="form.get('grams').value == 1">gram  of gold.</span>
+        <br>
+        The amount of {{form.get('amount').value | currency}} credited to your Booking Account.
+      </p>
+    </div>
+  </section>
+
+</section>
+ <!-- popover_one -->
+ <div
+ [style.display]="schemeTransactionModal ? 'block' : 'none'"
+ class="modal p-4"
+ id="imagemodal"
+ tabindex="-1"
+ role="dialog"
+ aria-labelledby="myModalLabel"
+ aria-hidden="true"
+>
+ <div class="modal-dialog margin-centered p-4">
+   <div class="modal-content p-4 bg-clr-modal">
+     <div class="transaction">
+       <div class="d-flex mb-4 justify-content-between">
+         <div>
+           <h5 class="modal-title clr-w" id="myModalLabel">Feedback</h5>
+         </div>
+         <div>
+           <button
+             class="btn btn-danger"
+             data-dismiss="modal"
+             (click)="hideSchemeTransactionModal()"
+           >
+             X
+           </button>
+         </div>
+       </div>
+       <form [formGroup]="form1" (ngSubmit)="onsubmit_form()">
+         <div class="form-group">
+           <div class="input-group" style="padding: 0; margin: 0">
+             <textarea
+               type="Message"
+               placeholder="Help us to improve*"
+               class="form-control form-control form-control-lg"
+               id="exampleFormControlTextarea1"
+               rows="3"
+               formControlName="message"
+               maxlength="255"
+             ></textarea>
+           </div>
+           <div></div>
+         </div>
+         <p class="max">* Max 250 character</p>
+         <div class="modal-footer border-top">
+           <!--  -->
+           <div
+             class="form-group ratingDiv">
+           <div class="ml-3"> 
+            <div class="ml-4 pl-4"> 
+              <b style="display: block" style="color: gold;font-size: 18px;">Rate us <span class="text-danger" style="font-size: 20px;">*</span></b>
+            </div>
+          </div>
+             <ul class="rate-area">
+               <input
+                 type="radio"
+                 id="5-star"
+                 name="rating"
+                 value="5"
+                 formControlName="rating"
+               /><label for="5-star" title="Amazing">5 stars</label>
+               <input
+                 type="radio"
+                 id="4-star"
+                 name="rating"
+                 value="4"
+                 formControlName="rating"
+               /><label for="4-star" title="Good">4 stars</label>
+               <input
+                 type="radio"
+                 id="3-star"
+                 name="rating"
+                 value="3"
+                 formControlName="rating"
+               /><label for="3-star" title="Average">3 stars</label>
+               <input
+                 type="radio"
+                 id="2-star"
+                 name="rating"
+                 value="2"
+                 formControlName="rating"
+               /><label for="2-star" title="Not Good">2 stars</label>
+               <input
+                 type="radio"
+                 id="1-star"
+                 name="rating"
+                 value="1"
+                 formControlName="rating"
+               /><label for="1-star" title="Bad">1 star</label>
+             </ul>
+           </div>
+         </div>
+         <div style="justify-content: center;display: flex;">
+           <button
+             style="font-variant: all-small-caps"
+             type="submit"
+             [disabled]="form1.invalid"
+             class="btn btn-save btn-outline-dark post_btn" 
+           >
+             submit
+           </button>
+         </div>
+       </form>
+     </div>
+   </div>
+ </div>
+</div>
+
+<!-- popover_two -->
+<div [style.display]="schemeTransactionModal_after ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1"
+role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div class="modal-dialog margin-centered">
+  <div class="modal-content p-4 bg-clr-modal">
+    <div class="transaction">
+      <div class="d-flex mb-4 justify-content-between">
+        <div>
+
+          <i class="fa fa-check"></i>
+          <h3 class="modal-title clr-w" id="myModalLabel">  Thank for your Feedback</h3>
+          
+        </div>
+        
+        <div>
+          <button class="btn btn-danger" data-dismiss="modal" (click)="hideSchemeTransactionModal()">
+            X
+          </button>
+        </div>
+      </div>      
+    </div>
+  </div>
+  
+ 
+</div>
+</div>

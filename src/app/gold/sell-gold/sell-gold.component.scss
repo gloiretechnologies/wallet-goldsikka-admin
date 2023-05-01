@@ -1,0 +1,182 @@
+.main-form{
+  width: 50%;
+  background: #ffffff;
+  padding: 20px;
+  border-radius:6px;
+}
+.ratingDiv{
+  padding: 0;
+  margin-right: 39%;
+  color: white;
+  margin-top: 5px;
+
+}
+.max{
+  color: white;
+  display: flex;
+justify-content: end;
+}
+.sell-gold {
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .i-box {
+    padding: 15px;
+    display: block;
+
+    ul {
+      list-style: disc;
+      padding: 0;
+      margin-left: 25px;
+
+      li {
+        font-size: 14px;
+        margin: 3px 0;
+      }
+    }
+  }
+
+  form {
+    margin: 20px 0 0 0;
+
+    label {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .input-group-text {
+      width: 60px;
+      text-align: center;
+      display: block;
+
+      i {
+        text-align: center;
+        vertical-align: middle;
+        color: #666666;
+        margin-top: 5px;
+        font-size: 21px;
+      }
+    }
+
+    .form-control-lg {
+      font-size: 1.5rem;
+    }
+
+  }
+  .loading {
+    position: absolute;
+    z-index: 10;
+    display: block;
+    height: 100%;
+    background-color: white;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.75;
+    width: 100%;
+
+    i {
+      font-size: 3rem;
+      vertical-align: middle;
+      margin: 100px;
+    }
+  }
+
+  a .add-bank {
+    text-decoration: underline;
+  }
+
+}
+
+// mobile responsive
+@media only screen and (max-width: 767px) {
+  .sell-gold{
+    h1{
+      font-size: 1.5rem;
+    }
+  }
+  .main-form{
+    width: 100%;
+  }
+  .ratingDiv{
+    margin-right: 31%;
+  }
+}
+
+
+.mandatory {
+  color: red;
+  font-size: 20px;
+}
+
+
+.margin-centered
+{
+  margin-top: 90px !important;
+ }
+ .bg-clr-modal
+ {
+   background-color: #1a2e22;
+    border: none !important;
+    color: rgb(0, 0, 0);
+ }
+ .clr-w 
+ {
+   color: white;
+ }
+ .btn-save
+ {
+  background: white;
+    color: black;
+    font-weight: 400;
+ }
+ .border-top
+ {
+      border-top: 1px solid #ffffff !important;
+ }
+
+ // star testing
+ .rate-area {
+	margin: auto;
+	border-style: none;
+}
+
+.rate-area:not(:checked) > input {
+	position: absolute;
+	top: -9999px;
+	clip: rect(0, 0, 0, 0);
+}
+
+.rate-area:not(:checked) > label {
+	float: right;
+	width: 0.8em;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+	font-size: 180%;
+	color: lightgrey;
+}
+
+.rate-area:not(:checked) > label:before {
+	content: "★";
+}
+
+.rate-area > input:checked ~ label {
+	color: gold;
+}
+
+.rate-area:not(:checked) > label:hover,
+.rate-area:not(:checked) > label:hover ~ label {
+	color: gold;
+}
+
+.rate-area > input:checked + label:hover,
+.rate-area > input:checked + label:hover ~ label,
+.rate-area > input:checked ~ label:hover,
+.rate-area > input:checked ~ label:hover ~ label,
+.rate-area > label:hover ~ input:checked ~ label {
+	color: gold;
+}

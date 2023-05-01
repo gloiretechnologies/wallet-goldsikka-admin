@@ -1,0 +1,44 @@
+.address-settings {
+  width: 100%;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .address {
+    margin-top: 30px;
+  }
+
+  .address-list {
+    border: 1px solid #dfdfdf;
+    padding: 15px;
+    margin: 0 0 15px 0;
+    display: block;
+
+    .far, .fas {
+      font-size: 17px;
+    }
+
+    .fa-trash-alt {
+      color: #ce3735;
+    }
+
+    &.new {
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+      &:hover {
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+
+  .btn-success {
+    i {
+      color: white;
+    }
+  }
+}

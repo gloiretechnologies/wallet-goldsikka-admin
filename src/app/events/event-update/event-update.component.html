@@ -1,0 +1,212 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="login-div">
+        <div class="login-box">
+          <h2>Update Event</h2>
+          <form role="form" class="form w-100" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="w-100">
+              <div *ngIf="!!errorMessage" class="form-group">
+                <div class="alert alert-danger">
+                  <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+                </div>
+              </div>
+
+              <div *ngIf="!!successMessage" class="form-group">
+                <div class="alert alert-success">
+                  <i class="fas fa-check"></i> &nbsp; {{successMessage}}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Select Event Type <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.event_type.errors || errors['event_type']))}">
+
+                  <select formControlName="event_type" class="form-control" (change)="changeEventType()"
+                          [ngClass]="{'is-invalid': (submitted && (f.event_type.errors || errors['event_type']))}">
+                    <option value="">Select Event Type</option>
+                    <option value="MRG">Marriage</option>
+                    <option value="OTH">Others</option>
+                  </select>
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('event_type').hasError('required')">This field is required
+                </div>
+                <div class="invalid-feedback" *ngFor="let e of errors['event_type']"></div>
+              </div>
+
+              <div class="form-group" *ngIf="isOthersEventType">
+                <label>Other Event Type <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.other_event_type.errors || errors['other_event_type']))}">
+
+                  <input formControlName="other_event_type" type="text" placeholder="Enter Other Event Type" class="form-control"
+                         [ngClass]="{'is-invalid': (submitted && (f.other_event_type.errors || errors['other_event_type']))}">
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('other_event_type').hasError('required')">This field is required
+                </div>
+
+                <div class="invalid-feedback" *ngFor="let e of errors['other_event_type']">{{e.toString()}}</div>
+              </div>
+              <div class="form-group">
+                <label>Event Name <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.event_name.errors || errors['event_name']))}">
+
+                  <input formControlName="event_name" type="text" placeholder="Enter Event Name" class="form-control"
+                         [ngClass]="{'is-invalid': (submitted && (f.event_name.errors || errors['event_name']))}">
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('event_name').hasError('required')">This field is required
+                </div>
+
+                <div class="invalid-feedback" *ngFor="let e of errors['event_name']">{{e.toString()}}</div>
+              </div>
+              <div class="form-group" *ngIf="isOthersEventType">
+                <label>Event Holder Name <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.holder_name.errors || errors['holder_name']))}">
+
+                  <input formControlName="holder_name" type="text" placeholder="Enter Event Holder Name"
+                         class="form-control"
+                         [ngClass]="{'is-invalid': (submitted && (f.holder_name.errors || errors['holder_name']))}">
+                </div>
+
+                <div class="invalid-feedback" *ngFor="let e of errors['holder_name']">{{e.toString()}}</div>
+              </div>
+              <div class="form-group" *ngIf="isEventType">
+                <label>Select Bride Or Groom <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.gender.errors || errors['gender']))}">
+
+                  <select formControlName="gender" class="form-control"
+                          [ngClass]="{'is-invalid': (submitted && (f.gender.errors || errors['gender']))}">
+                    <option value="">Select Bride Or Groom</option>
+                    <option value="F">Bride</option>
+                    <option value="M">Groom</option>
+                  </select>
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('gender').hasError('required')">This field is required
+                </div>
+                <div class="invalid-feedback" *ngFor="let e of errors['gender']"></div>
+              </div>
+              <div class="form-group" *ngIf="isEventType">
+                <label>Bride Name <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.bride_name.errors || errors['bride_name']))}">
+
+                  <input formControlName="bride_name" type="text" placeholder="Enter Bride Name" class="form-control"
+                         [ngClass]="{'is-invalid': (submitted && (f.bride_name.errors || errors['bride_name']))}">
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('bride_name').hasError('required')">This field is required
+                </div>
+
+                <div class="invalid-feedback" *ngFor="let e of errors['event_name']">{{e.toString()}}</div>
+              </div>
+              <div class="form-group" *ngIf="isEventType">
+                <label>Groom Name <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.groom_name.errors || errors['groom_name']))}">
+
+                  <input formControlName="groom_name" type="text" placeholder="Enter Groom Name" class="form-control"
+                         [ngClass]="{'is-invalid': (submitted && (f.groom_name.errors || errors['groom_name']))}">
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('groom_name').hasError('required')">This field is required
+                </div>
+
+                <div class="invalid-feedback" *ngFor="let e of errors['groom_name']">{{e.toString()}}</div>
+              </div>
+              <div class="form-group">
+                <label>Date <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.event_date.errors || errors['event_date']))}">
+
+                  <input formControlName="event_date" type="date" placeholder="Enter Date" class="form-control date"
+                         [ngClass]="{'is-invalid': (submitted && (f.event_date.errors || errors['event_date']))}">
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('event_date').hasError('required')">This field is required
+                </div>
+                <div class="invalid-feedback" *ngFor="let e of errors['event_date']">{{e.toString()}}</div>
+              </div>
+              <div class="form-group">
+                <label>Time <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.muhurtham_time.errors || errors['muhurtham_time']))}">
+
+                  <input formControlName="muhurtham_time" type="time" placeholder="Enter Time" class="form-control date"
+                         [ngClass]="{'is-invalid': (submitted && (f.muhurtham_time.errors || errors['muhurtham_time']))}">
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('muhurtham_time').hasError('required')">This field is
+                  required
+                </div>
+                <div class="invalid-feedback" *ngFor="let e of errors['muhurtham_time']">{{e.toString()}}</div>
+              </div>
+              <div class="form-group">
+                <label>Venue <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.venue.errors || errors['venue']))}">
+
+                  <input formControlName="venue" type="text" placeholder="Enter Venue" class="form-control"
+                         [ngClass]="{'is-invalid': (submitted && (f.venue.errors || errors['venue']))}">
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('venue').hasError('required')">This field is required
+                </div>
+
+                <div class="invalid-feedback" *ngFor="let e of errors['venue']">{{e.toString()}}</div>
+              </div>
+              <div class="form-group">
+                <label>Description <span class="mandatory">*</span></label>
+                <div class="input-group"
+                     [ngClass]="{'is-invalid': (submitted && (f.description.errors || errors['description']))}">
+
+                  <textarea formControlName="description" type="text" placeholder="Enter Description"
+                            class="form-control"
+                            [ngClass]="{'is-invalid': (submitted && (f.description.errors || errors['description']))}"></textarea>
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('description').hasError('required')">This field is
+                  required
+                </div>
+
+                <div class="invalid-feedback" *ngFor="let e of errors['description']">{{e.toString()}}</div>
+              </div>
+
+              <div class="form-group" >
+                <label *ngIf="!isEventType" >Photo <span class="mandatory">*</span></label>
+                <label *ngIf="isEventType">Couple Photos <span class="mandatory">*</span></label>
+                <input type="file" formControlName="photo" (change)="onFileChange($event)"  [ngClass]="{'is-invalid': (submitted && (f.photo.errors || errors['photo']))}"/>
+                <div class="invalid-feedback" *ngIf="form.get('photo').hasError('required')">This field is
+                  required
+                </div>
+                <div class="invalid-feedback" *ngFor="let e of errors['photo']">{{e.toString()}}</div>
+              </div>
+              <div class="form-group" *ngIf="isEventType">
+                <label>Wedding Card Photo <span class="mandatory">*</span></label>
+                <input type="file" formControlName="wedding_card_photo" (change)="onCouplePhotosChange($event)" [ngClass]="{'is-invalid': (submitted && (f.wedding_card_photo.errors || errors['wedding_card_photo']))}"/>
+                <div class="invalid-feedback" *ngIf="form.get('wedding_card_photo').hasError('required')">This field is
+                  required
+                </div>
+                <div class="invalid-feedback" *ngFor="let e of errors['wedding_card_photo']">{{e.toString()}}</div>
+              </div>
+              <!--<div class="form-group" >
+                <label *ngIf="isEventType">Couple Photos</label>
+                <img src="{{this.events.photoImageLink}}"   class="image">
+              </div>
+              <div class="form-group" *ngIf="isEventType">
+                <label>Wedding Card Photo</label>
+                <img src="{{this.events.weddingCardPhotoLink}}"  class="image">
+              </div>-->
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-md">
+                  Submit
+                </button>
+              </div>
+              <div class="loading" *ngIf="isSubmitting">
+                <i class="fas fa-spinner fa-spin"></i>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

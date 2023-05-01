@@ -1,0 +1,34 @@
+.bank-account-settings {
+  display: block;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  .bank {
+    margin-top: 30px;
+  }
+
+  .bank-list {
+    border: 2px solid #b3b3b366;
+    padding: 15px;
+    margin: 15px 0;
+
+    .far, .fas {
+      font-size: 14px;
+    }
+
+    .fa-trash-alt {
+      color: #ce3735
+    }
+
+    .btn-success {
+      i {
+        color: white;
+      }
+    }
+  }
+
+}

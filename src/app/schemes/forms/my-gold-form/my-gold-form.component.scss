@@ -1,0 +1,91 @@
+.my-gold-form-list {
+  display: block;
+
+  h1 {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  .coupon{
+    margin: 5% 0 0 0;
+
+    //  color: $text-dark-color;
+  }
+
+  form {
+
+    label {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .input-group-text {
+      width: 60px;
+      text-align: center;
+      display: block;
+
+      i {
+        text-align: center;
+        vertical-align: middle;
+        color: #666666;
+        margin-top: 5px;
+        font-size: 21px;
+      }
+    }
+
+    .form-control-lg {
+      font-size: 1.5rem;
+    }
+
+  }
+
+  .payment-details {
+    width: 100% !important;
+  }
+
+  .max-err-msg {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #ff0200;
+
+  }
+}
+
+.form-check-input {
+  width: 16px;
+  height: 16px;
+}
+
+.form-check-label {
+  margin-left: 2px;
+
+  color: black !important;
+}
+
+.form-check {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.loading {
+  position: absolute;
+  z-index: 10;
+  display: block;
+  height: 100%;
+  background-color: white;
+  top: 0;
+  left: 0;
+  text-align: center;
+  opacity: 0.75;
+  width: 100%;
+
+  i {
+    font-size: 3rem;
+    vertical-align: middle;
+    margin: 100px;
+  }
+}
+
+.mandatory {
+  color: red;
+  font-size: 20px;
+}

@@ -1,0 +1,69 @@
+<div class="col-md-3 m-auto text-center">
+  <div class="car">
+    <h3>Myorders: {{len}}</h3>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6" *ngFor="let data of myorders">
+      <div class="card" style="padding: 4px;
+    margin-bottom: 6px;">
+        <div class="row">
+          <div class="col-md-8 space">
+            <p class="oi-btn">ORDER ID : <b class="oib"> {{data.order_id}}</b></p>
+            <P class="oq-btn">ORDER QUANTITY :<b class="oib"> {{data.no_of_products}}</b></P>
+          </div>
+          <div class="col-md-4">
+            <div class="track-or">
+              <a routerLink="/ecommerce/order-tracking/{{data.order_id}}">Track your order</a>
+            </div>
+            <!-- <P class="os-btn">
+              <a routerLink="/ecommerce/order-tracking/{{data.order_id}}" class="info">Track your order</a>
+            </P> -->
+            <!-- <P (click)="onImage(data.order_id,data.userid)">
+              <a class="info">Info</a>
+            </P> -->
+            <div class="order-info" (click)="onImage(data.order_id,data.userid)">
+              <a>Info </a>
+            </div>
+            <!-- <p class="os-btn">
+              <a class="download-btn info" (click)="downloadPdf(data.order_id)" download="w3logo"> Invoice <i
+                  class="fas fa-download"></i></a>
+            </p> -->
+            <div class="invoice">
+              <a (click)="downloadPdf(data.order_id)" download="w3logo">Invoice<i
+                  class="fas fa-download icon-set"></i></a>
+            </div>
+            <div [style.display]="showUserImageModal ? 'block' : 'none'" class="modal user-hover-img" id="imagesModal"
+              tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="w-100">
+                      <button type="button" class="btn btn-danger float-right" data-dismiss="modal"
+                        (click)="hideUserImageModal()">X
+                      </button>
+                    </h4>
+                  </div>
+                  <div class="modal-body m-body">
+                    <div class="container" *ngFor="let item of info">
+                      <div class="row modal-row">
+                        <div class="col-md-3">
+                          <img id="myimage" class="modal-img" src="{{item.image_uri}}" alt="">
+                        </div>
+                        <div class="col-md-9 m-auto">
+                          <p class="sub">{{item.pname}}</p>
+                          <p class="name">{{item.subcatname}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

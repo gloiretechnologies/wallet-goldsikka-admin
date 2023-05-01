@@ -1,0 +1,106 @@
+<section class="withdraw w-100 m-auto">
+
+  <!-- <div class="alert alert-warning i-box">
+    <ul class="pb-0 mb-0">
+      <li>Exchange for jewellery at our partner jewellers or ask for home delivery of coins and bars</li>
+      <li>Convert your gold into coin and bars</li>
+      <li>Sell your gold</li>
+    </ul>
+  </div> -->
+
+  <div class="w-100">
+    <div *ngIf="!!errorMessage" class="form-group">
+      <div class="alert alert-danger">
+        <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+        <span *ngIf="!!isBank"><a class="add-bank" routerLink="/settings/bankAccounts/add"> Click here </a> to add your Bank Account</span>
+      </div>
+    </div>
+  </div>
+
+  <section *ngIf="!bankTransferCompleted && !moneyWalletTransferCompleted">
+
+    <form class="from m-auto main-form" role="form" [formGroup]="form" (ngSubmit)="onSubmit()"
+          [ngClass]="{'was-validated': (submitted && form.valid), 'needs-validation': (submitted)}">
+      <div class="">
+      <h1 class="mb-3">Withdraw Amount</h1>
+      <p class="amount text-bold">Account Amount : {{walletAmount |currency}}</p>
+      </div>
+      <div class="form-group">
+        <label class="d-block">Amount <span class="mandatory">*</span></label>
+        <div class="input-group" [ngClass]="{'is-invalid': (submitted && (f.amount.errors || errors['amount ']))}">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAKQSURBVFiFzddLqM1bHAfwz+bksMs9SHFwRrhhICMyECFlYiBRHhlwuyYeZcKETJgIGXqWTkSimwh5lDPABFGu+/CIUAY4yCV5DNZybeusvfef4+Bbq3bf32+t33evtdf3tzY/CS5j0nesNwmXoCESK7AfB3Gvi4u3YBbmQCkJzERzFwt4iEPiFy1lEkZjeoZ/i4toq1NgAsaheyZ2DNcqiW5VFumbGQOwE0trFF8ecwZUWaPTGI77NeIPMPRbFKqFv2vE/unq4j8E47ALt/AK7+uMVzF3J8Z2pnAZu3FH+HENR2OBeY34VfCWO1F8+UuLN+IUWr9mcgXK2IuT6JFLyPkArMcowZjeZeJ9MBnD8Aa3o+AXmdzuOIwrWFNEdX88Fu5yikZsxFMcxYU4juEJNqBnZl5zXLNfEQFLsCfDN+Es9mFg5Jb6ZEzNQj+5EHNTtOK3IgJ24PeEK+EENteZW8JWHMnElmB7EQFnMCXhZghnmPr76jgq0YCrOvaTqThdRMBfGJFwf2BBJrcN5zL8QhxIuJG4UUTAc/ROuEcYnHDlmPtcx6vaouO74peYWxNNeJbhnwouN7+CmyrsQJvPj2xBzH2dWedZFFIVo/Bnhr+LIQm32Cf7XZTEWoSHR4obwlH8j/Q9MFi+3Z4TjKcSO4RffUnw/UpMwfnMOvclR1lUQCtWyr9yUjTE3FRUpwScEB4bm1S3bzG2Bf8KTvnNBLzHXIwX3G5Q5JfFIXIHMAbzqgj8agEEr58o9PrLOB5FzY2fr+OmcDteFhXQkCT0kr+GH/EfVmEtpgl9vyRs+ew6c6Fdnfa+TtjGXDPpLJqEPz5rayWVhevVrv7T60tHO7YJu/zz4qONduWotPMfjw9sIbzEke2S9gAAAABJRU5ErkJggg=="
+              alt="Weight Machine">
+              </span>
+          </div>
+          <input type="text" placeholder="Enter Amount" class="form-control form-control-lg"
+                 formControlName="amount"
+                 [ngClass]="{'is-invalid': (submitted && (f.amount.errors || errors['amount']))}">
+        </div>
+
+        <div class="invalid-feedback" *ngIf="form.get('amount').hasError('required')">This field is required</div>
+        <div class="invalid-feedback" *ngIf="form.get('amount').hasError('min')">You have the minimum amount Rs.500
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('amount').hasError('max')">You have exceed the maximum limit of
+          Rs.100000
+        </div>
+        <div class="invalid-feedback" *ngFor="let e of errors['amount']">{{e.toString()}}</div>
+      </div>
+
+      <br/>
+      <h2 *ngIf='isBankAccount  && banksList.length ==0' class="text-center" style="font-size: 20px;">You dont have any
+        bank account.Please <a class="text-danger" routerLink="/settings/bankAccounts/add" style="font-size: 25px;">Click
+          Here</a> add your bank account</h2>
+      <div class="form-group" *ngIf="isBankAccount && banksList.length >0">
+        <label class="w-100">Select one Bank to Transfer the Amount </label>
+        <div class="input-group"
+        >
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+          </div>
+          <select class="form-control form-control-lg" formControlName="bank_id" autocomplete="off"
+          >
+            <option *ngFor="let bank of banksList" value="{{bank.id}}">{{bank.name}}</option>
+          </select>
+        </div>
+
+        <div class="invalid-feedback" *ngFor="let e of errors['bank_id']">{{e.toString()}}</div>
+      </div>
+      <div class="form-group pt-2">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Continue</button>
+      </div>
+      <div class="loading" *ngIf="isSubmitting">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </form>
+  </section>
+
+  <section *ngIf="bankTransferCompleted">
+    <div class="alert alert-success mb-4 pl-5 pt-5 pb-5">
+      <div class="pt-3 pb-3 d-flex">
+        <i class="fas fa-check-circle mr-1" style="font-size: 40px"></i>
+        <h6 style="font-size: 21px; line-height: 40px">
+          &nbsp; Transaction Successful
+        </h6>
+      </div>
+      <p class="d-block pl-5 ml-3" style="font-size: 17px">{{transactionMessage}}
+      </p>
+    </div>
+  </section>
+
+  <section *ngIf="moneyWalletTransferCompleted">
+    <div class="alert alert-success mb-4 pl-5 pt-5 pb-5">
+      <div class="pt-3 pb-3 d-flex">
+        <i class="fas fa-check-circle mr-1" style="font-size: 40px"></i>
+        <h6 style="font-size: 21px; line-height: 40px">
+          &nbsp; Transaction Successful
+        </h6>
+      </div>
+      <p class="d-block pl-5 ml-3" style="font-size: 17px">{{transactionMessage}}
+      </p>
+    </div>
+  </section>
+
+</section>

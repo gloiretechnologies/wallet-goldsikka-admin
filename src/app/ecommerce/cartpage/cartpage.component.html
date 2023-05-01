@@ -1,0 +1,77 @@
+<section class="cart-sec">
+
+  <div class="one">
+    <div class="wb-head">My Cart</div>
+  </div>
+  <section *ngIf="respons==='No products'">
+    <h4 class="text-center mt-4"><b> No Items In Cart </b></h4>
+  </section>
+  <section class="" *ngFor="let data of cartp">
+    <div class="container cards">
+      <div class="row cart-row">
+        <div class="col-md-4">
+          <img src="{{data.image_uri}}" alt="">
+        </div>
+        <div class="col-md-8 sub">
+          <table class="table-responsive">
+            <tr>
+              <th class="su">Product Name </th>
+              <td class="sd">:&nbsp;{{data.pname}} </td>
+            </tr>
+            <tr>
+              <th class="su">Weight</th>
+              <td class="sd">:&nbsp;{{data.weight}}gms
+              </td>
+            </tr>
+
+            <tr>
+              <th class="su">VA({{data.va}}%)</th>
+              <td class="sd">:&nbsp;₹{{data.vaprice|currency:'JPY':''}}
+              </td>
+            </tr>
+
+            <tr>
+              <th class="su">Price</th>
+              <td class="sd">:&nbsp;₹{{data.price |currency:'JPY':''}}</td>
+            </tr>
+            <tr>
+              <th class="su">Description</th>
+              <td class="sd">:&nbsp;{{data.description }}</td>
+            </tr>
+
+          </table>
+          <div class="row mt-4">
+            <div class="col-md-12">
+              <div class="d-flex justify-content-end">
+                <div class="">
+                  <button class="btn re mr-2" (click)="del(data.id)">Remove</button>
+                </div>
+                <div class="">
+                  <button class="btn move b-mobile" (click)="movetofav(data.id,data.size)">Move to Favourites</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <div class="cart mt-4" *ngIf="respons!='No products'">
+    <div class="row">
+      <div class="col-md-3 col-6 d-flex align-items-center justify-content-center">
+        <p class="amount m-0 mobile-f">No of items in cart&nbsp;:&nbsp;{{respons.productscount}}</p>
+      </div>
+      <div class="col-md-7 col-8">
+        <h2 class="am ju mobile-f">Total Amount (With GST and VA% )&nbsp;:&nbsp;₹
+          {{respons.payable_amount |currency:'JPY':''}}
+        </h2>
+      </div>
+      <div class="col-md-2 col-4">
+        <button routerLink="/ecommerce/checkout" class="btn continue">Checkout</button>
+      </div>
+    </div>
+  </div>
+</section>

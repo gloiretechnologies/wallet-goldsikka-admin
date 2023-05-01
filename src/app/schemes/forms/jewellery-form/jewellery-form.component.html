@@ -1,0 +1,212 @@
+<section class="scheme-form-list">
+  <div class="row">
+    <div class="w-100">
+      <div *ngIf="!!errorMessage" class="form-group">
+        <div class="alert alert-danger">
+          <i class="fas fa-exclamation-triangle mr-2"></i> {{errorMessage}}
+        </div>
+      </div>
+      <div *ngIf="!!successMessage" class="form-group">
+        <div class="alert alert-success">
+          <i class="fas fa-check mr-2"></i> {{successMessage}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="">
+    <div>
+      <h1 class="mt-3">{{schemes.title}}</h1>
+    </div>
+
+    <form class="from" role="form" [formGroup]="form" (ngSubmit)="onSubmit()"
+      [ngClass]="{'was-validated': (submitted && form.valid), 'needs-validation': (submitted)}">
+      <div *ngIf="isGreaterThanCouponAmount== true" class="alert alert-warning" role="alert">
+        Sorry! can't proceed as you entered Amount not equivalent to Minimum Transaction Amount from Coupon List,kindly
+        reverify Minimum Transaction Amount & apply again!
+      </div>
+      <div class="form-group">
+        <label>Amount : <span class="mandatory">*</span></label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-rupee-sign"></i>
+            </span>
+          </div>
+          <select class="form-control form-control-lg" autofocus formControlName="amount"
+            [ngClass]="{'is-invalid': (submitted && f.amount.errors)}" (change)="getSchemeCalculationAmount();">
+            <option value="" selected>Select Amount</option>
+            <option value="1000">1000</option>
+            <option value="1500">1500</option>
+            <option value="2000">2000</option>
+            <option value="2500">2500</option>
+            <option value="3000">3000</option>
+            <option value="3500">3500</option>
+            <option value="4000">4000</option>
+            <option value="4500">4500</option>
+            <option value="5000">5000</option>
+            <option value="5500">5500</option>
+            <option value="6000">6000</option>
+            <option value="6500">6500</option>
+            <option value="7000">7000</option>
+            <option value="7500">7500</option>
+            <option value="8000">8000</option>
+            <option value="8500">8500</option>
+            <option value="9000">9000</option>
+            <option value="9500">9500</option>
+          </select>
+
+          <div class="invalid-feedback" *ngIf="form.get('amount').hasError('required')">This field is
+            required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tenures : <span class="mandatory">*</span></label>
+        <div class="input-group" [ngClass]="{'is-invalid': (submitted && f.total_installments.errors)}">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-key"></i></span>
+          </div>
+          <select class="form-control form-control-lg" autofocus formControlName="total_installments"
+            [ngClass]="{'is-invalid': (submitted && f.total_installments.errors)}"
+            (change)="getSchemeCalculationAmount();" [value]='12'>
+            <option value="12">12 Months</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="form.get('total_installments').hasError('required')">This field is
+            required
+          </div>
+        </div>
+      </div>
+      <h6 class="text-right text-black-50">Live Price (22 Carat) : {{this.currentGoldPricePerGram}} </h6>
+
+      <div class="mb-2" *ngIf="!!schemeValues">
+        <table class="payment-details">
+          <tr>
+            <td class="form-text text-muted mr-2">
+              Get Grams:
+            </td>
+            <td class="text-right"> {{(schemeValues.gramsEmi ? schemeValues.gramsEmi : "0.00")}} g</td>
+          </tr>
+          <tr>
+            <td class="form-text text-muted mr-2">
+              MMP Amount:
+            </td>
+            <td class="text-right">{{(schemeValues.emiAmount ? schemeValues.emiAmount : "0.00")| currency}}</td>
+          </tr>
+          <!-- <tr>
+            <td class="form-text text-muted mr-4">Tax Amount :</td>
+            <td class="text-right"> {{(schemeValues.gst ? schemeValues.gst : "0.00") | currency}}</td>
+          </tr> -->
+          <tr>
+            <td class="form-text text-muted mr-4">Processing Fee:</td>
+            <td class="text-right text-bold">
+              {{(schemeValues.processingFee ? schemeValues.processingFee : "0.00") | currency}}</td>
+          </tr>
+          <tr>
+            <td class="form-text text-muted mr-4">Discount Coupon:</td>
+            <td class="text-right text-bold">
+              {{(schemeValues.couponAmount ? schemeValues.couponAmount : "0.00") | currency}}</td>
+          </tr>
+          <tr>
+            <td class="form-text text-muted mr-4">Total Amount:</td>
+            <td class="text-right text-bold">
+              {{(schemeValues.finalAmount ? schemeValues.finalAmount : "0.00") | currency}}</td>
+          </tr>
+        </table>
+        <div class="form-check">
+          <input class="form-check-input form-control" type="checkbox" (change)="moneyWallet($event)">
+          <label class="form-check-label">
+            Use Booking Account
+          </label>
+        </div>
+        <div style="margin-left: 30px;"> Booking Account Balance : {{walletAmount | currency}}</div>
+        <br>
+
+        <div class="form-group" *ngIf="walletAmountInput">
+          <label>Booking Account Amount : <span class="mandatory">*</span></label>
+          <div class="input-group"
+            [ngClass]="{'is-invalid': (submitted && (f.enteredWalletAmount.errors || errors['enteredWalletAmount']))}">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+            </div>
+            <input formControlName="enteredWalletAmount" oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';"
+              (keypress)="onlyNumberKey($event)" type="tel" placeholder="Enter amount"
+              class="form-control form-control-lg" (change)="enteredWalletAmountChange()"
+              (keyup)="enteredWalletAmountChange()"
+              [ngClass]="{'is-invalid': (submitted && (f.enteredWalletAmount.errors || errors['enteredWalletAmount']))}">
+          </div>
+          <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('required')">Enter amount
+          </div>
+          <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('min')">Enter Account amount
+            above 0
+          </div>
+          <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('pattern')">Enter only numbers
+          </div>
+          <!--            <div class="invalid-feedback">{{walletErrorMsg}}</div>-->
+        </div>
+        <hr>
+        <table class="payment-details">
+          <tr>
+            <td class="form-text text-muted mr-4">Payable Amount:</td>
+            <td class="text-right"> {{(finalAmount ? finalAmount : "0.00") | currency}}</td>
+          </tr>
+        </table>
+        <hr>
+      </div>
+
+      <div class="form-group pt-2 d-block">
+        <div class="alert alert-warning">
+          <!--          I agree and confirm to purchase {{schemeValues.gramsEmi}} grams each month for a period-->
+          <!--          of {{form.get('total_installments').value}} consecutive months. GoldSikka will charge based on the then price-->
+          <!--          of gold each month.-->
+          <input type="checkbox" formControlName="agree" [ngClass]="{'is-invalid': (submitted && f.agree.errors)}" /> I
+          Agree
+          to Terms &
+          Conditions
+          <div class="invalid-feedback" *ngIf="form.get('agree').hasError('required')">You must accept the
+            terms &
+            conditions to continue.
+          </div>
+        </div>
+      </div>
+      <app-coupon-buy (couponValue)="onchange($event)" [jwellaryForm]="inputParam"> </app-coupon-buy>
+      <div class="form-group">
+        <label>Gold Referral Code</label>
+        <div class="input-group"
+          [ngClass]="{'is-invalid': (submitted && (f.referralCode.errors || errors['referralCode']))}">
+          <input formControlName="referralCode" type="text" placeholder="Enter Referral Code"
+            class="form-control form-control-lg"
+            [ngClass]="{'is-invalid': (submitted && (f.referralCode.errors || errors['referralCode']))}">
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('referralCode').hasError('required')">Enter Referral Code
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('referralCode').hasError('pattern')">Enter only numbers
+        </div>
+        <!--            <div class="invalid-feedback">{{walletErrorMsg}}</div>-->
+        <p class="">Note* : Referral code is used only for one time per transaction</p>
+      </div>
+      <div class="loading" *ngIf="isSubmitting">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+
+
+
+      <div class="form-group pt-2">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+          Start Subscription
+          <span *ngIf="finalAmount == 0 && f.enteredWalletAmount.value !== 0
+                   && f.enteredWalletAmount.value ">with Booking Account
+          </span>
+          <span *ngIf="finalAmount !== 0">{{finalAmount | currency}}</span>
+          <i class="fa fa-spin fa-spinner ml-2" *ngIf="isSubmitting"></i></button>
+      </div>
+
+
+
+
+
+
+    </form>
+
+  </div>
+</section>

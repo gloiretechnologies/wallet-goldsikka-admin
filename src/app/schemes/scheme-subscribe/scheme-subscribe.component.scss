@@ -1,0 +1,87 @@
+.scheme-subscribe-list {
+  position: relative;
+  z-index: 1;
+
+  .scheme-content {
+    position: relative;
+    width: 100%;
+    padding: 25px;
+    margin: 0 auto;
+    background-color: #ffff;
+    transition: 300ms ease all;
+  }
+
+  .main-content {
+    font-weight: bold;
+    white-space: pre-line;
+  }
+
+  .tc {
+    white-space: pre-line;
+  }
+
+  .accordion {
+    background-color: #f3f6fb;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    border: 0;
+    transition: 0.4s;
+    border-top: 1px solid #ced4da;
+    text-transform: uppercase;
+
+    &:last-child {
+      //border: 1px solid #ced4da;
+    }
+  }
+
+  .active, .accordion:hover {
+    background-color: #e1e8f5;
+  }
+
+  .accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+
+  .active:after {
+    content: "\2212";
+  }
+
+  .active:after .panel {
+    padding: 10px;
+  }
+
+  .panel {
+    background-color: white;
+
+    padding: 21px -1px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+
+  .subscribe {
+    position: sticky;
+    z-index: 2;
+    top: 80px;
+    background: white;
+    padding: 25px;
+    display: block;
+  }
+
+}
+.but-mn{
+    padding: 10px 11px;
+    background: #1a2e22;
+    border-radius: 3px;
+    color: #fff;
+    border: navajowhite !important;
+}

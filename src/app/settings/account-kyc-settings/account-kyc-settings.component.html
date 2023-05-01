@@ -1,0 +1,133 @@
+<div class="account-kyc-settings">
+  <h1>KYC Details</h1>
+
+  <section class="mt-3">
+    <div class="w-100">
+      <div *ngIf="!!errorMessage" class="form-group">
+        <div class="alert alert-danger">
+          <i class="fas fa-exclamation-triangle mr-2"></i> {{errorMessage}}
+        </div>
+      </div>
+      <div *ngIf="!!successMessage" class="form-group">
+        <div class="alert alert-success">
+          <i class="fas fa-check mr-2"></i> {{successMessage}}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isKyc">
+      <div class="form-group mt-4">
+        <button type="submit" class="btn btn-primary btn-block" (click)="updateKyc();">
+          Update Kyc
+        </button>
+      </div>
+      <div class="address-list">
+        <div class="row">
+          <div class="col-md-10">
+            <ul class="list-group list-group-unbordered">
+              <li class="list-group-item">
+                <b>Father Name</b> <span class="pull-right" *ngIf="kycDetails">{{kycDetails.father_name}}</span>
+              </li>
+              <li class="list-group-item">
+                <b>Spouse Name</b> <span class="pull-right" *ngIf="kycDetails">{{kycDetails.spouse_name}}</span>
+              </li>
+              <li class="list-group-item">
+                <b>Alternate Phone No</b> <span class="pull-right" *ngIf="kycDetails">{{kycDetails.alternate_phone}}</span>
+              </li>
+              <li class="list-group-item">
+                <b>PAN Card</b> <span class="pull-right" *ngIf="kycDetails">{{kycDetails.pan_card}}</span>
+              </li>
+              <li class="list-group-item">
+                <b>Aadhaar Card</b> <span class="pull-right" *ngIf="kycDetails">{{kycDetails.aadhaar_card}}</span>
+              </li>
+              <li class="list-group-item">
+                <b>Gender</b> <span class="pull-right" *ngIf="kycDetails">{{kycDetails.gender}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!!isKyc">
+
+
+      <form class="from d-block w-100" role="form" [formGroup]="form" (ngSubmit)="onSubmit()"
+            [ngClass]="{'was-validated': (submitted && form.valid), 'needs-validation': (submitted)}">
+        <div class="profile-update">
+
+          <div class="form-group ">
+            <label>Father Name </label>
+            <input type="text" class="form-control" formControlName="father_name" placeholder="Enter Father Name"
+                   [ngClass]="{'is-invalid': (submitted && (f.father_name.errors || errors['father_name']))}">
+
+          </div>
+          <div class="form-group ">
+            <label>Spouse Name  </label>
+            <input type="text" class="form-control" formControlName="spouse_name" placeholder="Enter Spouse Name"
+                   [ngClass]="{'is-invalid': (submitted && (f.spouse_name.errors || errors['spouse_name']))}">
+          </div>
+          <div class="form-group">
+            <label>Alternate Phone No  <span class="mandatory">*</span></label>
+            <input type="text" class="form-control" formControlName="alternate_phone"
+                   placeholder="Enter Alternate Phone No"
+                   [ngClass]="{'is-invalid': (submitted && (f.alternate_phone.errors || errors['alternate_phone']))}">
+
+            <div class="invalid-feedback" *ngIf="form.get('alternate_phone').hasError('required')">This field is
+              required
+            </div>
+            <div class="invalid-feedback" *ngIf="form.get('alternate_phone').hasError('min')">Please enter a correct
+              Mobile
+              Number
+            </div>
+            <div class="invalid-feedback" *ngIf="form.get('alternate_phone').hasError('pattern')">Please Enter the
+              Correct Number
+            </div>
+            <div class="invalid-feedback" *ngFor="let e of errors['alternate_phone']">{{e.toString()}}</div>
+          </div>
+          <div class="form-group ">
+            <label>PAN Card  <span class="mandatory">*</span></label>
+            <input type="text" class="form-control" formControlName="pan_card" placeholder="Enter PAN No"
+                   [ngClass]="{'is-invalid': (submitted && (f.pan_card.errors || errors['pan_card']))}">
+
+            <div class="invalid-feedback" *ngIf="form.get('pan_card').hasError('required')">This field is required
+            </div>
+            <div class="invalid-feedback" *ngFor="let e of errors['pan_card']">{{e.toString()}}</div>
+          </div>
+          <div class="form-group ">
+            <label>Aadhaar Card  <span class="mandatory">*</span></label>
+            <input type="text" class="form-control" formControlName="aadhaar_card" placeholder="Enter Aadhaar No"
+                   [ngClass]="{'is-invalid': (submitted && (f.aadhaar_card.errors || errors['aadhaar_card']))}">
+            <div class="invalid-feedback" *ngIf="form.get('aadhaar_card').hasError('required')">This field is required
+            </div>
+            <div class="invalid-feedback" *ngIf="form.get('aadhaar_card').hasError('min')">The aadhaar card must be at
+              least 12 characters.
+            </div>
+            <div class="invalid-feedback" *ngFor="let e of errors['aadhaar_card']">{{e.toString()}}</div>
+          </div>
+          <div class="form-group mt-4">
+            <label>Gender  <span class="mandatory">*</span></label> &nbsp;&nbsp;
+            <label class="gender-input">
+                <input type="radio" value="M" formControlName="gender"
+                     [ngClass]="{'is-invalid': (submitted && (f.gender.errors || errors['gender']))}">
+              &nbsp; <span><i class="fas fa-male mr-2"></i>Male</span>
+            </label> &nbsp;&nbsp;
+            <label class="gender-input">
+              <input type="radio" value="F" formControlName="gender"
+                     [ngClass]="{'is-invalid': (submitted && (f.gender.errors || errors['gender']))}">
+              &nbsp; <span><i class="fas fa-female mr-2"></i>Female</span>
+            </label>
+            <div class="invalid-feedback" *ngIf="form.get('gender').hasError('required')">This field is required</div>
+
+          </div>
+          <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary btn-block">
+              Submit
+            </button>
+          </div>
+        </div>
+        <!-- /.card-footer -->
+      </form>
+    </div>
+
+  </section>
+</div>

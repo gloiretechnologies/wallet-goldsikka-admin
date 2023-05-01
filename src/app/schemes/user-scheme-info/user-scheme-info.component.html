@@ -1,0 +1,287 @@
+<section class="user-scheme-info">
+  <div *ngIf="isAccountAccess">
+    <div class="row">
+      <div class="w-100">
+        <div *ngIf="!!accountErrorMessage" class="form-group">
+          <div class="alert alert-danger">
+            <i class="fas fa-e xclamation-triangle"></i> &nbsp; {{accountErrorMessage}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-tickets *ngIf="isTicket"></app-tickets>
+    <app-tickets-list *ngIf="!isTicket"></app-tickets-list>
+  </div>
+  <div *ngIf="!isAccountAccess">
+    <div class="row">
+      <div class="w-100">
+        <div *ngIf="!!errorMessage" class="form-group">
+          <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>Scheme Details</h2>
+    <div class="card d-block scheme-subscribe-details">
+      <div class="card-body p-0">
+        <table class="payment-details">
+          <tr>
+            <td class="form-text text-muted">Scheme Name</td>
+            <td> :</td>
+            <td>{{schemeTitle}}</td>
+          </tr>
+          <tr>
+            <td class="form-text text-muted">Date</td>
+            <td> :</td>
+            <td>{{subscribeSchemeInfo.created_date}}</td>
+          </tr>
+          <tr>
+            <td class="form-text text-muted">Total MMP`s</td>
+            <td> :</td>
+            <td>{{subscribeSchemeInfo.total_installments}} Months</td>
+          </tr>
+          <tr>
+            <td class="form-text text-muted">Paid MMP`s</td>
+            <td> :</td>
+            <td>{{subscribeSchemeInfo.paid_installments}} Months</td>
+          </tr>
+          <tr>
+            <td class="form-text text-muted">Pending MMP`s</td>
+            <td> :</td>
+            <td>{{subscribeSchemeInfo.pending_installments}} Months</td>
+          </tr>
+          <tr *ngIf="(type == 'MG')">
+            <td class="form-text text-muted">Total Grams</td>
+            <td> :</td>
+            <td>{{subscribeSchemeInfo.emi_grams}} g</td>
+          </tr>
+
+          <tr *ngIf="(type == 'JW')">
+            <td class="form-text text-muted">MMP Amount</td>
+            <td> :</td>
+            <td>{{subscribeSchemeInfo.amount | currency}}</td>
+          </tr>
+
+          <tr>
+            <td class="form-text text-muted">Processing Fee</td>
+            <td> :</td>
+            <td>{{subscribeSchemeInfo.processing_fee |currency}}</td>
+          </tr>
+           <!-- <tr>
+            <td class="form-text text-muted">Discount Coupon
+            </td>
+            <td> :</td>
+           <td>{{subscribeSchemeInfo.coupon | currency}}</td>
+          </tr> -->
+
+          <tr>
+            <td class="form-text text-muted">Status</td>
+            <td> :</td>
+            <td>{{subscribeSchemeInfo.schemeStatus}} <a *ngIf="(subscribeSchemeInfo.scheme_status=='2')"
+                (click)="raiseTicket();" class="btn btn-primary">Raise Ticket</a>
+              <a target="_blank" *ngIf="(subscribeSchemeInfo.scheme_status=='5')" routerLink="/tickets"
+                class="btn btn-primary">Ticket List</a></td>
+          </tr>
+        </table>
+        <br />
+        <br />
+
+        <div class="row">
+          <div class="col-lg-6">
+            <h5>Installments </h5>
+          </div>
+          <div class="col-lg-6 text-right" *ngIf="(type == 'JW')">
+            <h5>Total Grams : {{subscribeSchemeInfo.totalGrams}} grams</h5>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>DATE</th>
+                <th>TRANSACTION ID</th>
+                <th>MMP AMOUNT</th>
+                <th>GST</th>
+                <!-- <th>DISCOUNT COUPON</th> -->
+                <th>TOTAL AMOUNT </th>
+                <th *ngIf="(type == 'JW')">GOLD <small>(grams)</small></th>
+                <th>PAYMENT MODE</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="!!subscribeSchemeInfo.user_scheme_installments">
+              <tr *ngFor="let txn of subscribeSchemeInfo.user_scheme_installments">
+                <td>{{txn.emi_date }}</td>
+                <td>
+                  <span *ngIf="txn.isPay">{{txn.user_transactions.id}}</span>
+                  <span *ngIf="!txn.isPay">----</span>
+                </td>
+                <td>
+                  <span *ngIf="txn.isPay">{{txn.user_transactions.amount |currency}}</span>
+                  <span *ngIf="!txn.isPay">{{txn.amount |currency}}</span>
+                </td>
+                <td>
+                  <span *ngIf="txn.isPay">{{txn.user_transactions.gst |currency}}</span>
+                  <span *ngIf="!txn.isPay">{{txn.gst |currency}}</span>
+                </td>
+                <!-- <td>
+                  <span *ngIf="txn.isPay">{{txn.user_transactions.couponAmount |currency}}</span>
+                  <span *ngIf="!txn.isPay">{{txn.amount |currency}}</span>
+                </td> -->
+                <td>
+                  <span *ngIf="txn.isPay">{{txn.user_transactions.total_amount |currency}}</span>
+                  <span *ngIf="!txn.isPay">{{txn.totalAmount |currency}}</span>
+                </td>
+                <td *ngIf="(type == 'JW')">
+                  <span *ngIf="txn.isPay">{{txn.grams.toFixed(6)}} g</span>
+                  <span *ngIf="!txn.isPay">----</span>
+                </td>
+
+                <td>
+                  <span *ngIf="txn.isPay"> {{txn['source']}}</span>
+                  <span *ngIf="!txn.isPay">----</span></td>
+
+                <td>
+                  <a *ngIf="txn.isPay" class="btn btn-success mr-2 ">Paid</a>
+                  <a *ngIf="!txn.isPay && subscribeSchemeInfo.isDoPayment" class="btn btn-danger mr-2"
+                    (click)="paymentMMI(txn.id);">Pay MMP</a>
+                  <a *ngIf="txn.isPay" class="btn btn-primary mr-2" (click)="downloadReceipt(txn.id)"><i
+                      class="fas fa-download"></i> Download</a>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="loading" *ngIf="isPaymentDo">
+          <i class="fas fa-spinner fa-spin"></i>
+        </div>
+        <br />
+        <br />
+          <nz-modal [(nzVisible)]="showModal" nzTitle="MMP Payment Details" (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()" [nzStyle]="{ top: '20px' }" nzOkText="Ok" nzOkType="'primary'" nzCancelDisabled=true
+          nzCancelText="cancel" nzWidth="700px">
+          <ng-container *nzModalContent>
+            <div class="card d-block p-4">
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover">
+                    <tr>
+                      <td class="text-muted">Live Price</td>
+                      <td>{{paymentDetails.livePrice |currency}} </td>
+                    </tr>
+                    <tr>
+                      <td class=" text-muted">EMI Amount</td>
+                      <td>{{paymentDetails.emiAmount|currency}} </td>
+                    </tr>
+                    <tr>
+                      <td class=" text-muted">GST</td>
+                      <td>{{paymentDetails.gst|currency}} </td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted">Total Amount</td>
+                      <td>{{paymentDetails.finalAmount|currency}}</td>
+                    </tr>
+                    <tr *ngIf="(type == 'JW')">
+                      <td class="text-muted">EMI Grams</td>
+                      <td>{{paymentDetails.gramsEmi}} g</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input form-control" type="checkbox" (change)="moneyWallet($event)">
+                <label class="form-check-label">
+                  Use Booking Account
+                </label>
+              </div>
+              <div style="margin-left: 30px;"> Booking Account Balance : {{walletAmount | currency}}</div>
+              <br>
+              <form class="from" role="form" [formGroup]="form">
+
+                <div class="form-group" *ngIf="walletAmountInput">
+                  <label>Booking Account Balance <span class="mandatory">*</span></label>
+                  <div class="input-group"
+                    [ngClass]="{'is-invalid': ((f.enteredWalletAmount.errors || errors['enteredWalletAmount']))}">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-rupee-sign"></i></span>
+                    </div>
+                    <input formControlName="enteredWalletAmount" type="text" placeholder="Enter amount"
+                      class="form-control form-control-lg" (change)="enteredWalletAmountChange()"
+                      (keyup)="enteredWalletAmountChange()"
+                      [ngClass]="{'is-invalid': ((f.enteredWalletAmount.errors || errors['enteredWalletAmount']))}">
+                  </div>
+                  <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('required')">Enter
+                    amount
+                  </div>
+                  <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('min')">Enter Account
+                    amount above 0
+                  </div>
+                  <div class="invalid-feedback" *ngIf="form.get('enteredWalletAmount').hasError('pattern')">Enter only
+                    numbers
+                  </div>
+                  <!--            <div class="invalid-feedback">{{walletErrorMsg}}</div>-->
+                </div>
+                <br />
+
+              <!--<div class="form-group">
+                <label>Referral Code</label>
+                <div class="input-group"
+                  [ngClass]="{'is-invalid': (submitted && (f.referralCode.errors || errors['referralCode']))}">
+
+                  <input formControlName="referralCode" type="text" placeholder="Enter Referral Code"
+                    class="form-control form-control-lg"
+                    [ngClass]="{'is-invalid': (submitted && (f.referralCode.errors || errors['referralCode']))}">
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('referralCode').hasError('required')">Enter Referral
+                  Code
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('referralCode').hasError('pattern')">Enter only
+                  numbers
+                </div>
+                &lt;!&ndash; <div class="invalid-feedback">{{walletErrorMsg}}</div> &ndash;&gt;
+              </div>-->
+              </form>
+              <br />
+              <div class="form-check">
+
+                <div class="table-responsive amount">
+                  <table class="table table-striped table-hover">
+                    <tr>
+                      <td>
+                        Payable Amount
+                      </td>
+                      <td>
+                        :
+                      </td>
+                      <td>
+                        {{finalAmount|currency}} /-
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </ng-container>
+          <div class="loading" *ngIf="isSubmitting">
+            <i class="fas fa-spinner fa-spin"></i>
+          </div>
+          <div *nzModalFooter>
+            <button nz-button type="button" class="btn btn-dark" data-dismiss="modal" (click)="handleCancel()">Close
+            </button>
+            <button nz-button type="button" class="btn btn-primary"
+              (click)="mmiPaymentRazorPay(schemeInstallementId,paymentDetails.livePrice,finalAmount)">
+              Pay <span *ngIf="finalAmount == 0 && f.enteredWalletAmount.value !== 0
+                   && f.enteredWalletAmount.value ">with Booking Account
+              </span>
+              <span *ngIf="finalAmount !== 0">{{finalAmount | currency}}</span>
+            </button>
+          </div>
+
+        </nz-modal>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,103 @@
+<div class="nominee-settings">
+  <h1>Nominees</h1>
+
+  <section class="mt-3">
+    <div class="w-100">
+      <div *ngIf="!!errorMessage" class="form-group">
+        <div class="alert alert-danger">
+          <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+        </div>
+      </div>
+      <div *ngIf="!!successMessage" class="form-group">
+        <div class="alert alert-success">
+          <i class="fas fa-check"></i> &nbsp; {{successMessage}}
+        </div>
+      </div>
+    </div>
+
+    <div class="nominees">
+
+      <a *ngIf="!!nomineeResponse.data && nomineeResponse.data.length <1" routerLink="./add"
+        class="btn btn-primary btn-block btn-lg mb-3"><i class="fa fa-plus mr-2"></i> Add New
+        Nominees</a>
+
+      <div *ngIf="!!nomineeResponse.data">
+        <div class="nominee-list" *ngFor="let a of nomineeResponse.data">
+
+          <div class="text-right">
+            <div class="float-right text-right">
+              <!--                <a class="btn btn-sm btn-outline-secondary" routerLink="./{{a.id}}/edit"><i class="far fa-edit"></i></a>-->
+              <button type="button" (click)="deleteNominee(a.id)" class="btn btn-outline-danger btn-sm ml-2"><i
+                  class="far fa-trash-alt"></i></button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <ul class="list-group list-group-unbordered">
+                <!-- <li class="list-group-item"> -->
+                <!-- <b>Name</b> <span class="pull-right">{{a.name}}</span> -->
+                <!-- <h5><i class="fas fa-user mr-2"></i>   {{a.name}} ({{a.relation}}) -->
+                <li class="list-group-item">
+                  <b> Name : </b><br />
+                </li>
+                <li class="list-group-item">
+                  <b> Relation : </b> <br />
+                </li>
+
+                <!-- </h5> -->
+                <li class="list-group-item">
+                  <b> Phone No : </b><br />
+                </li>
+                <li class="list-group-item">
+                  <b> Address : </b><br />
+                </li>
+                <li class="list-group-item">
+                  <b> City : </b><br />
+                </li>
+                <li class="list-group-item">
+                  <b> State : </b> <br />
+                </li>
+                <li class="list-group-item">
+                  <b> Pin No : </b><br />
+                </li>
+
+              </ul>
+            </div>
+            <div class="col-lg-6">
+              <ul class="list-group list-group-unbordered">
+                <!-- <li class="list-group-item"> -->
+                <!-- <b>Name</b> <span class="pull-right">{{a.name}}</span> -->
+                <!-- <h5><i class="fas fa-user mr-2"></i>   {{a.name}} ({{a.relation}}) -->
+                <li class="list-group-item">
+                  <span class="nominee-data">{{a.name}}</span><br />
+                </li>
+                <li class="list-group-item">
+                  <span class="nominee-data">{{a.relation}}</span><br />
+                </li>
+
+                <!-- </h5> -->
+                <li class="list-group-item">
+                  <span class="nominee-data">{{a.phone}}</span><br />
+                </li>
+                <li class="list-group-item">
+                  <span class="nominee-data">{{a.address}}</span><br />
+                </li>
+                <li class="list-group-item">
+                  <span class="nominee-data">{{a.city}}</span><br />
+                </li>
+                <li class="list-group-item">
+                  <span class="nominee-data">{{a.state.name}}</span><br />
+                </li>
+                <li class="list-group-item">
+                  <span class="nominee-data">{{a.zip}}</span><br />
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

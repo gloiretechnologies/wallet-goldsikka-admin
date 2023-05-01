@@ -1,0 +1,31 @@
+<section class="verify-otp">
+  <div class="w-100">
+    <div *ngIf="!!errorMessage" class="form-group">
+      <div class="alert alert-danger">
+        <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-info mb-4">
+    <div class="pt-3 pb-3 d-flex">
+      <i class="fas fa-envelope-square mr-1" style="font-size: 20px"></i>
+      <h6 style="font-size: 17px">
+        &nbsp; We have sent OTP to your registered mobile number ending with "{{maskedPhone}}".
+        Please verify OTP to complete your transfer.
+      </h6>
+    </div>
+
+    <div class="form-group mt-3 mb-3">
+      <small class="d-block mt-3 mb-3">Enter your 6 digit OTP code.</small>
+      <div class="otp-input mb-4">
+        <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:6}"></ng-otp-input>
+      </div>
+    </div>
+    <button (click)="sendOtp()" type="button" class="btn btn-info btn-sm mb-3" [disabled]="numberOfTimesOtpSent >= maxLimitForOtp">Resend OTP again</button>
+  </div>
+
+  <div class="loading" *ngIf="isSubmitting">
+    <i class="fas fa-spinner fa-spin"></i>
+  </div>
+</section>

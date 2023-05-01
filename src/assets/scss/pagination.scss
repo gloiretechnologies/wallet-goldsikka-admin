@@ -1,0 +1,46 @@
+@import "variables";
+
+
+.pagination {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  margin: 5px 0;
+
+  .ngx-pagination {
+    margin-bottom: 0 !important;
+
+    a {
+      text-decoration: none;
+    }
+
+    a, button {
+      border: 1px solid $text-dark-color;
+      color: $text-dark-color;
+      background-color: white;
+      transition: ease-in-out;
+      transition-delay: 25ms;
+    }
+
+    .current {
+      background-color: $text-dark-color;
+      border: 1px solid $text-dark-color;
+
+      .ng-star-inserted {
+        color: white !important;
+      }
+    }
+
+    .disabled {
+      border: 1px solid $text-light-color;
+      background-color: #efefef;
+    }
+
+    a, button, .current, .disabled {
+      font-size: $default-font-size !important;
+      padding: 6px 12px;
+      border-radius: 3px;
+      margin: 0 5px;
+    }
+  }
+}

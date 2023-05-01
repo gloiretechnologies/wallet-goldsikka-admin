@@ -1,0 +1,124 @@
+<section class="feed-back-form-create">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="login-div">
+        <div class="login-box">
+          <h2>Create Your FeedBack</h2>
+          <form role="form" class="form w-100" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div class="w-100">
+              <div *ngIf="!!errorMessage" class="form-group">
+                <div class="alert alert-danger">
+                  <i class="fas fa-exclamation-triangle"></i> &nbsp; {{errorMessage}}
+                </div>
+              </div>
+              <div *ngIf="!!successMessage" class="form-group">
+                <div class="alert alert-success">
+                  <i class="fas fa-check mr-2"></i> {{successMessage}}
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label>Message <span class="mandatory">*</span></label>
+
+                <textarea formControlName="message" class="form-control text-area" required [rows]="3"
+                          placeholder="Enter Message"
+                          [ngClass]="{'is-invalid': (submitted && (f.message.errors || errors['message']))}"></textarea>
+                <div class="invalid-feedback" *ngIf="form.get('message').hasError('required')">This field is required
+                </div>
+                <div class="invalid-feedback" *ngFor="let e of errors['message']">{{e.toString()}}</div>
+              </div>
+
+              <div class="form-group text-center">
+
+                <div class="star">
+                  <div class="section-inner text-center">
+                    <div class="wrapper wrapper-center clearfix">
+                      <h2 class="text-center">Give us a Rating <span class="mandatory">*</span></h2>
+                    </div>
+                  </div>
+
+                  <div class="section-inner text-center">
+                    <div class="wrapper clearfix">
+
+
+                      <!-- Large Half & Full Stars -->
+
+                      <div class="one-half">
+                        <div class="css-star-rating large blue ">
+
+                          <input type="radio" id="lghalf-1" value="5" formControlName="rating"
+                                 (change)="rating($event)">
+                          <label for="lghalf-1"><span>5 Stars</span></label>
+
+                          <input type="radio" id="lghalf-2" value="4.5" formControlName="rating"
+                                 (change)="rating($event)">
+                          <label class="star-half" for="lghalf-2"><span>4.5 Stars</span></label>
+
+                          <input type="radio" id="lghalf-3" value="4" formControlName="rating"
+                                 (change)="rating($event)">
+                          <label for="lghalf-3"><span>4 Stars</span></label>
+
+                          <input type="radio" id="lghalf-4" value="3.5" formControlName="rating"
+                                 (change)="rating($event)">
+                          <label class="star-half" for="lghalf-4"><span>3.5 Stars</span></label>
+
+                          <input type="radio" id="lghalf-5" value="3" formControlName="rating"
+                                 (change)="rating($event)">
+                          <label for="lghalf-5"><span>3 Stars</span></label>
+
+                          <input type="radio" id="lghalf-6" value="2.5" formControlName="rating"
+                                 (change)="rating($event)">
+                          <label class="star-half" for="lghalf-6"><span>2.5 Stars</span></label>
+
+                          <input type="radio" id="lghalf-7" value="2" formControlName="rating"
+                                 (change)="rating($event)">
+                          <label for="lghalf-7"><span>2 Stars</span></label>
+
+                          <input type="radio" id="lghalf-8" value="1.5" formControlName="rating"
+                                 (change)="rating($event)">
+                          <label class="star-half" for="lghalf-8"><span>1.5 Stars</span></label>
+
+                          <input type="radio" id="lghalf-9" value="1" formControlName="rating"
+                                 (change)="rating($event)">
+                          <label for="lghalf-9"><span>1 Star</span></label>
+
+                          <input type="radio" id="lghalf-0" value="0.5" formControlName="rating"
+                                 (change)="rating($event)">
+                          <label class="star-half" for="lghalf-0"><span>0.5 Stars</span></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('rating').hasError('required')">This field is required
+                </div>
+                <div class="invalid-feedback" *ngIf="form.get('rating').hasError('min')">This field is required
+                </div>
+                <div class="invalid-feedback" *ngFor="let e of errors['rating']">{{e.toString()}}</div>
+                <div class="error-field" *ngIf="ratingRequired">This field is required
+                </div>
+              </div>
+              <br/>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-md">
+                  Continue
+                  <i *ngIf="isSubmitting" class="fas fa-spinner fa-spin"></i>
+                </button>
+              </div>
+              <div class="loading" *ngIf="isSubmitting">
+                <i class="fas fa-spinner fa-spin"></i>
+              </div>
+            </div>
+          </form>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>

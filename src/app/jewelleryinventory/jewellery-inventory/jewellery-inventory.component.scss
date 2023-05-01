@@ -1,0 +1,137 @@
+.product_category {
+
+  // background-image: url(https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z29sZCUyMGpld2VsbGVyeXxlbnwwfHwwfHw%3D&w=1000&q=80);
+  // background-attachment: fixed;
+  background-size: 100% 100%;
+
+  .product_img {
+    border: 1px solid;
+    padding: 20px 0px;
+    background-color: #8080804d;
+    border-radius: 3px;
+    margin: 10px 0px;
+  }
+
+  h2 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 35px;
+    border-bottom: 1px solid #9e9e9e;
+    padding: 5px 0px;
+    border-top: 1px solid #9e9e9e;
+    text-shadow: 2px 2px 20px #00000082;
+
+    .badge {
+      padding: 6px 6px;
+      background: #ffc107;
+      border-radius: 20px;
+      position: absolute;
+      top: 3%;
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+}
+
+// subheading css
+h4 {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+// images css
+.product_img {
+  text-align: center;
+}
+
+img {
+  width: 70%;
+  border-radius: 250px;
+  box-shadow: 10px 10px 20px #000;
+
+}
+
+hr {
+  margin-top: 45px;
+}
+
+// view more button css
+.btn {
+  padding: 4px 8px;
+  font-weight: 100;
+}
+
+.btn-wishlist {
+  margin-right: 30px;
+  padding-top: 10px;
+}
+
+.clr-w {
+  color: white;
+}
+
+.btn-hover {
+  margin: 0 auto;
+}
+
+.btn-hover .button {
+  background: none;
+  padding: 4px 20px;
+  font-size: 18px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 0 10px #00000054;
+  border-radius: 25px;
+  border: 1px solid #e6e6e6;
+  color: #1a2e22;
+  transition: 0.5s;
+  min-width: 30%;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-hover .button:hover {
+  color: #000;
+}
+
+.left-right::before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: #ffc107;
+  z-index: -1;
+  transition: 0.5s;
+}
+
+.left-right:hover::before {
+  width: 100%;
+}
+
+.cart-size {
+  font-size: 26px;
+}
+
+@media only screen and(max-width: 767px) {
+  h4 {
+    font-size: 15px;
+  }
+
+  .btn-hover .button {
+    margin: 0px;
+    padding: 3px 10px;
+
+    font-size: 15px;
+  }
+
+  .product_category .product_img {
+
+    padding: 8px 0px;
+
+  }
+
+}

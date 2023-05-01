@@ -1,0 +1,75 @@
+.gift-gold {
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .i-box {
+    padding: 15px;
+    display: block;
+
+    ul {
+      list-style: disc;
+      padding: 0;
+      margin-left: 25px;
+
+      li {
+        font-size: 14px;
+        margin: 3px 0;
+      }
+    }
+  }
+
+  form {
+    margin: 20px 0 0 0;
+
+    label {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .input-group-text {
+      width: 60px;
+      text-align: center;
+      display: block;
+
+      i {
+        text-align: center;
+        vertical-align: middle;
+        color: #666666;
+        margin-top: 5px;
+        font-size: 21px;
+      }
+    }
+
+    .form-control-lg {
+      font-size: 1.5rem;
+    }
+
+  }
+
+  ::ng-deep {
+    .ant-select-item {
+      padding: 12px 15px !important;
+    }
+  }
+  .loading {
+    position: absolute;
+    z-index: 10;
+    display: block;
+    height: 100%;
+    background-color: white;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.75;
+    width: 100%;
+
+    i {
+      font-size: 3rem;
+      vertical-align: middle;
+      margin: 100px;
+    }
+  }
+}

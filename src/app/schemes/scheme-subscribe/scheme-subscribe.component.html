@@ -1,0 +1,67 @@
+<section class="scheme-subscribe-list row">
+
+  <section class="col-lg-8">
+    <h1>{{schemeContent.title}}</h1>
+
+    <div class="scheme-content">
+      <div *ngIf="schemeContent.id==2">
+        <button class="but-mn mb-4">Pay 11 installments, Get 100% off on 12th installment! </button>
+      </div>
+      <div>
+        <p class="main-content">{{schemeContent.scheme_content}}</p>
+
+        <div *ngFor="let sub of schemeContent.scheme_sub_content">
+          <li>{{sub.content}}</li>
+        </div>
+
+        <div class="accordion-menu mt-3 mb-3">
+          <div *ngIf="features">
+
+            <button type="button" class="accordion">Features</button>
+            <div class="panel">
+              <table class="table table-bordered table-hover">
+                <tbody>
+                  <tr *ngFor="let fea of schemeContent.scheme_features">
+                    <td>{{fea.features}}</td>
+                    <td>{{fea.explanation}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h6 *ngIf="!schemeContent.scheme_features" class="text-center">No Features Found</h6>
+            </div>
+          </div>
+
+          <div *ngIf="faqs">
+            <button type="button" class="accordion">FAQ's</button>
+            <div class="panel">
+              <table class="table table-bordered table-hover">
+                <tbody>
+                  <tr *ngFor="let faq of schemeContent.scheme_faqs">
+                    <td>{{faq.questions}}</td>
+                    <td>{{faq.answers}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <h6 *ngIf="!schemeContent.scheme_faqs" class="text-center">No FAQ`s Found</h6>
+            </div>
+          </div>
+          <div>
+            <button type="button" class="accordion">Terms & Conditions
+            </button>
+            <div class="panel">
+              <span class="tc">{{schemeContent.scheme_terms_and_conditions}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="col-lg-4">
+    <div class="subscribe">
+      <app-my-gold-form-component *ngIf="schemeContent.scheme_calculation_type === 'MG'"></app-my-gold-form-component>
+      <app-jewellery-form-component *ngIf="schemeContent.scheme_calculation_type === 'JW'">
+      </app-jewellery-form-component>
+    </div>
+  </section>
+</section>

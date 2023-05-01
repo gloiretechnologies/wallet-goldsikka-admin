@@ -1,0 +1,50 @@
+<section class="invite-event-list w-100 m-auto">
+
+  <section class="my-schemes mt-5 mb-5">
+    <h2>Invited Users List</h2>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+        <th>Date</th>
+        <th>Event Name</th>
+        <th>Mobile</th>
+        <th>User Name</th>
+        </thead>
+        <tbody *ngIf="activeEventsList">
+        <tr
+          *ngFor="let sc of activeEventsList.data| paginate: { itemsPerPage: 10, currentPage: page, totalItems: activeEventsList.total }">
+
+          <td>{{sc.created_date }} </td>
+          <td>{{sc.eventName}}</td>
+          <td>{{sc.guest_mobile}} </td>
+          <td>{{sc.guest_name}}</td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="!activeEventsList">
+        <tr>
+          <td colspan="6">
+            <div class="alert alert-warning">No subscriptions found</div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="card-footer">
+        <div class="pagination">
+          <pagination-controls
+            (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)"
+            maxSize="{{activeEventsList['last_page']}}"
+            directionLinks="true"
+            responsive="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</section>
